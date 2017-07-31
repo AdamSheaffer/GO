@@ -1,3 +1,53 @@
-<p>
-  register works!
-</p>
+<div class="login-wrapper">
+  <form [formGroup]="form" (submit)="onRegisterSubmit()" class="login">
+    <label class="title">
+      <img src="assets/images/012-card.png" alt="login-logo" id="auth-logo">
+      <h3 class="welcome">Welcome to Ground Out</h3>
+      Register
+    </label>
+    <div class="login-group">
+      <!-- Username -->
+      <input formControlName="name" class="username" type="text" id="login_username" placeholder="Username*">
+
+      <!-- Email -->
+      <input formControlName="email" class="username" type="text" id="login_email" placeholder="Email*">
+
+      <!-- Password -->
+      <input formControlName="password" class="password" type="password" id="password" placeholder="Password*">
+
+      <!-- Confirm Password -->
+      <input formControlName="confirm" class="password" type="password" id="confirm" placeholder="Confirm Password*">
+
+      <!-- Error Messages -->
+      <div *ngIf="form.controls.name.errors?.required && form.controls.name.dirty" class="error active">
+        Username is required
+      </div>
+      <div *ngIf="form.controls.name.errors?.maxlength && form.controls.name.dirty" class="error active">
+        Username can't be larger than 30 characters
+      </div>
+      <div *ngIf="form.controls.email.errors?.required && form.controls.email.dirty" class="error active">
+        Email is required
+      </div>
+      <div *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty" class="error active">
+        Must be a valid Email
+      </div>
+      <div *ngIf="form.controls.email.errors?.maxlength && form.controls.email.dirty" class="error active">
+        Email can't be larger than 40 characters
+      </div>
+      <div *ngIf="form.controls.password.errors?.required && form.controls.password.dirty" class="error active">
+        Password is required
+      </div>
+      <div *ngIf="form.controls.password.errors?.maxlength && form.controls.password.dirty" class="error active">
+        Password can't be larger than 35 characters
+      </div>
+      <div *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty" class="error active">
+        Passwords do not match
+      </div>
+
+      <!-- Submit -->
+      <button [disabled]="!form.valid || isProcessing" type="submit" class="btn btn-primary">SIGN UP</button>
+      <a routerLink="/login" class="signup">Already registered? Log in</a>
+
+    </div>
+  </form>
+</div>

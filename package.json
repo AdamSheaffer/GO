@@ -2,7 +2,7 @@
   "name": "go",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -19,10 +19,17 @@
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.17.2",
     "cors": "^2.8.4",
+    "crypto": "0.0.3",
     "dotenv": "^4.0.0",
+    "es6-promisify": "^5.0.0",
     "express": "^4.15.3",
-    "jsonwebtoken": "^7.4.1",
-    "mongoose": "^4.11.3"
+    "express-validator": "^3.2.1",
+    "md5": "^2.2.1",
+    "mongoose": "^4.11.3",
+    "passport": "^0.3.2",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "^1.0.0",
+    "validator": "^8.0.0"
   },
   "homepage": "https://github.com/AdamSheaffer/GO#readme"
 }

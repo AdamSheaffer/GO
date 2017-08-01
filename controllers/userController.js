@@ -2,7 +2,6 @@ const promisify = require('es6-promisify');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
-//const mail = require('../handlers/mail');
 
 function setUserInfo(user) {
     return {

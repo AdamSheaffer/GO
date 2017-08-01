@@ -12,6 +12,7 @@
   <div class="header-actions">
 
     <!-- IF LOGGED IN -->
+    <img *ngIf="authService.isLoggedIn()" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
     <clr-dropdown *ngIf="authService.isLoggedIn()" clrMenuPosition="bottom-right">
       <button class="nav-text" clrDropdownToggle>
                 {{authService.user.name}}
@@ -22,7 +23,6 @@
         <a href="" (click)="logout()" clrDropdownItem>Log out</a>
       </clr-dropdown-menu>
     </clr-dropdown>
-    <img *ngIf="authService.isLoggedIn()" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
 
     <!-- IF LOGGED OUT -->
     <div *ngIf="!authService.isLoggedIn()">

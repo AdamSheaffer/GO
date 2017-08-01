@@ -4,6 +4,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const authRoutes = require('./routes/auth');
+const mainRoutes = require('./routes/main');
 const passport = require('passport');
 const expressValidator = require('express-validator');
 const app = express();
@@ -23,6 +24,7 @@ if (app.get('env') === 'development') {
     app.use(errorHandlers.developmentErrors);
     app.use(express.static(`${__dirname}/client/dist/`));
     app.use('/auth', authRoutes);
+    app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/dist/index.html'));
     });
@@ -30,6 +32,7 @@ if (app.get('env') === 'development') {
     app.use(errorHandlers.productionErrors);
     app.use(express.static(`${__dirname}/public/`));
     app.use('/auth', authRoutes);
+    app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'public/index.html'));
     });

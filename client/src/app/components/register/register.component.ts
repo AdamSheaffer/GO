@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
     selector: 'app-register',
@@ -16,7 +17,8 @@ export class RegisterComponent implements OnInit {
     constructor(
         private authService: AuthService,
         private formBuilder: FormBuilder,
-        private router: Router) {
+        private router: Router,
+        private msgService: AlertService) {
         this.createForm();
     }
 
@@ -68,17 +70,17 @@ export class RegisterComponent implements OnInit {
             return user;
         }, {});
 
-        this.authService.registerUser(user).subscribe(data => {
-            debugger;
+        this.authService.registerUser(user).then(res => {
+            const data = res.json();
             if (data.success) {
-                //this.msgService.show(data.message, { cssClass: 'alert alert-success' });
+                this.msgService.show({ message: data.message, cssClass: 'alert-success' });
                 this.authService.storeUserData(data.token, data.user);
                 this.router.navigate(['/']);
             } else {
-                //this.msgService.show(data.message, { cssClass: 'alert alert-danger' });
+                this.msgService.show({ message: data.message, cssClass: 'alert-danger' });
                 this.isProcessing = false;
             }
-        });
+        })
     }
 
 }

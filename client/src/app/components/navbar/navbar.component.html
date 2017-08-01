@@ -10,8 +10,24 @@
     <a class="nav-link nav-text">Interactive Analytics</a>
   </div>
   <div class="header-actions">
-    <a href="javascript://" class="nav-link nav-icon">
-      <clr-icon shape="cog"></clr-icon>
-    </a>
+
+    <!-- IF LOGGED IN -->
+    <clr-dropdown *ngIf="authService.isLoggedIn()" clrMenuPosition="bottom-right">
+      <button class="nav-text" clrDropdownToggle>
+                {{authService.user.name}}
+                <clr-icon shape="caret down"></clr-icon>
+            </button>
+      <clr-dropdown-menu>
+        <a href="..." clrDropdownItem>Preferences</a>
+        <a href="" (click)="logout()" clrDropdownItem>Log out</a>
+      </clr-dropdown-menu>
+    </clr-dropdown>
+    <img *ngIf="authService.isLoggedIn()" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
+
+    <!-- IF LOGGED OUT -->
+    <div *ngIf="!authService.isLoggedIn()">
+      <a routerLink="/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Login</a>
+      <a routerLink="/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Register</a>
+    </div>
   </div>
 </header>

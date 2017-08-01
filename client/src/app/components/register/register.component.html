@@ -10,13 +10,13 @@
       <input formControlName="name" class="username" type="text" id="login_username" placeholder="Username*">
 
       <!-- Email -->
-      <input formControlName="email" class="username" type="text" id="login_email" placeholder="Email*">
+      <input (blur)="emailBlurred = true" formControlName="email" class="username" type="text" id="login_email" placeholder="Email*">
 
       <!-- Password -->
       <input formControlName="password" class="password" type="password" id="password" placeholder="Password*">
 
       <!-- Confirm Password -->
-      <input formControlName="confirm" class="password" type="password" id="confirm" placeholder="Confirm Password*">
+      <input (blur)="confirmBlurred = true" formControlName="confirm" class="password" type="password" id="confirm" placeholder="Confirm Password*">
 
       <!-- Error Messages -->
       <div *ngIf="form.controls.name.errors?.required && form.controls.name.dirty" class="error active">
@@ -28,7 +28,7 @@
       <div *ngIf="form.controls.email.errors?.required && form.controls.email.dirty" class="error active">
         Email is required
       </div>
-      <div *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty" class="error active">
+      <div *ngIf="form.controls.email.errors?.validateEmail && form.controls.email.dirty && emailBlurred" class="error active">
         Must be a valid Email
       </div>
       <div *ngIf="form.controls.email.errors?.maxlength && form.controls.email.dirty" class="error active">
@@ -40,13 +40,13 @@
       <div *ngIf="form.controls.password.errors?.maxlength && form.controls.password.dirty" class="error active">
         Password can't be larger than 35 characters
       </div>
-      <div *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty" class="error active">
+      <div *ngIf="form.errors?.matchingPasswords && form.controls.confirm.dirty && confirmBlurred" class="error active">
         Passwords do not match
       </div>
 
       <!-- Submit -->
       <button [disabled]="!form.valid || isProcessing" type="submit" class="btn btn-primary">SIGN UP</button>
-      <a routerLink="/login" class="signup">Already registered? Log in</a>
+      <a routerLink="/login" class="signup">Already registered? Sign in</a>
 
     </div>
   </form>

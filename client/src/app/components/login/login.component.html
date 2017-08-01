@@ -1,16 +1,24 @@
 <div class="login-wrapper">
-  <form class="login">
+  <form [formGroup]="form" (submit)="onLoginSubmit()" class="login">
     <label class="title">
       <img src="assets/images/012-card.png" alt="login-logo" id="auth-logo">
       Login
     </label>
     <div class="login-group">
-      <input class="username" type="text" id="login_username" placeholder="Username">
-      <input class="password" type="password" id="login_password" placeholder="Password">
-      <!-- <div class="error active">
-        Invalid user name or password
-      </div> -->
-      <button type="submit" class="btn btn-primary">NEXT</button>
+      <!-- Email -->
+      <input formControlName="email" class="username" type="text" placeholder="Email">
+      <!-- Password -->
+      <input formControlName="password" class="password" type="password" placeholder="Password">
+
+      <!-- Error Messages -->
+      <div *ngIf="form.controls.email.errors?.required && form.controls.email.dirty" class="error active">
+        Email is required
+      </div>
+      <div *ngIf="form.controls.password.errors?.required && form.controls.password.dirty" class="error active">
+        Password is required
+      </div>
+
+      <button [disabled]="form.invalid || isProcessing" type="submit" class="btn btn-primary">LOG IN</button>
       <a routerLink="/register" class="signup">Sign up for a new account</a>
     </div>
   </form>

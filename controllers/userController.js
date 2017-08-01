@@ -4,12 +4,13 @@ const crypto = require('crypto');
 const User = require('../models/User');
 //const mail = require('../handlers/mail');
 
-function setUserInfo(request) {
+function setUserInfo(user) {
     return {
-        _id: request._id,
-        name: request.name,
-        email: request.email,
-        role: request.role,
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+        gravatar: user.gravatar
     }
 };
 
@@ -62,7 +63,7 @@ exports.register = async (req, res, next) => {
     const existingUser = await User.findOne({ email });
     // If user is not unique, return error
     if (existingUser) {
-        return res.status(422).json({ success: false, message: 'That email address is already in use.' });
+        return res.json({ success: false, message: 'That email address is already in use.' });
     }
 
     let user = new User({ email, password, name });

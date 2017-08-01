@@ -2,3 +2,14 @@
     display: inline-block;
     height: 75%
 }
+
+.avatar {
+    display: block;
+    height: 75%;
+    border-radius: 50px;
+    margin: auto 0;
+}
+
+.header-actions {
+    padding-right: 24px;
+}

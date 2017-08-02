@@ -1,0 +1,3 @@
+<h2>Ticket Finder</h2>
+<app-map [userLocation]="userLocation" [events]="events"></app-map>
+<button [disabled]="!userLocation" (click)="getEventsInRange()" class="btn btn-outline">Get Events</button>

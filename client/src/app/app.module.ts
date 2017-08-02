@@ -16,7 +16,11 @@ import { RegisterComponent } from './components/register/register.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthService } from './services/auth.service';
 import { AlertService } from './services/alert.service';
+import { EventService } from './services/event.service';
 import { AppFlashComponent } from './components/app-flash/app-flash.component';
+import { MapComponent } from './components/map/map.component';
+import { TicketFinderComponent } from './components/ticket-finder/ticket-finder.component';
+import { LocationService } from './services/location.service';
 
 @NgModule({
     imports: [
@@ -34,12 +38,16 @@ import { AppFlashComponent } from './components/app-flash/app-flash.component';
         HomeComponent,
         RegisterComponent,
         LoginComponent,
-        AppFlashComponent
+        AppFlashComponent,
+        MapComponent,
+        TicketFinderComponent
     ],
     providers: [
         AuthService,
         AlertService,
-        AlertIconAndTypesService
+        AlertIconAndTypesService,
+        EventService,
+        LocationService
     ],
     bootstrap: [AppComponent]
 })

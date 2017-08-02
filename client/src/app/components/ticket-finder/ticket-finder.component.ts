@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EventService } from '../../services/event.service';
 import { LocationService } from '../../services/location.service';
 import { Location } from '../../shared/location.model';
 import { Event } from '../../shared/event.model';
+import { AlertService } from '../../services/alert.service';
 
 @Component({
   selector: 'app-ticket-finder',
@@ -13,8 +15,15 @@ export class TicketFinderComponent implements OnInit {
 
   userLocation: Location;
   events: Event[] = [];
+  form: FormGroup;
 
-  constructor(private eventService: EventService, private locationService: LocationService) { }
+  constructor(
+    private eventService: EventService,
+    private locationService: LocationService,
+    private formBuilder: FormBuilder,
+    private msgService: AlertService) {
+    this.createForm();
+  }
 
   ngOnInit() {
     this.locationService.getUserLocation((loc) => {
@@ -22,12 +31,26 @@ export class TicketFinderComponent implements OnInit {
     })
   }
 
+  createForm() {
+    this.form = this.formBuilder.group({
+      radius: [50, Validators.compose([
+        Validators.required
+      ])],
+      beginDate: ['', Validators.compose([
+        Validators.required
+      ])],
+      endDate: ['', Validators.compose([
+        Validators.required
+      ])],
+      maxPrice: [null, Validators.min(1)],
+    });
+  }
+
   getEventsInRange() {
-    const miles = 300;
-    const beginDate = '2017-08-01';
-    const endDate = '2017-08-04';
-    this.eventService.getEventsInRadius(this.userLocation, miles, beginDate, endDate).then(data => {
+    const { radius, beginDate, endDate, maxPrice } = this.form.getRawValue();
+    this.eventService.getEventsInRadius(this.userLocation, radius, beginDate, endDate).then(data => {
       this.events = data.events;
+      this.msgService.show({ cssClass: 'alert-info', message: `${this.events.length} games found` });
       console.log(this.events);
     });
   }

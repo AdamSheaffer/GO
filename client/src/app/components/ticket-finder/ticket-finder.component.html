@@ -1,3 +1,35 @@
 <h2>Ticket Finder</h2>
+
+<form [formGroup]="form" (submit)="getEventsInRange()">
+    <section class="form-block">
+        <label>Find Games Near Me</label>
+        <div class="form-group">
+            <label for="radius">Radius (mi)</label>
+            <div class="select">
+                <select formControlName="radius" name="radius" id="radius">
+                    <option [value]="50">50</option>
+                    <option [value]="100">100</option>
+                    <option [value]="200">200</option>
+                    <option [value]="300">300</option>
+                    <option [value]="400">400</option>
+                    <option [value]="0">500+</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="begin">Begin Date</label>
+            <input formControlName="beginDate" type="date" name="begin" value="">
+        </div>
+        <div class="form-group">
+            <label for="end">End Date</label>
+            <input formControlName="endDate" type="date" name="end" value="">
+        </div>
+        <div class="form-group">
+            <label for="price">Max Ticket Price</label>
+            <input formControlName="maxPrice" type="number" name="price" placeholder="Max Price">
+        </div>
+    </section>
+    <button [disabled]="!userLocation" type="submit" class="btn btn-outline">Get Events</button>
+</form>
+
 <app-map [userLocation]="userLocation" [events]="events"></app-map>
-<button [disabled]="!userLocation" (click)="getEventsInRange()" class="btn btn-outline">Get Events</button>

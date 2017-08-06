@@ -1,0 +1,62 @@
+[
+    {
+        "name": "Oriole Park at Camden Yards",
+        "team": "Orioles",
+        "parkCity": "Baltimore",
+        "teamCity": "Baltimore",
+        "location": {
+            "address": "333 W Camden St, Baltimore, MD 21201",
+            "coordinates": [
+                -76.62228470000002,
+                39.2839198
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Fenway Park",
+        "team": "Red Sox",
+        "parkCity": "Boston",
+        "teamCity": "Boston",
+        "location": {
+            "address": "4 Yawkey Way Ext, Boston, MA 02215",
+            "coordinates": [
+                -71.0987819,
+                42.34584359999999
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Guaranteed Rate Field",
+        "team": "White Sox",
+        "parkCity": "Chicago",
+        "teamCity": "Chicago",
+        "location": {
+            "address": "333 W 35th St, Chicago, IL 60616",
+            "coordinates": [
+                -87.63377349999996,
+                41.8300088
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Progressive Field",
+        "team": "Indians",
+        "parkCity": "Cleveland",
+        "teamCity": "Cleveland",
+        "location": {
+            "address": "2401 Ontario St, Cleveland, OH 44115",
+            "coordinates": [
+                -81.68527319999998,
+                41.4957048
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    }
+]

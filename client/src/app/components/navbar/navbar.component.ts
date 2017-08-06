@@ -9,8 +9,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./navbar.component.css']
 })
 export class NavbarComponent implements OnInit {
+  get isLoggedIn() {
+    return this.authService.isLoggedIn();
+  }
+
   constructor(
-    public authService: AuthService,
+    private authService: AuthService,
     private msgService: AlertService,
     private router: Router) { }
 

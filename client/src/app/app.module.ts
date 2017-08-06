@@ -24,6 +24,8 @@ import { TicketFinderComponent } from './components/ticket-finder/ticket-finder.
 import { LocationService } from './services/location.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { ParksComponent } from './components/parks/parks.component';
+import { TripLoggerComponent } from './components/trip-logger/trip-logger.component';
+import { AuthGuard } from './guards/auth.guard';
 
 @NgModule({
     imports: [
@@ -46,14 +48,16 @@ import { ParksComponent } from './components/parks/parks.component';
         MapComponent,
         TicketFinderComponent,
         TicketListComponent,
-        ParksComponent
+        ParksComponent,
+        TripLoggerComponent
     ],
     providers: [
         AuthService,
         AlertService,
         AlertIconAndTypesService,
         EventService,
-        LocationService
+        LocationService,
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

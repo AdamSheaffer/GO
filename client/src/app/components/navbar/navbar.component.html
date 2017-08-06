@@ -6,14 +6,14 @@
     </a>
   </div>
   <div class="header-nav">
-    <a class="active nav-link nav-text">Dashboard</a>
+    <a *ngIf="isLoggedIn" routerLink="/trip/new" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Log Trip</a>
     <a routerLink="/tickets" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Find Tickets</a>
   </div>
   <div class="header-actions">
 
     <!-- IF LOGGED IN -->
-    <img *ngIf="authService.isLoggedIn()" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
-    <clr-dropdown *ngIf="authService.isLoggedIn()" clrMenuPosition="bottom-right">
+    <img *ngIf="isLoggedIn" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
+    <clr-dropdown *ngIf="isLoggedIn" clrMenuPosition="bottom-right">
       <button class="nav-text" clrDropdownToggle>
                 {{authService.user.name}}
                 <clr-icon shape="caret down"></clr-icon>
@@ -25,7 +25,7 @@
     </clr-dropdown>
 
     <!-- IF LOGGED OUT -->
-    <div *ngIf="!authService.isLoggedIn()">
+    <div *ngIf="!isLoggedIn">
       <a routerLink="/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Login</a>
       <a routerLink="/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Register</a>
     </div>

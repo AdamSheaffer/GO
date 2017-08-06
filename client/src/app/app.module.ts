@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -21,10 +22,13 @@ import { AppFlashComponent } from './components/app-flash/app-flash.component';
 import { MapComponent } from './components/map/map.component';
 import { TicketFinderComponent } from './components/ticket-finder/ticket-finder.component';
 import { LocationService } from './services/location.service';
+import { TicketListComponent } from './components/ticket-list/ticket-list.component';
+import { ParksComponent } from './components/parks/parks.component';
 
 @NgModule({
     imports: [
         BrowserModule,
+        BrowserAnimationsModule,
         ClarityModule.forRoot(),
         ClrIconModule,
         AppRoutingModule,
@@ -40,7 +44,9 @@ import { LocationService } from './services/location.service';
         LoginComponent,
         AppFlashComponent,
         MapComponent,
-        TicketFinderComponent
+        TicketFinderComponent,
+        TicketListComponent,
+        ParksComponent
     ],
     providers: [
         AuthService,

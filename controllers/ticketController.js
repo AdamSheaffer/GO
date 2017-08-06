@@ -6,6 +6,8 @@ function buildSeatGeekUrl(queryString) {
 
 function mapEvents(events) {
     return events.map(e => {
+        const homeTeam = e.performers.find(p => p.home_team);
+        const awayTeam = e.performers.find(p => p.away_team);
         return {
             venue: e.venue,
             id: e.id,
@@ -13,7 +15,7 @@ function mapEvents(events) {
             title: e.title,
             stats: e.stats,
             url: e.url,
-            performers: e.performers,
+            performers: { homeTeam, awayTeam },
             datetime_local: e.datetime_local
         }
     });
@@ -32,13 +34,34 @@ exports.getEvents = async (req, res) => {
 
 exports.getEventsInRadius = async (req, res) => {
     let ip;
-    const { lon, lat, range = 50, beginDate, endDate } = req.query;
+    const { lon, lat, range, beginDate, endDate, maxPrice, minPrice, sortBy, page = 1 } = req.query;
+
+    if (!beginDate || !endDate) {
+        return res.json({ success: false, message: 'Begin and End Dates are required' });
+    }
 
     // If no coords sent, try to guess location by IP
     if (!lon || !lat) ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
 
-    const locationQuery = lon && lat ? `lon=${lon}&lat=${lat}` : `geoip=${ip}`;
-    const queryString = `?${locationQuery}&range=${range}mi&datetime_utc.gte=${beginDate}&datetime_utc.lte=${endDate}`;
+    let queryString = `?datetime_utc.gte=${beginDate}&datetime_utc.lte=${endDate}&page=${page}`;
+
+    if (!!range && range !== "0") {
+        const locationQuery = lon && lat ? `lon=${lon}&lat=${lat}` : `geoip=${ip}`;
+        queryString += `&${locationQuery}&range=${range}mi`;
+    }
+
+    if (!!maxPrice) {
+        queryString += `&lowest_price.lte=${maxPrice}`;
+    }
+
+    if (!!minPrice) {
+        queryString += `&highest_price.gte=${minPrice}`;
+    }
+
+    if (!!sortBy) {
+        queryString += `&sort=${sortBy}`;
+    }
+
     const url = buildSeatGeekUrl(queryString);
     const { data } = await axios.get(url);
     const events = mapEvents(data.events);

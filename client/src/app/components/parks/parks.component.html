@@ -1,0 +1,13 @@
+<div class="card">
+  <div class="card-header">
+    Parks
+  </div>
+  <div class="card-block">
+    <div class="row">
+      <div *ngFor="let park of parks" class="col-lg-3 col-md-4 col-sm-6 col-xs-12" (click)="selectPark(park)">
+        <img src="{{park.team.image}}" alt="{{park.venue.name}}" [ngClass]="{'park-img-active': park.isActive}" class="park-img">
+        <span class="park-name">{{park.venue.name}}</span>
+      </div>
+    </div>
+  </div>
+</div>

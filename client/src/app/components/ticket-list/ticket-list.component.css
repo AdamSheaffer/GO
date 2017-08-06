@@ -1,0 +1,13 @@
+.details-img {
+    height: 100px;
+    display: block;
+}
+
+.details-label-tickets {
+    text-align: center;
+    width: 100px;
+}
+
+.ticket-filter {
+    text-align: right;
+}

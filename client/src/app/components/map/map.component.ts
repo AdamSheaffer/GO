@@ -67,7 +67,7 @@ export class MapComponent implements OnInit {
   }
 
   setBounds(eventsByLocation: EventsByLocation[]) {
-    if (!this.map || !eventsByLocation.length) return; // This may get called before the map gets loaded
+    if (!this.map || !eventsByLocation || !eventsByLocation.length) return; // This may get called before the map gets loaded
 
     const bounds = new google.maps.LatLngBounds();
 
@@ -91,7 +91,7 @@ export class MapComponent implements OnInit {
 
 
   groupEvents(events: Event[]): EventsByLocation[] {
-    if (!events || !events.length) return;
+    if (!events) return;
 
     const eventsByLocation: EventsByLocation[] = [];
     const groupedObj = groupBy(events, (e) => `${e.venue.location.lat},${e.venue.location.lon}`);

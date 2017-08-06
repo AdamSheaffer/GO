@@ -1,0 +1,73 @@
+<div class="card">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-xs-4">
+        <span>Tickets</span>
+      </div>
+      <div *ngIf="events?.length" class="col-xs-8 ticket-filter">
+        <a (click)="sortEvents('datetime_local')">
+        Date
+        <clr-icon *ngIf="sortingBy === 'datetime_local' && sortingDirection === 'asc'" shape="angle up"></clr-icon>
+        <clr-icon *ngIf="sortingBy === 'datetime_local' && sortingDirection === 'desc'" shape="angle down"></clr-icon>
+      </a>
+        <span>|</span>
+        <a (click)="sortEvents('lowest_price')">Price</a>
+        <clr-icon *ngIf="sortingBy === 'lowest_price' && sortingDirection === 'asc'" shape="angle up"></clr-icon>
+        <clr-icon *ngIf="sortingBy === 'lowest_price' && sortingDirection === 'desc'" shape="angle down"></clr-icon>
+      </div>
+    </div>
+  </div>
+  <div class="card-block">
+    <clr-stack-view>
+
+      <!-- Ticket Listing -->
+      <clr-stack-block *ngFor="let event of events" [clrSbExpanded]="event.isActive" (click)="selectEvent(event)">
+        <clr-stack-label>{{event.datetime_local | date}}</clr-stack-label>
+        <clr-stack-content>
+          <span>{{event.short_title}}</span>
+        </clr-stack-content>
+        <clr-stack-block>
+          <clr-stack-label>
+            <a target="_blank" href="{{event.url}}">
+            <img class="details-img" src="/assets/images/021-ticket.png" alt="tickets">
+            <div class="details-label-tickets">Tickets</div>
+          </a>
+          </clr-stack-label>
+          <clr-stack-content>
+            <div>
+              <span>Park: {{event.venue.name}}</span>
+            </div>
+            <div>
+              <span>Price: {{event.stats.lowest_price | currency:'USD':true}} - {{event.stats.highest_price | currency:'USD':true}}</span>
+            </div>
+            <div>
+              <span>Location: {{event.venue.display_location}}</span>
+            </div>
+          </clr-stack-content>
+        </clr-stack-block>
+      </clr-stack-block>
+
+      <!-- Default -->
+      <clr-stack-block *ngIf="!events?.length">
+        <clr-stack-content>No Tickets Found</clr-stack-content>
+      </clr-stack-block>
+    </clr-stack-view>
+  </div>
+  <div class="card-footer row flex-items-xs-between" *ngIf="events?.length">
+    <div>
+      <a (click)="previousPage()" *ngIf="meta.page > 1">
+        <clr-icon shape="caret left"></clr-icon>
+        <span>Previous</span>
+      </a>
+    </div>
+    <div>
+      <span>{{pageDisplay()}}</span>
+    </div>
+    <div>
+      <a (click)="nextPage()" *ngIf="!isLastPage()">
+        <span>Next</span>
+        <clr-icon shape="caret right"></clr-icon>
+      </a>
+    </div>
+  </div>
+</div>

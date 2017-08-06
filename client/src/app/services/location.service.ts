@@ -8,15 +8,15 @@ export class LocationService {
 
   constructor() { }
 
-  getUserLocation(fn: (location: Location) => void) {
+  getUserLocation(onSuccess: (location: Location) => void, onError: (err) => void) {
     if (this.userPosition) {
-      return fn(this.userPosition);
+      return onSuccess(this.userPosition);
     }
 
     window.navigator.geolocation.getCurrentPosition((pos) => {
       this.userPosition = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-      fn(this.userPosition);
-    });
+      onSuccess(this.userPosition);
+    }, onError);
   }
 
 }

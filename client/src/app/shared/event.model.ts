@@ -3,7 +3,7 @@ import { Park } from './park.model';
 export class Event {
     datetime_local: string;
     id: number;
-    performers: { homeTeam: Object, awayTeam: Object };
+    performers: { homeTeam: any, awayTeam: any };
     short_title: string;
     stats: Object;
     title: string;

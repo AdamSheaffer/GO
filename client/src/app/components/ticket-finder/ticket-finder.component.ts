@@ -59,7 +59,7 @@ export class TicketFinderComponent implements OnInit {
     const { radius, beginDate, endDate, minPrice, maxPrice } = this.form.getRawValue();
     this.queryParams.range = radius;
     this.queryParams.beginDate = beginDate;
-    this.queryParams.endDate = endDate;
+    this.queryParams.endDate = endDate + 'T23:59Z';
     this.queryParams.minPrice = minPrice;
     this.queryParams.maxPrice = maxPrice;
 

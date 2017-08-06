@@ -3,7 +3,7 @@ import { Event } from '../../shared/event.model';
 import { Location } from '../../shared/location.model';
 import { } from '@types/google-maps';
 import { groupBy } from 'lodash';
-import { EventsByLocation } from "../../shared/events-by-location.model";
+import { EventsByLocation } from '../../shared/events-by-location.model';
 
 @Component({
   selector: 'app-map',
@@ -13,6 +13,8 @@ import { EventsByLocation } from "../../shared/events-by-location.model";
 export class MapComponent implements OnInit {
   private _events: Event[];
   private _userLocation: Location;
+
+  infoWindow = new google.maps.InfoWindow();
 
   @Input()
   set events(events: Event[]) {
@@ -43,22 +45,34 @@ export class MapComponent implements OnInit {
         lat: (this.userLocation && this.userLocation.lat) || this.defaultCenter.lat,
         lng: (this.userLocation && this.userLocation.lon) || this.defaultCenter.lon
       },
-      zoom: 4
+      zoom: 4,
+      styles: []
     });
+
+    this.infoWindow = new google.maps.InfoWindow({ content: 'Test' });
   }
 
   setMarkers(eventsByLocation: EventsByLocation[]) {
     if (!this.map) return; // This may get called before the map gets loaded
 
     this.clearMarkers();
-    eventsByLocation.forEach(e => {
+    this.markers = eventsByLocation.map(e => {
       const { lat, lon } = e.location;
+      const icon = 'assets/images/009-location-sm.png';
       const marker = new google.maps.Marker({
         position: { lat, lng: lon },
         map: this.map,
-        title: 'Test!'
+        title: 'Test!',
+        icon
       });
-      this.markers.push(marker);
+
+      marker.addListener('click', () => {
+        this.infoWindow.setContent(this.setInfoWindowContent(e));
+        this.infoWindow.open(this.map, marker);
+      });
+
+      return marker;
+
     });
   }
 
@@ -89,6 +103,37 @@ export class MapComponent implements OnInit {
     this.map.setCenter(new google.maps.LatLng(location.lat, location.lon));
   }
 
+  setInfoWindowContent(eventsByLocation: EventsByLocation) {
+    const events = eventsByLocation.events;
+    const homeTeam = events[0].performers.homeTeam;
+    const dates = this.buildDateString(events);
+
+    return `
+      <h5 id="firstHeading" class="firstHeading">${events[0].venue.name}</h5>
+      <div>
+        <b>Team:</b> ${homeTeam.name}
+      </div>
+      <div>
+        <b> Dates: </b> ${dates}
+      </div>
+      <hr />
+      <br />
+      <img src="${homeTeam.image}" />`;
+  }
+
+  buildDateString(events: Event[]) {
+    const months = 'Jan Feb Mar Apr May Jun Jul Aug Sept Oct Nov Dec'.split(' ');
+    return events.reduce((dateStr, e, i) => {
+      if (i > 0) {
+        dateStr += ', ';
+      }
+      const date = new Date(e.datetime_local);
+      const month = months[date.getMonth()];
+      const day = date.getDate();
+
+      return dateStr += `${month} ${day}`;
+    }, '');
+  }
 
   groupEvents(events: Event[]): EventsByLocation[] {
     if (!events) return;

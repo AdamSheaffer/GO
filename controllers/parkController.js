@@ -1,6 +1,6 @@
-exports.getParks = (req, res) => {
-    return res.json({
-        success: true,
-        parks: ['Park 1', 'Park 2']
-    });
+const Park = require('../models/Park');
+
+exports.getParks = async (req, res) => {
+    const parks = await Park.find();
+    return res.json({ success: true, parks });
 }

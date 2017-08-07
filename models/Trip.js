@@ -20,7 +20,12 @@ const tripSchema = new mongoose.Schema({
         required: true
     },
     comments: String,
-    rating: Number
+    rating: {
+        type: Number,
+        min: 1,
+        max: 5,
+        required: true
+    }
 });
 
 module.exports = mongoose.model('Trip', tripSchema);

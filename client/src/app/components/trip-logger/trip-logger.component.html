@@ -1,3 +1,34 @@
-<p>
-  trip-logger works!
-</p>
+<div class="col-lg-8">
+  <div class="card">
+    <div class="card-header">Log Trip</div>
+    <div class="card-block">
+      <form [formGroup]="form" (submit)="submitTrip()">
+        <section class="form-block">
+          <!-- Date -->
+          <div class="form-group">
+            <label for="tripDate">Date</label>
+            <input formControlName="tripDate" type="date" name="tripDate">
+          </div>
+          <!-- Park -->
+          <div class="form-group">
+            <label for="park">Park</label>
+            <div class="select">
+              <select formControlName="park">
+          <option [value]="null">SELECT PARK</option>
+          <option *ngFor="let park of parks" [value]="park._id">{{park.name}}</option>
+        </select>
+            </div>
+          </div>
+          <!-- Picture Upload -->
+          <!-- Rating -->
+          <!-- Comments -->
+          <div class="form-group">
+            <label for="comments">Details</label>
+            <textarea formControlName="comments" rows="10" cols="10" name="comments" placeholder="Score, stats, weather, details, etc..."></textarea>
+          </div>
+        </section>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>

@@ -58,5 +58,395 @@
             "type": "Point"
         },
         "division": "American League"
+    },
+    {
+        "name": "Comerica Park",
+        "team": "Tigers",
+        "parkCity": "Detroit",
+        "teamCity": "Detroit",
+        "location": {
+            "address": "2100 Woodward Ave, Detroit, MI 48201",
+            "coordinates": [
+                -83.04887289999999,
+                42.339293
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Minute Maid Park",
+        "team": "Astros",
+        "parkCity": "Houston",
+        "teamCity": "Houston",
+        "location": {
+            "address": "501 Crawford St, Houston, TX 77002",
+            "coordinates": [
+                -95.35453989999996,
+                29.7577058
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Kauffman Stadium",
+        "team": "Royals",
+        "parkCity": "Kansas City",
+        "teamCity": "Kansas City",
+        "location": {
+            "address": "1 Royal Way, Kansas City, MO 64129",
+            "coordinates": [
+                -94.4802889,
+                39.051465
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Angel Stadium of Anaheim",
+        "team": "Angels",
+        "parkCity": "Anaheim",
+        "teamCity": "Los Angeles",
+        "location": {
+            "address": "2000 E Gene Autry Way, Anaheim, CA 92806",
+            "coordinates": [
+                -117.8827493,
+                33.8002902
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Target Field",
+        "team": "Twins",
+        "parkCity": "Minneapolis",
+        "teamCity": "Minnesota",
+        "location": {
+            "address": "1 Twins Way, Minneapolis, MN 55403",
+            "coordinates": [
+                -93.27775989999998,
+                44.9817121
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Yankee Stadium",
+        "team": "Yankees",
+        "parkCity": "Bronx",
+        "teamCity": "New York",
+        "location": {
+            "address": "1 E 161st St, Bronx, NY 10451",
+            "coordinates": [
+                -73.9265691,
+                40.8288189
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Oakland Coliseum",
+        "team": "Athletics",
+        "parkCity": "Oakland",
+        "teamCity": "Oakland",
+        "location": {
+            "address": "1 E 161st St, Bronx, NY 10451",
+            "coordinates": [
+                -122.2028616,
+                37.750277
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Safeco Field",
+        "team": "Mariners",
+        "parkCity": "Seattle",
+        "teamCity": "Seattle",
+        "location": {
+            "address": "Seattle, WA 98104",
+            "coordinates": [
+                -122.3323351,
+                47.6015566
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Tropicana Field",
+        "team": "Rays",
+        "parkCity": "St. Petersburg",
+        "teamCity": "Tampa Bay",
+        "location": {
+            "address": "1 Tropicana Drive, St. Petersburg, FL 33705",
+            "coordinates": [
+                -82.65326900000002,
+                27.7681114
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Globe Life Park in Arlington",
+        "team": "Rangers",
+        "parkCity": "Arlington",
+        "teamCity": "Texas",
+        "location": {
+            "address": "1000 Ballpark Way, Arlington, TX 76011",
+            "coordinates": [
+                -97.0825092,
+                32.7512434
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Rodgers Centre",
+        "team": "Blue Jays",
+        "parkCity": "Toronto",
+        "teamCity": "Toronto",
+        "location": {
+            "address": "1 Blue Jays Way #3200, Toronto, ON M5V 1J3",
+            "coordinates": [
+                -79.38925469999998,
+                43.6417388
+            ],
+            "type": "Point"
+        },
+        "division": "American League"
+    },
+    {
+        "name": "Chase Field",
+        "team": "Diamondbacks",
+        "parkCity": "Phoenix",
+        "teamCity": "Arizona",
+        "location": {
+            "address": "401 E Jefferson St, Phoenix, AZ 85004",
+            "coordinates": [
+                -112.06749609999997,
+                33.4453626
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "SunTrust Park",
+        "team": "Braves",
+        "parkCity": "Atlanta",
+        "teamCity": "Atlanta",
+        "location": {
+            "address": "Battery Avenue, Atlanta, GA 30339",
+            "coordinates": [
+                -84.46920499999999,
+                33.8907566
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Wrigley Field",
+        "team": "Cubs",
+        "parkCity": "Chicago",
+        "teamCity": "Chicago",
+        "location": {
+            "address": "1060 W Addison St, Chicago, IL 60613",
+            "coordinates": [
+                -87.65613410000003,
+                41.9474536
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Great American Ball Park",
+        "team": "Reds",
+        "parkCity": "Cincinnati",
+        "teamCity": "Cincinnati",
+        "location": {
+            "address": "100 Main St, Cincinnati, OH 45202",
+            "coordinates": [
+                -84.50811169999997,
+                39.0978453
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Coors Field",
+        "team": "Rockies",
+        "parkCity": "Denver",
+        "teamCity": "Colorado",
+        "location": {
+            "address": "2001 Blake St, Denver, CO 80205",
+            "coordinates": [
+                -104.99334909999999,
+                39.7559779
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Dodger Stadium",
+        "team": "Dodgers",
+        "parkCity": "Los Angeles",
+        "teamCity": "Los Angeles",
+        "location": {
+            "address": "1000 Elysian Park Ave, Los Angeles, CA 90012",
+            "coordinates": [
+                -118.24046650000003,
+                34.0735579
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Marlins Park",
+        "team": "Marlins",
+        "parkCity": "Miami",
+        "teamCity": "Miami",
+        "location": {
+            "address": "501 Marlins Way, Miami, FL 33125",
+            "coordinates": [
+                -80.2195567,
+                25.7781113
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Miller Park",
+        "team": "Brewers",
+        "parkCity": "Milwaukee",
+        "teamCity": "Milwaukee",
+        "location": {
+            "address": "1 Brewers Way, Milwaukee, WI 53214",
+            "coordinates": [
+                -87.97121170000003,
+                43.028078
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Citi Field",
+        "team": "Mets",
+        "parkCity": "Flushing",
+        "teamCity": "New York",
+        "location": {
+            "address": "Flushing, NY 11368",
+            "coordinates": [
+                -73.84778740000002,
+                40.7506343
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Citizens Bank Park",
+        "team": "Phillies",
+        "parkCity": "Philadelphia",
+        "teamCity": "Philadelphia",
+        "location": {
+            "address": "1 Citizens Bank Way, Philadelphia, PA 19148",
+            "coordinates": [
+                -75.1666401,
+                39.9059929
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "PNC Park",
+        "team": "Pirates",
+        "parkCity": "Pittsburgh",
+        "teamCity": "Pittsburgh",
+        "location": {
+            "address": "115 Federal St, Pittsburgh, PA 15212",
+            "coordinates": [
+                -80.00640870000001,
+                40.4471507
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Petco Park",
+        "team": "Padres",
+        "parkCity": "San Diego",
+        "teamCity": "San Diego",
+        "location": {
+            "address": "100 Park Blvd, San Diego, CA 92101",
+            "coordinates": [
+                -117.15579500000001,
+                32.7072046
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "AT&T Park",
+        "team": "Giants",
+        "parkCity": "San Francisco",
+        "teamCity": "San Francisco",
+        "location": {
+            "address": "24 Willie Mays Plaza, San Francisco, CA 94107",
+            "coordinates": [
+                -122.3894833,
+                37.7785351
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Busch Stadium",
+        "team": "Cardinals",
+        "parkCity": "St. Louis",
+        "teamCity": "St. Louis",
+        "location": {
+            "address": "700 Clark Ave, St. Louis, MO 63102",
+            "coordinates": [
+                -90.1928125,
+                38.6226441
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
+    },
+    {
+        "name": "Nationals Park",
+        "team": "Nationals",
+        "parkCity": "Washington, DC",
+        "teamCity": "Washington",
+        "location": {
+            "address": "1500 S Capitol St SE, Washington, DC 20003",
+            "coordinates": [
+                -77.00757269999997,
+                38.8730933
+            ],
+            "type": "Point"
+        },
+        "division": "National League"
     }
 ]

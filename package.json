@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon --inspect start.js && cd client/ && ng serve",
-    "loadParks": "node ./data/parkData.js",
+    "loadparks": "node ./data/parkData.js",
     "blowitallaway": "node ./data/parkData.js --delete"
   },
   "repository": {

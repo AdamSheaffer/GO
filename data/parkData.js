@@ -14,7 +14,7 @@ const parks = JSON.parse(fs.readFileSync(__dirname + '/parks.json', 'utf-8'));
 async function deleteData() {
     console.log('😢😢 Goodbye Data...');
     await Park.remove();
-    console.log('Data Deleted. To load sample data, run\n\n\t npm run sample\n\n');
+    console.log('Data Deleted. To load sample data, run\n\n\t npm run loadparks\n\n');
     process.exit();
 }
 

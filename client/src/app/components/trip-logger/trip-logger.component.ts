@@ -12,13 +12,19 @@ import { sortBy } from 'lodash';
 export class TripLoggerComponent implements OnInit {
 
   parks = [];
-  form: FormGroup;
+  trip = {};
+  photos = [];
+  photoPreviews = [];
+  fileReader: FileReader;
 
   constructor(
     private parkService: ParkService,
     private msgService: AlertService,
     private formBuilder: FormBuilder) {
-    this.createForm();
+    this.fileReader = new FileReader();
+    this.fileReader.onload = (e) => {
+      console.log(e);
+    }
   }
 
   ngOnInit() {
@@ -29,31 +35,50 @@ export class TripLoggerComponent implements OnInit {
         this.msgService.show({ cssClass: 'alert-danger', message: 'Error getting list of parks. Please try again' });
       }
     });
-
-    this.form.controls['park'].valueChanges.subscribe((parkId: string) => {
-      const park = this.parks.find(p => p._id === parkId);
-      console.log(park);
-    });
   }
 
-  createForm() {
-    this.form = this.formBuilder.group({
-      tripDate: [null, Validators.required],
-      park: [null, Validators.required],
-      comments: [null],
-      rating: [1, Validators.required]
-    });
+  onPhotoSelect(event) {
+    const photos = event.target.files || event.srcElement.files;
+    this.photos.push(...photos);
+    this.readUrl(event.target)
+  }
+
+  readUrl(input) {
+    if (input.files && input.files.length) {
+      const files = Array.from(input.files);
+
+      files.forEach((f: Blob) => {
+        var reader = new FileReader();
+        reader.onload = (e: any) => {
+          this.photoPreviews.push(e.target);
+        }
+        reader.readAsDataURL(f);
+      });
+
+    }
+  }
+
+  deletePhoto(index) {
+    this.photos.splice(index, 1);
+    this.photoPreviews.splice(index, 1);
   }
 
   submitTrip() {
-    const trip = this.form.getRawValue();
-    this.parkService.postTrip(trip).then(data => {
+    const formData = new FormData();
+
+    formData.append('trip', JSON.stringify(this.trip));
+
+    this.photos.forEach(p => formData.append('photos', p));
+
+    this.parkService.postTrip(formData).then(data => {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         // re-route user
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
-    });
+    }).catch(err => {
+      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
+    })
   }
 }

@@ -65,7 +65,7 @@ exports.register = async (req, res, next) => {
         return res.json({ success: false, message: 'That email address is already in use.' });
     }
 
-    let user = new User({ email, password, name });
+    const user = new User({ email, password, name });
 
     const newUser = await user.save();
 

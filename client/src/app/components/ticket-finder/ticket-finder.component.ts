@@ -36,7 +36,7 @@ export class TicketFinderComponent implements OnInit {
       this.queryParams.coords = loc;
     }, (err) => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Enable location services on your browser before using the Ticket Finder tool' });
-    })
+    });
   }
 
   createForm() {

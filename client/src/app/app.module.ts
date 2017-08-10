@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { ClarityModule } from 'clarity-angular';
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
 import { ClrIconModule } from 'clarity-angular/icon/icon.module';
+import 'clarity-icons'; // loads only core-shapes alone and Clarity Icons API
+import 'clarity-icons/shapes/all-shapes'; // loads all shapes from all sets
 
 import { AppComponent } from './components/app/app.component';
 import { AppRoutingModule } from "./app-routing.module";

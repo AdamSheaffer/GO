@@ -6,22 +6,13 @@ exports.catchErrors = (fn) => {
 
 exports.developmentErrors = (err, req, res, next) => {
     err.stack = err.stack || '';
-    const errorDetails = {
-        message: err.message,
-        status: err.status
-    };
     res.status(err.status || 500);
-    return res.json({
-        success: false,
-        errorDetails
-    });
+    err.message = 'Whoops! Something went wrong...';
+    return res.json({ error: err });
 };
 
 exports.productionErrors = (err, req, res, next) => {
     res.status(err.status || 500);
-    return res.json({
-        success: false,
-        message: 'Whoops! Something went wrong...',
-        error: {}
-    });
+    err.message = 'Whoops! Something went wrong...';
+    return res.json({ error: err });
 };

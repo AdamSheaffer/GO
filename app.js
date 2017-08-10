@@ -21,21 +21,21 @@ if (app.get('env') === 'development') {
     app.use(cors({
         origin: 'http://localhost:4200'
     }));
-    app.use(errorHandlers.developmentErrors);
     app.use(express.static(`${__dirname}/client/dist/`));
     app.use('/auth', authRoutes);
     app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/dist/index.html'));
     });
+    app.use(errorHandlers.developmentErrors);
 } else {
-    app.use(errorHandlers.productionErrors);
     app.use(express.static(`${__dirname}/public/`));
     app.use('/auth', authRoutes);
     app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'public/index.html'));
     });
+    app.use(errorHandlers.productionErrors);
 }
 
 module.exports = app;

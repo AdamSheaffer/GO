@@ -12,6 +12,8 @@ router.get('/tickets', catchErrors(ticketsController.getEvents));
 router.get('/range', catchErrors(ticketsController.getEventsInRadius));
 router.post('/trips',
     requireAuth,
+    tripsController.upload,
+    catchErrors(tripsController.resize),
     catchErrors(tripsController.postNewTrip));
 
 router.get('/parks', catchErrors(parkController.getParks));

@@ -7,8 +7,8 @@ import 'rxjs/add/operator/toPromise';
 export class AuthService {
 
     domain = "http://localhost:8080";
-    redirectUrl: String;
-    authToken: String;
+    redirectUrl: string;
+    authToken: string;
     user: any;
 
     constructor(private http: Http) { }
@@ -21,6 +21,14 @@ export class AuthService {
                 authorization: this.authToken
             })
         });
+    }
+
+    createMultipartAuthenticationHeaders<RequestOptions>() {
+        this.loadToken();
+        const headers = new Headers();
+        headers.set('Accept', 'application/json');
+        headers.set('authorization', this.authToken);
+        return new RequestOptions({ headers: headers });
     }
 
     loadToken() {

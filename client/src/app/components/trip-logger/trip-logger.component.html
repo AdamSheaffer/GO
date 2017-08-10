@@ -2,29 +2,57 @@
   <div class="card">
     <div class="card-header">Log Trip</div>
     <div class="card-block">
-      <form [formGroup]="form" (submit)="submitTrip()">
+      <form (submit)="submitTrip()">
         <section class="form-block">
           <!-- Date -->
           <div class="form-group">
             <label for="tripDate">Date</label>
-            <input formControlName="tripDate" type="date" name="tripDate">
+            <input [(ngModel)]="trip.tripDate" type="date" name="tripDate">
           </div>
           <!-- Park -->
           <div class="form-group">
             <label for="park">Park</label>
             <div class="select">
-              <select formControlName="park">
-          <option [value]="null">SELECT PARK</option>
-          <option *ngFor="let park of parks" [value]="park._id">{{park.name}}</option>
-        </select>
+              <select [(ngModel)]="trip.park" name="park">
+                <option [value]="null">SELECT PARK</option>
+                <option *ngFor="let park of parks" [value]="park._id">{{park.name}}</option>
+              </select>
             </div>
           </div>
-          <!-- Picture Upload -->
+
           <!-- Rating -->
+          <div class="form-group">
+            <label for="rank">Park Rating</label>
+            <clr-icon (click)="trip.rating = rank" (mouseenter)="hover = rank" (mouseleave)="hover = null" shape="star" *ngFor="let rank of [1,2,3,4,5]; let i = index"
+              [ngClass]="{'is-solid': hover >= rank|| trip.rating >= rank}" class="is-warning">
+            </clr-icon>
+          </div>
           <!-- Comments -->
           <div class="form-group">
             <label for="comments">Details</label>
-            <textarea formControlName="comments" rows="10" cols="10" name="comments" placeholder="Score, stats, weather, details, etc..."></textarea>
+            <textarea [(ngModel)]="trip.comments" rows="10" cols="10" name="comments" placeholder="Score, stats, weather, details, etc..."></textarea>
+          </div>
+          <!-- Picture Upload -->
+          <div class="row">
+            <div *ngFor="let preview of photoPreviews; let i = index" class="preview-img-wrapper">
+              <div class="card">
+                <div class="card-block">
+                  <img [src]="preview.result" class="preview-img" />
+                </div>
+                <div class="card-footer flex-items-xs-right">
+                  <clr-tooltip>
+                    <clr-icon (click)="deletePhoto(i)" shape="trash" size="24"></clr-icon>
+                    <clr-tooltip-content>
+                      <span>Delete Photo</span>
+                    </clr-tooltip-content>
+                  </clr-tooltip>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="btn btn-sm" for="photos">Add Photos</label>
+            <input type="file" (change)="onPhotoSelect($event)" name="photos" id="photos" multiple>
           </div>
         </section>
         <button type="submit" class="btn btn-primary">Submit</button>

@@ -1,0 +1,22 @@
+#photos {
+	opacity: 0;
+	overflow: hidden;
+	z-index: -1;
+}
+
+.preview-img {
+    height: 175px;
+}
+
+.blur {
+	filter: blur(7px) grayscale(75%);
+}
+
+.preview-img-wrapper {
+	padding: 12px;
+	display: inline-block;
+}
+
+.preview-img-wrapper .card-block, .preview-img-wrapper .card-footer {
+	padding: 8px;
+}

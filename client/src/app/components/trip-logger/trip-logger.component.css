@@ -8,13 +8,13 @@
     height: 175px;
 }
 
-.blur {
-	filter: blur(7px) grayscale(75%);
+.preview-img-wrapper {
+	padding: 0 8px;
+	display: inline-block;
 }
 
-.preview-img-wrapper {
-	padding: 12px;
-	display: inline-block;
+.preview-img-wrapper:last-child {
+	padding-bottom: 12px;
 }
 
 .preview-img-wrapper .card-block, .preview-img-wrapper .card-footer {

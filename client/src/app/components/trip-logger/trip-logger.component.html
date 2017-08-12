@@ -1,17 +1,17 @@
-<div class="col-lg-8">
+<div class="col-lg-10 col-md-12 offset-lg-1">
   <div class="card">
     <div class="card-header">Log Trip</div>
-    <div class="card-block">
-      <form (submit)="submitTrip()">
+    <form (submit)="submitTrip()">
+      <div class="card-block">
         <section class="form-block">
           <!-- Date -->
           <div class="form-group">
-            <label for="tripDate">Date</label>
+            <label for="tripDate" class="required">Date</label>
             <input [(ngModel)]="trip.tripDate" type="date" name="tripDate">
           </div>
           <!-- Park -->
           <div class="form-group">
-            <label for="park">Park</label>
+            <label for="park" class="required">Park</label>
             <div class="select">
               <select [(ngModel)]="trip.park" name="park">
                 <option [value]="null">SELECT PARK</option>
@@ -55,8 +55,11 @@
             <input type="file" (change)="onPhotoSelect($event)" name="photos" id="photos" multiple>
           </div>
         </section>
+      </div>
+      <div class="card-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+      </div>
+    </form>
+
   </div>
 </div>

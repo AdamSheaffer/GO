@@ -12,7 +12,7 @@ import { sortBy } from 'lodash';
 export class TripLoggerComponent implements OnInit {
 
   parks = [];
-  trip = {};
+  trip = { rating: 1 };
   photos = [];
   photoPreviews = [];
   fileReader: FileReader;

@@ -2,3 +2,7 @@
 a {
     cursor: pointer;
 }
+
+.card .card-header {
+    background: #FFB38F;
+}

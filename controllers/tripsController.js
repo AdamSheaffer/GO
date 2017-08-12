@@ -54,7 +54,7 @@ exports.postNewTrip = async (req, res) => {
     }
 
     trip.user = req.user._id;
-    trip.photos = [req.body.photo];
+    trip.photos = req.body.photos;
     const newTrip = await (new Trip(trip)).save();
     return res.json({ success: true, message: 'Trip Saved!', trip });
 }

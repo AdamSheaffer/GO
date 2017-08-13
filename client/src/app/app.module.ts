@@ -30,6 +30,7 @@ import { ParksComponent } from './components/parks/parks.component';
 import { TripLoggerComponent } from './components/trip-logger/trip-logger.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserTripsComponent } from './components/user-trips/user-trips.component';
+import { TripsMapComponent } from './components/trips-map/trips-map.component';
 
 @NgModule({
     imports: [
@@ -54,7 +55,8 @@ import { UserTripsComponent } from './components/user-trips/user-trips.component
         TicketListComponent,
         ParksComponent,
         TripLoggerComponent,
-        UserTripsComponent
+        UserTripsComponent,
+        TripsMapComponent
     ],
     providers: [
         AuthService,

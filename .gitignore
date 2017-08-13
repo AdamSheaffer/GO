@@ -42,4 +42,4 @@ testem.log
 Thumbs.db
 
 *.env
-/uploads
+uploads/

@@ -28,6 +28,10 @@ const userSchema = new Schema({
         enum: ['Member', 'Admin'],
         default: 'Member'
     },
+    badges: [{
+        type: mongoose.Schema.ObjectId,
+        ref: 'Badge'
+    }],
     resetPasswordToken: { type: String },
     resetPasswordExpires: { type: Date }
 }, { timestamps: true });

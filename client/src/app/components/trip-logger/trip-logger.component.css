@@ -20,3 +20,20 @@
 .preview-img-wrapper .card-block, .preview-img-wrapper .card-footer {
 	padding: 8px;
 }
+
+.badge-img {
+	display: block;
+	margin: auto;
+	height: 400px;
+}
+
+.badge-header {
+	font-weight: 600;
+	font-size: 42px;
+	text-align: center;
+	color: #007CBB;
+}
+
+.badge-content {
+	text-align: center;
+}

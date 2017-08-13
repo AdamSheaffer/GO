@@ -1,0 +1,14 @@
+[
+    {
+        "name": "First Park",
+        "title": "CONGRATULATIONS!",
+        "description": "You logged your first trip! Keep going!",
+        "image": "028-hand.png"
+    },
+    {
+        "name": "100% Park",
+        "title": "CONGRATULATIONS!",
+        "description": "Congratulations! You made it to EVERY park!",
+        "image": "022-trophy-1.png"
+    }
+]

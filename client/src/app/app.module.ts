@@ -29,6 +29,7 @@ import { TicketListComponent } from './components/ticket-list/ticket-list.compon
 import { ParksComponent } from './components/parks/parks.component';
 import { TripLoggerComponent } from './components/trip-logger/trip-logger.component';
 import { AuthGuard } from './guards/auth.guard';
+import { UserTripsComponent } from './components/user-trips/user-trips.component';
 
 @NgModule({
     imports: [
@@ -52,7 +53,8 @@ import { AuthGuard } from './guards/auth.guard';
         TicketFinderComponent,
         TicketListComponent,
         ParksComponent,
-        TripLoggerComponent
+        TripLoggerComponent,
+        UserTripsComponent
     ],
     providers: [
         AuthService,

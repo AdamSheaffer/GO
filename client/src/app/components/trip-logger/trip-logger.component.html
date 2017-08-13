@@ -32,7 +32,7 @@
             <label for="comments">Details</label>
             <textarea [(ngModel)]="trip.comments" rows="10" cols="10" name="comments" placeholder="Score, stats, weather, details, etc..."></textarea>
           </div>
-          <!-- Picture Upload -->
+          <!-- Picture Previews -->
           <div class="row">
             <div *ngFor="let preview of photoPreviews; let i = index" class="preview-img-wrapper">
               <div class="card">
@@ -50,16 +50,34 @@
               </div>
             </div>
           </div>
+          <!-- Picture Upload -->
           <div class="form-group">
             <label class="btn btn-sm" for="photos">Add Photos</label>
             <input type="file" (change)="onPhotoSelect($event)" name="photos" id="photos" multiple>
           </div>
         </section>
       </div>
+      <!-- Submit -->
       <div class="card-footer">
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
-
   </div>
 </div>
+
+<!-- Modal -->
+<clr-modal [(clrModalOpen)]="hasBadge" [clrModalClosable]="false">
+  <h1 class="modal-title badge-header">{{badgeTitle}}</h1>
+  <div class="modal-body">
+    <img class="badge-img" src="assets/images/028-hand.png" alt="badge">
+    <h5 class="badge-content">{{badgeContent}}</h5>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn" (click)="hasBadge = false">
+      Log Another Trip
+    </button>
+    <button type="button" class="btn btn-primary" (click)="navigateToTrips()">
+      View My Scrapbook
+    </button>
+  </div>
+</clr-modal>

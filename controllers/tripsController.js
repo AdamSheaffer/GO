@@ -1,4 +1,6 @@
 const Trip = require('../models/Trip');
+const User = require('../models/User');
+const Badge = require('../models/Badge');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
@@ -32,7 +34,7 @@ exports.resize = async (req, res, next) => {
 
         const promise = jimp.read(f.buffer)
             .then(photo => photo.resize(800, jimp.AUTO))
-            .then(photo => photo.write(`./uploads/${fileName}`));
+            .then(photo => photo.write(`./client/src/assets/uploads/${fileName}`));
 
         promises.push(promise);
     });
@@ -55,7 +57,29 @@ exports.postNewTrip = async (req, res) => {
 
     trip.user = req.user._id;
     trip.photos = req.body.photos;
-    const newTrip = await (new Trip(trip)).save();
-    return res.json({ success: true, message: 'Trip Saved!', trip });
-}
+    await (new Trip(trip)).save();
+    const tripsPromise = Trip.find({ user: req.user._id });
+    const userPromise = User.findById(req.user._id);
+    const [trips, user] = await Promise.all([tripsPromise, userPromise]);
+    const badge = await checkBadges(trips);
+    if (badge) user.badges.push(badge);
+    await user.save();
+    return res.json({ success: true, message: 'Trip Saved!', badge });
+};
 
+exports.getUserTrips = async (req, res) => {
+    const trips = await Trip.find({ user: req.user._id }).populate('park');
+
+    if (!trips) {
+        return res.json({ success: false, message: 'No trips found!' });
+    }
+
+    return res.json({ success: true, trips });
+};
+
+const checkBadges = (trips) => {
+    // first trip badge
+    if (trips.length === 1) {
+        return Badge.findOne({ name: 'First Park' });
+    }
+}

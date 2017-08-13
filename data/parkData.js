@@ -7,13 +7,16 @@ mongoose.Promise = global.Promise; // Tell Mongoose to use ES6 promises
 
 // import all of our models - they need to be imported only once
 const Park = require('../models/Park');
+const Badge = require('../models/Badge');
 
 
 const parks = JSON.parse(fs.readFileSync(__dirname + '/parks.json', 'utf-8'));
+const badges = JSON.parse(fs.readFileSync(__dirname + '/badges.json', 'utf-8'));
 
 async function deleteData() {
     console.log('😢😢 Goodbye Data...');
     await Park.remove();
+    await Badge.remove();
     console.log('Data Deleted. To load sample data, run\n\n\t npm run loadparks\n\n');
     process.exit();
 }
@@ -21,6 +24,7 @@ async function deleteData() {
 async function loadData() {
     try {
         await Park.insertMany(parks);
+        await Badge.insertMany(badges);
         console.log('👍👍👍👍👍👍👍👍 Done!');
         process.exit();
     } catch (e) {

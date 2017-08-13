@@ -15,6 +15,9 @@ router.post('/trips',
     tripsController.upload,
     catchErrors(tripsController.resize),
     catchErrors(tripsController.postNewTrip));
+router.get('/trips',
+    requireAuth,
+    catchErrors(tripsController.getUserTrips));
 
 router.get('/parks', catchErrors(parkController.getParks));
 

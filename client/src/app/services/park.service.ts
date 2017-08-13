@@ -17,4 +17,9 @@ export class ParkService {
     const headers = this.authService.createMultipartAuthenticationHeaders();
     return this.http.post(`${this.domain}/api/trips`, trip, headers).toPromise().then(res => res.json());
   }
+
+  getUserTrips() {
+    const headers = this.authService.createAuthenticationHeaders();
+    return this.http.get(`${this.domain}/api/trips`, headers).toPromise().then(res => res.json());
+  }
 }

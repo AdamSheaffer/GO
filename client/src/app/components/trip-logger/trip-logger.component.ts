@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
 import { sortBy } from 'lodash';
@@ -16,10 +17,14 @@ export class TripLoggerComponent implements OnInit {
   photos = [];
   photoPreviews = [];
   fileReader: FileReader;
+  hasBadge = false;
+  badgeTitle: string;
+  badgeContent: string;
 
   constructor(
     private parkService: ParkService,
     private msgService: AlertService,
+    private router: Router,
     private formBuilder: FormBuilder) {
     this.fileReader = new FileReader();
     this.fileReader.onload = (e) => {
@@ -73,7 +78,9 @@ export class TripLoggerComponent implements OnInit {
     this.parkService.postTrip(formData).then(data => {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
-        // re-route user
+        if (data.badge) {
+          this.showBadge(data.badge);
+        }
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
@@ -81,4 +88,15 @@ export class TripLoggerComponent implements OnInit {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
     })
   }
+
+  showBadge(badge) {
+    this.hasBadge = true;
+    this.badgeTitle = badge.title;
+    this.badgeContent = badge.description;
+  }
+
+  navigateToTrips() {
+    this.router.navigate(['/trips']);
+  }
+
 }

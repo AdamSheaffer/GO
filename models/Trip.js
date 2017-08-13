@@ -16,7 +16,8 @@ const tripSchema = new mongoose.Schema({
         required: true
     },
     park: {
-        type: String,
+        type: mongoose.Schema.ObjectId,
+        ref: 'Park',
         required: true
     },
     comments: String,

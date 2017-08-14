@@ -4,6 +4,8 @@ const Badge = require('../models/Badge');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
+const fs = require('fs');
+const photoDir = './client/src/assets/uploads/';
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -34,7 +36,7 @@ exports.resize = async (req, res, next) => {
 
         const promise = jimp.read(f.buffer)
             .then(photo => photo.resize(800, jimp.AUTO))
-            .then(photo => photo.write(`./client/src/assets/uploads/${fileName}`));
+            .then(photo => photo.write(photoDir + fileName));
 
         promises.push(promise);
     });
@@ -82,4 +84,22 @@ const checkBadges = (trips) => {
     if (trips.length === 1) {
         return Badge.findOne({ name: 'First Park' });
     }
+}
+
+exports.deleteTrip = async (req, res) => {
+    const tripId = req.params.id;
+
+    if (!tripId) {
+        return res.json({ success: false, message: 'You must supply a trip id' });
+    };
+
+    // Check if trip has photos
+    const trip = await Trip.findById(tripId);
+    if (trip.photos && trip.photos.length) {
+        trip.photos.forEach(p => fs.unlink(photoDir + p));
+    }
+
+    await Trip.findByIdAndRemove(tripId);
+
+    return res.json({ success: true, message: 'Trip Deleted' });
 }

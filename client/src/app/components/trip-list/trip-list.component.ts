@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Trip } from '../../shared/trip.model';
 
 @Component({
@@ -8,6 +8,7 @@ import { Trip } from '../../shared/trip.model';
 })
 export class TripListComponent implements OnInit {
   @Input() trips: Trip[];
+  @Output() onDeleteTrip = new EventEmitter<Trip>();
 
   photoDir = '/assets/uploads/';
   showPhotoModal = false;
@@ -23,4 +24,7 @@ export class TripListComponent implements OnInit {
     this.showPhotoModal = true;
   }
 
+  deleteTrip(trip: Trip) {
+    this.onDeleteTrip.emit(trip);
+  }
 }

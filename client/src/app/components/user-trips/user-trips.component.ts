@@ -10,16 +10,40 @@ import { Trip } from '../../shared/trip.model';
 })
 export class UserTripsComponent implements OnInit {
   trips: Trip[] = [];
+  tripStagedForDelete: Trip;
+  deleteConfirmationModalContent: string;
 
   constructor(private parkService: ParkService, private msgService: AlertService) { }
 
   ngOnInit() {
     this.parkService.getUserTrips().then(data => {
       this.trips = data.trips;
-      console.log(this.trips);
     }).catch(err => {
-      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was an error finding your trips' });
+      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was an problem finding your trips' });
     });
   }
 
+  deleteTrip() {
+    this.parkService.deleteTrip(this.tripStagedForDelete._id).then(data => {
+      if (data.success) {
+        this.msgService.show({ cssClass: 'alert-success', message: data.message });
+        this.removeTripWithId(this.tripStagedForDelete._id);
+      } else {
+        this.msgService.show({ cssClass: 'alert-danger', message: data.message });
+      }
+      this.tripStagedForDelete = null;
+    }).catch(err => {
+      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was a problem deleting that trip' });
+      this.tripStagedForDelete = null;
+    });
+  }
+
+  removeTripWithId(id) {
+    this.trips = this.trips.filter(t => t._id !== id);
+  }
+
+  confirmDeleteTrip(trip: Trip) {
+    this.tripStagedForDelete = trip;
+    this.deleteConfirmationModalContent = `Delete your trip to ${trip.park.name}?`;
+  }
 }

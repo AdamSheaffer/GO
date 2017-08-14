@@ -20,6 +20,7 @@ export class TripsMapComponent implements OnInit {
       return { lat, lng }
     });
 
+    this.clearLines();
     this.drawLines(path);
     this.setBounds(path);
   }
@@ -30,6 +31,7 @@ export class TripsMapComponent implements OnInit {
 
   defaultCenter = { lat: 39.5, lon: -98.35 };
   map: google.maps.Map;
+  polyLines: google.maps.Polyline;
 
   constructor() { }
 
@@ -47,7 +49,7 @@ export class TripsMapComponent implements OnInit {
   drawLines(path) {
     if (!this.map) return;
 
-    const polyLines = new google.maps.Polyline({
+    this.polyLines = new google.maps.Polyline({
       path,
       geodesic: true,
       strokeColor: '#EA5149',
@@ -55,7 +57,12 @@ export class TripsMapComponent implements OnInit {
       strokeWeight: 2
     });
 
-    polyLines.setMap(this.map);
+    this.polyLines.setMap(this.map);
+  }
+
+  clearLines() {
+    if (!this.polyLines) return;
+    this.polyLines.setMap(null);
   }
 
   setBounds(paths) {

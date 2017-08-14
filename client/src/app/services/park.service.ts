@@ -22,4 +22,9 @@ export class ParkService {
     const headers = this.authService.createAuthenticationHeaders();
     return this.http.get(`${this.domain}/api/trips`, headers).toPromise().then(res => res.json());
   }
+
+  deleteTrip(tripId) {
+    const headers = this.authService.createAuthenticationHeaders();
+    return this.http.delete(`${this.domain}/api/trips/${tripId}`, headers).toPromise().then(res => res.json());
+  }
 }

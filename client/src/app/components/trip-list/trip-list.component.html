@@ -9,7 +9,7 @@
         <span class="tooltip-content">Edit</span>
       </a>
       <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-right">
-        <clr-icon shape="trash" size="18" class="is-danger"></clr-icon>
+        <clr-icon (click)="deleteTrip(trip)" shape="trash" size="18" class="is-danger"></clr-icon>
         <span class="tooltip-content">Delete</span>
       </a>
     </div>

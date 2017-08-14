@@ -8,7 +8,7 @@ import { Park } from '../../shared/park.model';
 })
 export class ParksComponent implements OnInit {
   @Input() parks: { team: Object, park: Park };
-  @Output() onParkSelect = new EventEmitter<Object>()
+  @Output() onParkSelect = new EventEmitter();
 
   constructor() { }
 

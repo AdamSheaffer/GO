@@ -93,8 +93,9 @@ exports.deleteTrip = async (req, res) => {
         return res.json({ success: false, message: 'You must supply a trip id' });
     };
 
+    const trip = await Trip.findOne({ _id: tripId, user: req.user._id });
+
     // Check if trip has photos
-    const trip = await Trip.findById(tripId);
     if (trip.photos && trip.photos.length) {
         trip.photos.forEach(p => fs.unlink(photoDir + p));
     }

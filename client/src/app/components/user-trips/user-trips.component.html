@@ -4,7 +4,7 @@
   </div>
   <div class="col-lg-5">
     <app-trips-map [trips]="trips"></app-trips-map>
-    <app-progress [trips]="trips" [parks]="parks"></app-progress>
+    <app-progress *ngIf="parks && parks.length" [trips]="trips" [parks]="parks"></app-progress>
   </div>
 </div>
 

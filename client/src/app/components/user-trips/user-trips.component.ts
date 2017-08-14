@@ -3,6 +3,7 @@ import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
 import { Trip } from '../../shared/trip.model';
 import { sortBy } from 'lodash';
+import { Park } from '../../shared/park.model';
 
 @Component({
   selector: 'app-user-trips',
@@ -13,6 +14,7 @@ export class UserTripsComponent implements OnInit {
   trips: Trip[] = [];
   tripStagedForDelete: Trip;
   deleteConfirmationModalContent: string;
+  parks: Park[];
 
   constructor(private parkService: ParkService, private msgService: AlertService) { }
 
@@ -22,6 +24,8 @@ export class UserTripsComponent implements OnInit {
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was an problem finding your trips' });
     });
+
+    this.getParks();
   }
 
   deleteTrip() {
@@ -50,5 +54,15 @@ export class UserTripsComponent implements OnInit {
 
   sortTrips(trips: Trip[]) {
     return sortBy(trips, t => new Date(t.tripDate));
+  }
+
+  getParks() {
+    this.parkService.getParks().then(data => {
+      if (data.success) {
+        this.parks = data.parks;
+      }
+    }).catch(err => {
+      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was a problem finding your park list' });
+    });
   }
 }

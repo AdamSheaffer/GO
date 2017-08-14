@@ -67,7 +67,6 @@ export class TicketFinderComponent implements OnInit {
       this.events = data.events;
       this.meta = data.meta;
       this.homeTeams = this.getHomeTeamsOfEvents(this.events);
-      console.log(this.homeTeams);
       this.msgService.show({ cssClass: 'alert-info', message: `Showing ${this.events.length} of ${data.meta.total} games found` });
     });
   }

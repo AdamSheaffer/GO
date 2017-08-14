@@ -31,6 +31,8 @@ import { TripLoggerComponent } from './components/trip-logger/trip-logger.compon
 import { AuthGuard } from './guards/auth.guard';
 import { UserTripsComponent } from './components/user-trips/user-trips.component';
 import { TripsMapComponent } from './components/trips-map/trips-map.component';
+import { TripListComponent } from './components/trip-list/trip-list.component';
+import { StarsComponent } from './components/stars/stars.component';
 
 @NgModule({
     imports: [
@@ -56,7 +58,9 @@ import { TripsMapComponent } from './components/trips-map/trips-map.component';
         ParksComponent,
         TripLoggerComponent,
         UserTripsComponent,
-        TripsMapComponent
+        TripsMapComponent,
+        TripListComponent,
+        StarsComponent
     ],
     providers: [
         AuthService,

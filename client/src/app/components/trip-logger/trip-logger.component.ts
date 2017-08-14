@@ -16,7 +16,6 @@ export class TripLoggerComponent implements OnInit {
   trip = { rating: 1 };
   photos = [];
   photoPreviews = [];
-  fileReader: FileReader;
   hasBadge = false;
   badgeTitle: string;
   badgeContent: string;
@@ -25,12 +24,7 @@ export class TripLoggerComponent implements OnInit {
     private parkService: ParkService,
     private msgService: AlertService,
     private router: Router,
-    private formBuilder: FormBuilder) {
-    this.fileReader = new FileReader();
-    this.fileReader.onload = (e) => {
-      console.log(e);
-    }
-  }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     this.parkService.getParks().then(data => {

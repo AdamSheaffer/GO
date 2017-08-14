@@ -13,7 +13,7 @@ const appRoutes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'login', component: LoginComponent },
     { path: 'tickets', component: TicketFinderComponent },
-    { path: 'trips', component: UserTripsComponent },
+    { path: 'trips', component: UserTripsComponent, canActivate: [AuthGuard] },
     { path: 'trip/new', component: TripLoggerComponent, canActivate: [AuthGuard] },
     { path: '**', component: HomeComponent }
 ]

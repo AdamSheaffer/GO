@@ -1,4 +1,8 @@
-<p>
-  user-trips works!
-</p>
-<app-trips-map [trips]="trips"></app-trips-map>
+<div class="row">
+  <div class="col-lg-7">
+    <app-trip-list [trips]="trips"></app-trip-list>
+  </div>
+  <div class="col-lg-5">
+    <app-trips-map [trips]="trips"></app-trips-map>
+  </div>
+</div>

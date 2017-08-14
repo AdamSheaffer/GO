@@ -1,0 +1,25 @@
+.header-date {
+    font-size: 12px;
+    color: #80746D;
+}
+
+.preview-img {
+    height: 100px;
+}
+
+.preview-img-wrapper {
+	padding: 0 8px;
+	display: inline-block;
+}
+
+.preview-img-wrapper .card-block, .preview-img-wrapper .card-footer {
+	padding: 8px;
+}
+
+.card-actions {
+    float: right;
+}
+
+clr-icon {
+    margin-left: 15px;
+}

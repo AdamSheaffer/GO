@@ -5,7 +5,7 @@ const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
-const photoDir = './client/src/assets/uploads/';
+const photoDir = './uploads/';
 
 const multerOptions = {
     storage: multer.memoryStorage(),

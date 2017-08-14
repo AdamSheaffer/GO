@@ -1,5 +1,5 @@
 import { Location } from './location.model';
-import { Park } from './park.model';
+import { SeatGeekPark } from './seatgeek-park.model';
 
 export class Trip {
     _id: string

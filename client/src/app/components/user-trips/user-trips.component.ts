@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
 import { Trip } from '../../shared/trip.model';
+import { sortBy } from 'lodash';
 
 @Component({
   selector: 'app-user-trips',
@@ -17,7 +18,7 @@ export class UserTripsComponent implements OnInit {
 
   ngOnInit() {
     this.parkService.getUserTrips().then(data => {
-      this.trips = data.trips;
+      this.trips = this.sortTrips(data.trips);
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was an problem finding your trips' });
     });
@@ -45,5 +46,9 @@ export class UserTripsComponent implements OnInit {
   confirmDeleteTrip(trip: Trip) {
     this.tripStagedForDelete = trip;
     this.deleteConfirmationModalContent = `Delete your trip to ${trip.park.name}?`;
+  }
+
+  sortTrips(trips: Trip[]) {
+    return sortBy(trips, t => new Date(t.tripDate));
   }
 }

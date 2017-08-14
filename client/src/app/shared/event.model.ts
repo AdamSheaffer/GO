@@ -1,4 +1,4 @@
-import { Park } from './park.model';
+import { SeatGeekPark } from './seatgeek-park.model';
 
 export class Event {
     datetime_local: string;
@@ -8,6 +8,6 @@ export class Event {
     stats: Object;
     title: string;
     url: string;
-    venue: Park;
+    venue: SeatGeekPark;
     isActive: boolean = false;
 }

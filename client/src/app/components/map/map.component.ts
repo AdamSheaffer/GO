@@ -57,12 +57,13 @@ export class MapComponent implements OnInit {
 
     this.clearMarkers();
     this.markers = eventsByLocation.map(e => {
+      console.log(e.events[0].performers.homeTeam);
       const { lat, lon } = e.location;
       const icon = 'assets/images/009-location-sm.png';
       const marker = new google.maps.Marker({
         position: { lat, lng: lon },
         map: this.map,
-        title: 'Test!',
+        title: e.events[0].performers.homeTeam.name,
         icon
       });
 

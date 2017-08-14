@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { Park } from '../../shared/park.model';
+import { SeatGeekPark } from '../../shared/seatgeek-park.model';
 
 @Component({
   selector: 'app-parks',
@@ -7,7 +7,7 @@ import { Park } from '../../shared/park.model';
   styleUrls: ['./parks.component.css']
 })
 export class ParksComponent implements OnInit {
-  @Input() parks: { team: Object, park: Park };
+  @Input() parks: { team: Object, park: SeatGeekPark };
   @Output() onParkSelect = new EventEmitter();
 
   constructor() { }

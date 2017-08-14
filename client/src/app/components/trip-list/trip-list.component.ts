@@ -10,7 +10,7 @@ export class TripListComponent implements OnInit {
   @Input() trips: Trip[];
   @Output() onDeleteTrip = new EventEmitter<Trip>();
 
-  photoDir = '/assets/uploads/';
+  photoDir = 'http://localhost:8080/';
   showPhotoModal = false;
   selectedPhoto: string;
 

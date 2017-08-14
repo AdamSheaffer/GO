@@ -1,0 +1,15 @@
+<div>
+  <h3>Progress</h3>
+  <h5>Total: {{totalPercentage}}%</h5>
+  <div class="progress success">
+    <progress max="100" [value]="totalPercentage"></progress>
+  </div>
+  <h5>National League: {{nlPercentage}}%</h5>
+  <div class="progress info">
+    <progress max="100" [value]="nlPercentage"></progress>
+  </div>
+  <h5>American League: {{alPercentage}}%</h5>
+  <div class="progress danger">
+    <progress max="100" [value]="alPercentage"></progress>
+  </div>
+</div>

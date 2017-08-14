@@ -13,7 +13,7 @@ export class TripsMapComponent implements OnInit {
 
   @Input()
   set trips(trips: Trip[]) {
-    this._trips = sortBy(trips, 'tripDate');
+    this._trips = trips;
 
     const path = trips.map(t => {
       const [lng, lat] = t.park.location.coordinates;

@@ -4,6 +4,7 @@
     height: 100px;
     width: 100px;
     filter: grayscale(100%);
+    margin: auto;
 }
 
 .park-name {
@@ -12,7 +13,7 @@
     display: block;
     width: 100px;
     line-height: 15px;
-    margin: 5px 0 10px 0;
+    margin: 5px auto 10px;
 }
 
 .park-img-active {

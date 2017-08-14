@@ -80,7 +80,7 @@ export class TripLoggerComponent implements OnInit {
       }
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
-    })
+    });
   }
 
   showBadge(badge) {

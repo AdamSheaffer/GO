@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         this.authService.storeUserData(data.token, data.user);
-        this.router.navigate([`${this.authService.redirectUrl || '/'}`]);
+        this.router.navigate([`${this.authService.redirectUrl || '/trips'}`]);
       } else {
         this.msgService.show({ message: data.message, cssClass: 'alert-danger' });
         this.isProcessing = false;

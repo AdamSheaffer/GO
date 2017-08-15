@@ -1,0 +1,105 @@
+.banner {
+    height: 300px;
+    position: relative;
+    background: #007E7A;
+}
+
+.banner-header {
+    text-align: right;
+    color: #FFF;
+    position: absolute;
+    bottom: -25px;
+    line-height: 75px;
+    right: 35px;
+    font-size: 75px;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.banner-subheader {
+    position: absolute;
+    right: 35px;
+    bottom: 60px;
+    color: #FFF;
+}
+
+.stopwatch {
+    height: 315px;
+    position: absolute;
+    bottom: -30px;
+    left: 35px;
+}
+
+.content-container {
+    padding: 20px 40px;
+}
+
+.content-img {
+    display: block;
+    height: 150px;
+    margin: auto;
+}
+
+.content-img-circle {
+    padding: 20px;
+    border-radius: 95px;
+    width: 190px;
+    margin: auto;
+}
+
+.content-heading {
+    color: #1E9FE0;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.auth-button-group {
+    padding-top: 20px;
+}
+
+.dark-blue {
+    background-color: #264556;
+}
+
+.gold {
+    background-color: #EDB529
+}
+
+.red {
+    background-color: #EA5149;
+}
+
+@media (max-width: 992px) {
+    .stopwatch {
+        height: 180px;
+        position: initial;
+        display: block;
+        margin: 24px auto 0;
+    }
+    .banner-header {
+        text-align: center;
+        position: initial;
+        line-height: initial;
+        right: initial;
+        bottom: initial;
+        margin-bottom: -25px;
+        margin-top: 5px;
+    }
+    .banner-subheader {
+        text-align: center;
+        position: initial;
+    }
+    .banner {
+        height: initial;
+    }
+}
+
+@media (max-width: 660px) {
+    .banner-header {
+        font-size: 50px;
+        margin-bottom: -15px;
+    }
+    .banner-subheader {
+        display: none;
+    }
+}

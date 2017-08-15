@@ -37,9 +37,9 @@ export class ProgressComponent implements OnInit {
     const visitedALParks = alParks.filter(p => visitedParks.includes(p.name))
     const visitedNLParks = nlParks.filter(p => visitedParks.includes(p.name));
     const totalParkCount = alParks.length + nlParks.length;
-    this.totalPercentage = (visitedParks.length / totalParkCount) * 100;
-    this.alPercentage = (visitedALParks.length / alParks.length) * 100;
-    this.nlPercentage = (visitedNLParks.length / nlParks.length) * 100;
+    this.totalPercentage = Math.floor((visitedParks.length / totalParkCount) * 100);
+    this.alPercentage = Math.floor((visitedALParks.length / alParks.length) * 100);
+    this.nlPercentage = Math.floor((visitedNLParks.length / nlParks.length) * 100);
   }
 
 }

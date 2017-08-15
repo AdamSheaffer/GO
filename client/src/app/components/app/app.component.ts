@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { ClrAlertModule } from 'clarity-angular'
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -7,5 +8,9 @@ import { ClrAlertModule } from 'clarity-angular'
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+  constructor(private router: Router) { }
+
+  get isHomeRoute() {
+    return this.router.url === '/';
+  }
 }

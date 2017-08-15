@@ -1,6 +1,6 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <app-navbar></app-navbar>
-<div class="main">
+<div [ngClass]="{'main': !isHomeRoute}">
     <app-flash></app-flash>
     <router-outlet></router-outlet>
 </div>

@@ -1,0 +1,30 @@
+<h3 class="teams-header">Teams</h3>
+<h5 class="teams-subheader-american">American League</h5>
+<div class="row teams">
+  <div *ngFor="let team of alTeamNames" class="col-xl-4 col-lg-6 col-md-3 col-sm-6 col-xs-12 team-img-container">
+    <img class="team-img" [ngClass]="{'visited': alTeamVisitedStatus[team].visited}" [src]="alTeamVisitedStatus[team].image"
+      alt="team">
+    <strong class="team-details american">{{team}}</strong>
+    <p class="team-details">{{alTeamVisitedStatus[team].park}}</p>
+    <p class="team-details">
+      Visited?
+      <span *ngIf="alTeamVisitedStatus[team].visited">Yes</span>
+      <span *ngIf="!alTeamVisitedStatus[team].visited">No</span>
+    </p>
+  </div>
+</div>
+<h3 class="teams-header">Teams</h3>
+<h5 class="teams-subheader-national">National League</h5>
+<div class="row teams">
+  <div *ngFor="let team of nlTeamNames" class="col-xl-4 col-lg-6 col-md-3 col-sm-6 col-xs-12 team-img-container">
+    <img class="team-img" [ngClass]="{'visited': nlTeamVisitedStatus[team].visited}" [src]="nlTeamVisitedStatus[team].image"
+      alt="team">
+    <strong class="team-details national">{{team}}</strong>
+    <p class="team-details">{{nlTeamVisitedStatus[team].park}}</p>
+    <p class="team-details">
+      Visited?
+      <span *ngIf="nlTeamVisitedStatus[team].visited">Yes</span>
+      <span *ngIf="!nlTeamVisitedStatus[team].visited">No</span>
+    </p>
+  </div>
+</div>

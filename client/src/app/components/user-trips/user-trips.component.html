@@ -1,5 +1,6 @@
 <div class="row">
   <div class="col-lg-7">
+    <!-- Default message if no trips -->
     <div *ngIf="hasFetchedTrips && !trips.length" class="row">
       <div class="card">
         <div class="card-header">
@@ -20,11 +21,16 @@
         </div>
       </div>
     </div>
+    <!-- Trip list details -->
     <app-trip-list [trips]="trips" (onDeleteTrip)="confirmDeleteTrip($event)"></app-trip-list>
   </div>
   <div class="col-lg-5">
+    <!-- Trip route -->
     <app-trips-map [trips]="trips"></app-trips-map>
+    <!-- Trip progress -->
     <app-progress *ngIf="parks && parks.length" [trips]="trips" [parks]="parks"></app-progress>
+    <!-- Teams visited -->
+    <app-user-trips-teams *ngIf="parks && parks.length" [trips]="trips" [parks]="parks"></app-user-trips-teams>
   </div>
 </div>
 

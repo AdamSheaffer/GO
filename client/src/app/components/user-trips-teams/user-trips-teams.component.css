@@ -1,0 +1,49 @@
+.teams {
+    margin-top: 25px;
+}
+
+.teams-header {
+    margin-top: 40px;
+}
+
+.teams-subheader-american {
+    margin-top: 0;
+    color:  #007CBB;
+}
+
+.teams-subheader-national {
+    margin-top: 0;
+    color:  #C92100;
+}
+
+.team-img {
+    display: block;
+    margin: auto;
+    height: 125px;
+    -webkit-filter: grayscale(1);
+    filter: grayscale(1);
+}
+
+.team-details {
+    text-align: center;
+    margin: 0;
+    display: block;
+    line-height: 20px;
+}
+
+.team-details.national {
+    color: #C92100
+}
+
+.team-details.american {
+    color: #007CBB;
+}
+
+.team-img.visited{
+    -webkit-filter: grayscale(0);
+    filter: grayscale(0);
+}
+
+.team-img-container {
+    margin-top: 15px;
+}

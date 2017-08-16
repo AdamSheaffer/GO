@@ -34,6 +34,7 @@ import { TripsMapComponent } from './components/trips-map/trips-map.component';
 import { TripListComponent } from './components/trip-list/trip-list.component';
 import { StarsComponent } from './components/stars/stars.component';
 import { ProgressComponent } from './progress/progress.component';
+import { UserTripsTeamsComponent } from './components/user-trips-teams/user-trips-teams.component';
 
 @NgModule({
     imports: [
@@ -62,7 +63,8 @@ import { ProgressComponent } from './progress/progress.component';
         TripsMapComponent,
         TripListComponent,
         StarsComponent,
-        ProgressComponent
+        ProgressComponent,
+        UserTripsTeamsComponent
     ],
     providers: [
         AuthService,

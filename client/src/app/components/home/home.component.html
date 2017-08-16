@@ -1,3 +1,4 @@
+<!-- Banner -->
 <div class="banner-container row">
     <div class="banner col-lg-5">
         <img class="stopwatch" src="/assets/images/014-stopwatch.png" alt="">
@@ -7,10 +8,17 @@
         <h1 class="banner-header">GROUND OUT</h1>
     </div>
 </div>
-<div class="row flex-items-xs-center auth-button-group">
+<!-- Auth buttons -->
+<div *ngIf="!isLoggedIn" class="row flex-items-xs-center nav-button-group">
     <a routerLink="/login" class="btn btn-outline">Log in</a>
     <a routerLink="/register" class="btn btn-primary">Get Started</a>
 </div>
+<!-- Trip nav buttons -->
+<div *ngIf="isLoggedIn" class="row flex-items-xs-center nav-button-group">
+    <a routerLink="/trips" class="btn btn-primary">View My Trips</a>
+    <a routerLink="/trips/new" class="btn btn-outline">Log New Trip</a>
+</div>
+
 <div class="content-container row">
     <div class="col-lg-4 col-md-6 col-sm-12">
         <div class="card">

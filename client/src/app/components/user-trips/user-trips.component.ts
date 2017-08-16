@@ -11,6 +11,7 @@ import { Park } from '../../shared/park.model';
   styleUrls: ['./user-trips.component.css']
 })
 export class UserTripsComponent implements OnInit {
+  hasFetchedTrips = false;
   trips: Trip[] = [];
   tripStagedForDelete: Trip;
   deleteConfirmationModalContent: string;
@@ -19,13 +20,17 @@ export class UserTripsComponent implements OnInit {
   constructor(private parkService: ParkService, private msgService: AlertService) { }
 
   ngOnInit() {
+    this.getTrips();
+    this.getParks();
+  }
+
+  getTrips() {
     this.parkService.getUserTrips().then(data => {
       this.trips = this.sortTrips(data.trips);
+      this.hasFetchedTrips = true;
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was an problem finding your trips' });
     });
-
-    this.getParks();
   }
 
   deleteTrip() {

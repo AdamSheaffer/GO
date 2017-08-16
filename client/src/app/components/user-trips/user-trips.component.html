@@ -1,5 +1,25 @@
 <div class="row">
   <div class="col-lg-7">
+    <div *ngIf="hasFetchedTrips && !trips.length" class="row">
+      <div class="card">
+        <div class="card-header">
+          <div class="content-img-circle dark-blue">
+            <img class="content-img" src="/assets/images/010-whistle.png" alt="find tickets">
+          </div>
+          <h3 class="content-heading">WELCOME!</h3>
+        </div>
+        <div class="card-block">
+          <p class="empty-description-trips">
+            You don't have any trips logged yet. When you do log a trip to a ballpark it will show up here. You'll be able to track your
+            progress and see how close you are to seeing them all. Badges you earn along the way will show up here as well.
+            <br><br> Log your first trip to get started!
+          </p>
+        </div>
+        <div class="card-footer">
+          <a routerLink="/trip/new" class="btn btn-primary">Log New Trip</a>
+        </div>
+      </div>
+    </div>
     <app-trip-list [trips]="trips" (onDeleteTrip)="confirmDeleteTrip($event)"></app-trip-list>
   </div>
   <div class="col-lg-5">

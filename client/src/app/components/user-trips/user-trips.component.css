@@ -1,0 +1,27 @@
+.empty-description-trips {
+    font-size: 16px;
+    line-height: 30px;
+    color: #747474;
+    margin-top: 20px;
+}
+
+.content-img {
+    display: block;
+    height: 150px;
+    margin: auto;
+}
+
+.content-img-circle {
+    padding: 20px;
+    border-radius: 95px;
+    width: 190px;
+    margin: auto;
+    background-color: #264556;
+}
+
+.content-heading {
+    color: #1E9FE0;
+    text-align: center;
+    font-weight: 500;
+    font-family: 'Josefin Sans', sans-serif;
+}

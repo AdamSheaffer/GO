@@ -1,5 +1,9 @@
 .alert {
     padding: 9px 12px 3px 12px;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 40px;
 }
 
 .alert-item {

@@ -7,6 +7,7 @@ import { TicketFinderComponent } from './components/ticket-finder/ticket-finder.
 import { TripLoggerComponent } from './components/trip-logger/trip-logger.component';
 import { AuthGuard } from './guards/auth.guard';
 import { UserTripsComponent } from './components/user-trips/user-trips.component';
+import { ParkDetailsComponent } from './components/park-details/park-details.component';
 
 const appRoutes: Routes = [
     { path: '', component: HomeComponent },
@@ -15,6 +16,7 @@ const appRoutes: Routes = [
     { path: 'tickets', component: TicketFinderComponent },
     { path: 'trips', component: UserTripsComponent, canActivate: [AuthGuard] },
     { path: 'trip/new', component: TripLoggerComponent, canActivate: [AuthGuard] },
+    { path: 'park/:team', component: ParkDetailsComponent },
     { path: '**', component: HomeComponent }
 ]
 

@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { Router } from '@angular/router';
 import { Trip } from '../../shared/trip.model';
 import { Park } from '../../shared/park.model';
 import { partition } from 'lodash';
@@ -31,7 +32,7 @@ export class UserTripsTeamsComponent implements OnInit {
   nlTeamNames: string[];
   imageDir = '/assets/images/teams/';
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.mapTeamsByDivision();
@@ -58,5 +59,10 @@ export class UserTripsTeamsComponent implements OnInit {
   updateTeamsVisited(trips: Trip[]) {
     this.getDivisionalVisitedTeams(trips, 'American').forEach(t => this.alTeamVisitedStatus[t].visited = true);
     this.getDivisionalVisitedTeams(trips, 'National').forEach(t => this.nlTeamVisitedStatus[t].visited = true);
+  }
+
+  onTeamSelect(team: string) {
+    console.log('routing');
+    this.router.navigate(['/park', team]);
   }
 }

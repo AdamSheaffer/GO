@@ -73,7 +73,9 @@ exports.getTicketsForPark = async (req, res) => {
     const park = req.params.park;
     if (!park) return res.json({ success: false, message: 'You must provide a park name' });
 
-    const url = buildSeatGeekUrl(`?q=${park}`);
+    const { page = '1', sortBy = 'datetime_utc.asc' } = req.query;
+    const queryString = `?q=${encodeURIComponent(park)}&page=${page}&sort=${sortBy}`;
+    const url = buildSeatGeekUrl(queryString);
     const { data } = await axios(url);
     const events = mapEvents(data.events);
 

@@ -10,5 +10,3 @@ export class TicketQuery {
     page: number = 1;
     sortBy?: string;
 }
-
-//getEventsInRadius(coords: Location, range: number, beginDate: string, endDate: string, minPrice: number, maxPrice: number, sortBy?: string) {

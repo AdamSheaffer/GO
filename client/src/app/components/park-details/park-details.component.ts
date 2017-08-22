@@ -6,6 +6,7 @@ import { Park } from '../../shared/park.model';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../shared/event.model';
 import { TicketQuery } from '../../shared/ticket-query.model';
+import { get, sample } from 'lodash';
 
 @Component({
   selector: 'app-park-details',
@@ -14,8 +15,12 @@ import { TicketQuery } from '../../shared/ticket-query.model';
 })
 export class ParkDetailsComponent implements OnInit {
   teamName: string;
+  teamColor: string;
+  teamImage: string;
+  parkImage: string;
   park: Park;
   events: Event[];
+  upcomingEvents: number;
   queryParams = new TicketQuery();
   meta;
 
@@ -26,10 +31,12 @@ export class ParkDetailsComponent implements OnInit {
     private msgService: AlertService,
     private eventService: EventService) {
     this.queryParams.page = 1;
+    this.queryParams.sortBy = 'datetime_utc.asc';
   }
 
   ngOnInit() {
     this.teamName = this.route.snapshot.paramMap.get('team');
+    this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
     this.getPark(this.teamName).then(() => this.getTickets());
   }
 
@@ -39,19 +46,23 @@ export class ParkDetailsComponent implements OnInit {
         return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
       this.park = data.park;
+      this.teamName = `${this.park.teamCity} ${this.park.team}`;
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Something unexpected happened. Please try again' });
     });
   }
 
   getTickets() {
-    this.eventService.getEventsForPark(this.park.name).then(data => {
+    this.eventService.getEventsForPark(this.park.name, this.queryParams.page, this.queryParams.sortBy).then(data => {
       if (!data.success) {
         return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
       this.meta = data.meta;
+      this.upcomingEvents = data.meta.total;
       this.events = data.events;
-      console.log(this.meta, this.events);
+      const sampleEvent = sample(data.events);
+      this.teamColor = get<string>(sampleEvent, 'performers.homeTeam.colors.iconic', '#000');
+
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Something unexpected happened. Please try again' });
     });

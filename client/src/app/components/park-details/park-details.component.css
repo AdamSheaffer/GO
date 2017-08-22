@@ -1,0 +1,34 @@
+.header-team {
+    text-align: center;
+    margin: 0 0 30px;
+    font-size: 65px;
+}
+
+.header-team-logo {
+    display: block;
+    margin: auto;
+    height: 150px;
+}
+
+.park-details {
+    display: inline-block;
+    padding-left: 20px;
+}
+
+.details-label {
+    font-weight: 600;
+    font-size: 32px;
+}
+
+.park-details-item:not(:last-of-type) {
+    margin-bottom: 20px;
+}
+
+.park-details-item {
+    margin-top: 8px;
+    font-size: 18px
+}
+
+.park-container {
+    margin-top: 24px;
+}

@@ -11,6 +11,7 @@ export class TicketListComponent implements OnInit {
   @Input() events: Event[];
   @Input() queryParams: TicketQuery;
   @Input() meta;
+  @Input() expandAll: boolean;
   @Output() onQueryChange = new EventEmitter<void>();
   @Output() onEventTicketSelect = new EventEmitter<Event>();
 
@@ -59,7 +60,6 @@ export class TicketListComponent implements OnInit {
   }
 
   isLastPage() {
-    debugger;
     return (this.queryParams.page * this.perPage) > this.meta.total;
   }
 

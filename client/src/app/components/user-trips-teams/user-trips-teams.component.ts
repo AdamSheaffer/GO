@@ -62,7 +62,6 @@ export class UserTripsTeamsComponent implements OnInit {
   }
 
   onTeamSelect(team: string) {
-    console.log('routing');
     this.router.navigate(['/park', team]);
   }
 }

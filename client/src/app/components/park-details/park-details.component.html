@@ -1,4 +1,22 @@
-<p>
-  park-details for {{teamName}} works!
-</p>
-<app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams"></app-ticket-list>
+<img [src]="teamImage" class="header-team-logo" alt="">
+<h1 class="header-team" [style.color]="teamColor">{{teamName}}</h1>
+<div class="row">
+  <div class="col-lg-6 col-sm-12">
+    <app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams" [expandAll]="true" (onQueryChange)="getTickets()"></app-ticket-list>
+  </div>
+  <div class="col-lg-6 col-sm-12">
+    <div class="row park-container">
+      <div class="img-container">
+        <img *ngIf="parkImage" [src]="parkImage" alt="{{teamName + 'park'}}">
+      </div>
+      <div class="park-details">
+        <label class="details-label">Park Name:</label>
+        <p class="park-details-item">{{park?.name}}</p>
+        <label class="details-label">Address:</label>
+        <p class="park-details-item">{{park?.location.address}}</p>
+        <label class="details-label">Upcoming Games:</label>
+        <p class="park-details-item">{{upcomingEvents}}</p>
+      </div>
+    </div>
+  </div>
+</div>

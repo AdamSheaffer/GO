@@ -21,7 +21,7 @@
     <clr-stack-view>
 
       <!-- Ticket Listing -->
-      <clr-stack-block *ngFor="let event of events" [clrSbExpanded]="event.isActive" (click)="selectEvent(event)">
+      <clr-stack-block *ngFor="let event of events" [clrSbExpanded]="expandAll || event.isActive" (click)="selectEvent(event)">
         <clr-stack-label>{{event.datetime_local | date}}</clr-stack-label>
         <clr-stack-content>
           <span>{{event.short_title}}</span>

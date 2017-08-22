@@ -1,3 +1,4 @@
 <p>
   park-details for {{teamName}} works!
 </p>
+<app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams"></app-ticket-list>

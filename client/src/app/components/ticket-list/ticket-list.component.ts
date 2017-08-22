@@ -59,6 +59,7 @@ export class TicketListComponent implements OnInit {
   }
 
   isLastPage() {
+    debugger;
     return (this.queryParams.page * this.perPage) > this.meta.total;
   }
 

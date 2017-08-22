@@ -26,7 +26,7 @@ exports.getEvents = async (req, res) => {
 
     if (!parkName) return res.json({ success: false, message: 'You must provide a park name' });
 
-    const url = buildSeatGeekUrl(`?venue.name=${parkName}`)
+    const url = buildSeatGeekUrl(`?venue.name=${parkName}`);
     const { data } = await axios.get(url);
     const events = mapEvents(data.events);
     return res.json({ success: true, meta: data.meta, events });
@@ -64,6 +64,17 @@ exports.getEventsInRadius = async (req, res) => {
 
     const url = buildSeatGeekUrl(queryString);
     const { data } = await axios.get(url);
+    const events = mapEvents(data.events);
+
+    return res.json({ success: true, meta: data.meta, events });
+}
+
+exports.getTicketsForPark = async (req, res) => {
+    const park = req.params.park;
+    if (!park) return res.json({ success: false, message: 'You must provide a park name' });
+
+    const url = buildSeatGeekUrl(`?q=${park}`);
+    const { data } = await axios(url);
     const events = mapEvents(data.events);
 
     return res.json({ success: true, meta: data.meta, events });

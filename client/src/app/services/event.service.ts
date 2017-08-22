@@ -20,4 +20,8 @@ export class EventService {
     return this.http.get(`${this.domain}/api/range`, args).toPromise().then(res => res.json());
   }
 
+  getEventsForPark(parkName: string) {
+    return this.http.get(`${this.domain}/api/tickets/${parkName}`).toPromise().then(res => res.json());
+  }
+
 }

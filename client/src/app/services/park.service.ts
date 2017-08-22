@@ -13,6 +13,10 @@ export class ParkService {
     return this.http.get(`${this.domain}/api/parks`).toPromise().then(res => res.json());
   }
 
+  getParkByTeam(teamName: string) {
+    return this.http.get(`${this.domain}/api/parks/${teamName}`).toPromise().then(res => res.json());
+  }
+
   postTrip(trip: FormData) {
     const headers = this.authService.createMultipartAuthenticationHeaders();
     return this.http.post(`${this.domain}/api/trips`, trip, headers).toPromise().then(res => res.json());
@@ -27,4 +31,5 @@ export class ParkService {
     const headers = this.authService.createAuthenticationHeaders();
     return this.http.delete(`${this.domain}/api/trips/${tripId}`, headers).toPromise().then(res => res.json());
   }
+
 }

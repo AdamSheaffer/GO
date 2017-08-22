@@ -9,6 +9,7 @@ const router = express.Router();
 const requireAuth = passport.authenticate('jwt', { session: false });
 
 router.get('/tickets', catchErrors(ticketsController.getEvents));
+router.get('/tickets/:park', catchErrors(ticketsController.getTicketsForPark));
 router.get('/range', catchErrors(ticketsController.getEventsInRadius));
 router.post('/trips',
     requireAuth,
@@ -23,5 +24,6 @@ router.delete('/trips/:id',
     catchErrors(tripsController.deleteTrip));
 
 router.get('/parks', catchErrors(parkController.getParks));
+router.get('/parks/:team', catchErrors(parkController.getParkByTeam));
 
 module.exports = router;

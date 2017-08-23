@@ -25,6 +25,14 @@ router.get('/trips/:id',
 router.delete('/trips/:id',
     requireAuth,
     catchErrors(tripsController.deleteTrip));
+router.put('/trips',
+    requireAuth,
+    tripsController.upload,
+    catchErrors(tripsController.resize),
+    tripsController.parseTrip,
+    tripsController.validateTrip,
+    catchErrors(tripsController.updateTrip),
+    catchErrors(tripsController.deletePhotos));
 
 router.get('/parks', catchErrors(parkController.getParks));
 router.get('/parks/:team', catchErrors(parkController.getParkByTeam));

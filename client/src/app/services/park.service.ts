@@ -37,4 +37,9 @@ export class ParkService {
     return this.http.delete(`${this.domain}/api/trips/${tripId}`, headers).toPromise().then(res => res.json());
   }
 
+  updateTrip(trip: FormData) {
+    const headers = this.authService.createMultipartAuthenticationHeaders();
+    return this.http.put(`${this.domain}/api/trips`, trip, headers).toPromise().then(res => res.json());
+  }
+
 }

@@ -5,6 +5,7 @@ const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
+const difference = require('lodash/difference');
 const photoDir = './uploads/';
 
 const multerOptions = {
@@ -116,4 +117,39 @@ exports.deleteTrip = async (req, res) => {
     await Trip.findByIdAndRemove(tripId);
 
     return res.json({ success: true, message: 'Trip Deleted' });
+}
+
+exports.parseTrip = (req, res, next) => {
+    req.body.trip = JSON.parse(req.body.trip);
+    next();
+}
+
+exports.validateTrip = (req, res, next) => {
+    if (!req.body.trip) {
+        return res.json({ success: false, message: 'You must include a trip object' });
+    }
+
+    req.body.trip.tripDate = new Date(req.body.trip.tripDate);
+
+    if (!req.body.trip.rating || !req.body.trip.tripDate || !req.body.trip.park) {
+        return res.json({ success: false, message: 'Trip is missing required fields' });
+    }
+    next();
+}
+
+exports.deletePhotos = async (req, res, next) => {
+    const updatedTrip = req.body.trip;
+    const oldTrip = await Trip.findById(updatedTrip._id);
+    const photosToDelete = difference(oldTrip.photos, updatedTrip.photos);
+    photosToDelete.forEach(p => fs.unlink(photoDir + p));
+    return res.json({ success: true, message: 'Trip Updated!' });
+}
+
+exports.updateTrip = async (req, res, next) => {
+    const { trip } = req.body;
+    if (req.body.photos && req.body.photos.length) {
+        trip.photos.push(...req.body.photos);
+    }
+    await Trip.findByIdAndUpdate(trip._id, trip);
+    next();
 }

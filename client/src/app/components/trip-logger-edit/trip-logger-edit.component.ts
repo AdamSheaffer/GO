@@ -1,31 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
-import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
+import { ParkService } from '../../services/park.service';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
+/* 
+  I don't know if this should be refactored. I started making the trip-logger.component
+  also work for editing, but it became messy with photos. I'm making EDIT a separate 
+  component for now, but using the original template and css from the logger.
+*/
+
 
 @Component({
-  selector: 'app-trip-logger',
-  templateUrl: './trip-logger.component.html',
-  styleUrls: ['./trip-logger.component.css']
+  selector: 'app-trip-logger-edit',
+  templateUrl: '../trip-logger/trip-logger.component.html',
+  styleUrls: ['../trip-logger/trip-logger.component.css']
 })
-export class TripLoggerComponent implements OnInit {
-
+export class TripLoggerEditComponent implements OnInit {
   parks = [];
-  trip = { rating: 1 };
-  photos = [];
+  trip;
+  newPhotos = []; // New photos will be actual files. Old ones will be urls
   photoPreviews = [];
   hasBadge = false;
   badgeTitle: string;
   badgeContent: string;
+  photoDir = 'http://localhost:8080/';
 
   constructor(
     private parkService: ParkService,
     private msgService: AlertService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.getParkList();
+    this.getTrip();
+  }
+
+  getParkList() {
     this.parkService.getParks().then(data => {
       if (data.success) {
         this.parks = sortBy(data.parks, 'name');
@@ -37,7 +48,7 @@ export class TripLoggerComponent implements OnInit {
 
   onPhotoSelect(event) {
     const photos = event.target.files || event.srcElement.files;
-    this.photos.push(...photos);
+    this.newPhotos.push(...photos);
     this.readUrl(event.target)
   }
 
@@ -56,8 +67,20 @@ export class TripLoggerComponent implements OnInit {
     }
   }
 
+  getTrip() {
+    const tripId = this.route.snapshot.params['id'];
+    this.parkService.getUserTrip(tripId).then(data => {
+      if (!data.success) {
+        return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
+      }
+      this.trip = data.trip;
+      this.trip.tripDate = data.trip.tripDate.substring(0, 10); // format date
+      this.photoPreviews = this.trip.photos.map(p => this.photoDir + p)
+    });
+  }
+
   deletePhoto(index) {
-    this.photos.splice(index, 1);
+    this.trip.photos.splice(index, 1);
     this.photoPreviews.splice(index, 1);
   }
 
@@ -66,28 +89,18 @@ export class TripLoggerComponent implements OnInit {
 
     formData.append('trip', JSON.stringify(this.trip));
 
-    this.photos.forEach(p => formData.append('photos', p));
+    this.newPhotos.forEach(p => formData.append('photos', p));
 
-    this.parkService.postTrip(formData).then(data => {
+    this.parkService.updateTrip(formData).then(data => {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
-        if (data.badge) {
-          this.showBadge(data.badge);
-        } else {
-          this.router.navigate(['/trips']);
-        }
+        this.router.navigate(['/trips']);
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
     });
-  }
-
-  showBadge(badge) {
-    this.hasBadge = true;
-    this.badgeTitle = badge.title;
-    this.badgeContent = badge.description;
   }
 
   cancel() {

@@ -49,7 +49,7 @@ export class TripLoggerComponent implements OnInit {
       files.forEach((f: Blob) => {
         var reader = new FileReader();
         reader.onload = (e: any) => {
-          this.photoPreviews.push(e.target);
+          this.photoPreviews.push(e.target.result);
         }
         reader.readAsDataURL(f);
       });
@@ -74,6 +74,8 @@ export class TripLoggerComponent implements OnInit {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         if (data.badge) {
           this.showBadge(data.badge);
+        } else {
+          this.router.navigate(['/trips']);
         }
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });

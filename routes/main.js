@@ -19,6 +19,9 @@ router.post('/trips',
 router.get('/trips',
     requireAuth,
     catchErrors(tripsController.getUserTrips));
+router.get('/trips/:id',
+    requireAuth,
+    catchErrors(tripsController.getUserTrip));
 router.delete('/trips/:id',
     requireAuth,
     catchErrors(tripsController.deleteTrip));

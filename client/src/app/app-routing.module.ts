@@ -16,6 +16,7 @@ const appRoutes: Routes = [
     { path: 'tickets', component: TicketFinderComponent },
     { path: 'trips', component: UserTripsComponent, canActivate: [AuthGuard] },
     { path: 'trip/new', component: TripLoggerComponent, canActivate: [AuthGuard] },
+    { path: 'trip/edit/:id', component: TripLoggerComponent, canActivate: [AuthGuard] },
     { path: 'park/:team', component: ParkDetailsComponent },
     { path: '**', component: HomeComponent }
 ]

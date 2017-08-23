@@ -86,6 +86,19 @@ const checkBadges = (trips) => {
     }
 }
 
+exports.getUserTrip = async (req, res) => {
+    const tripId = req.params.id;
+
+    if (!tripId) return res.json({ success: false, message: 'You must supply a trip id' });
+
+    const trip = await Trip.findOne({ _id: tripId });
+
+    if (!trip) return res.json({ success: false, message: 'No trip was found with that id' });
+    if (!trip.user.equals(req.user._id)) return res.json({ success: false, message: 'You are not authorized to view that trip' });
+
+    return res.json({ success: true, trip });
+}
+
 exports.deleteTrip = async (req, res) => {
     const tripId = req.params.id;
 

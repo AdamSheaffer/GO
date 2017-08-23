@@ -1,10 +1,13 @@
+<!-- Heading -->
 <img [src]="teamImage" class="header-team-logo" alt="">
 <h1 class="header-team" [style.color]="teamColor">{{teamName}}</h1>
 <div class="row">
+  <!-- Tickets -->
   <div class="col-lg-6 col-sm-12">
     <app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams" [expandAll]="true" (onQueryChange)="getTickets()"></app-ticket-list>
   </div>
   <div class="col-lg-6 col-sm-12">
+    <!-- Details -->
     <div class="row park-container">
       <div class="img-container">
         <img *ngIf="parkImage" [src]="parkImage" alt="{{teamName + 'park'}}">
@@ -14,9 +17,37 @@
         <p class="park-details-item">{{park?.name}}</p>
         <label class="details-label">Address:</label>
         <p class="park-details-item">{{park?.location.address}}</p>
-        <label class="details-label">Upcoming Games:</label>
+        <label class="details-label">Upcoming Home Games:</label>
         <p class="park-details-item">{{upcomingEvents}}</p>
+        <label class="details-label">Avg. Trip Rating:</label>
+        <div>
+          <app-stars *ngIf="park?.avgRating" [rating]="park?.avgRating"></app-stars>
+          <p *ngIf="park?.avgRating" class="park-details-item">{{park?.avgRating | number:'1.1' }} out of 5</p>
+          <em *ngIf="!park?.avgRating" class="park-details-item">No one has rated {{park?.name}} yet!</em>
+        </div>
+      </div>
+    </div>
+    <!-- Photos -->
+    <div class="row">
+      <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
+        <div (click)="selectPhoto(i)" class="card clickable">
+          <div class="card-block">
+            <img src="{{photoDir + photo}}" class="user-img" alt="">
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Photo Modal -->
+<clr-modal *ngIf="park?.photos && park.photos.length" [(clrModalOpen)]="showPhotoModal" [clrModalSize]="'lg'" [clrModalClosable]="false">
+  <div class="modal-body">
+    <clr-icon *ngIf="selectedPhotoIndex > 0" (click)="showPrevPhoto()" shape="caret left" size="100" class="is-inverse caret-left"></clr-icon>
+    <img src="{{photoDir + park.photos[selectedPhotoIndex]}}" class="modal-photo" alt="photo preview">
+    <clr-icon *ngIf="selectedPhotoIndex < park.photos.length - 1" (click)="showNextPhoto()" shape="caret right" size="100" class="is-inverse caret-right"></clr-icon>
+  </div>
+  <div class="modal-footer">
+    <button (click)="showPhotoModal = false" class="btn btn-default">Close</button>
+  </div>
+</clr-modal>

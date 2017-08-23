@@ -22,6 +22,9 @@ export class ParkDetailsComponent implements OnInit {
   events: Event[];
   upcomingEvents: number;
   queryParams = new TicketQuery();
+  photoDir = 'http://localhost:8080/';
+  selectedPhotoIndex = 0;
+  showPhotoModal = false;
   meta;
 
   constructor(
@@ -66,6 +69,21 @@ export class ParkDetailsComponent implements OnInit {
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Something unexpected happened. Please try again' });
     });
+  }
+
+  selectPhoto(photoIndex: number) {
+    this.selectedPhotoIndex = photoIndex;
+    this.showPhotoModal = true;
+  }
+
+  showPrevPhoto() {
+    if (this.selectedPhotoIndex < 1) return;
+    this.selectedPhotoIndex--;
+  }
+
+  showNextPhoto() {
+    if (!this.park || !this.park.photos || this.selectedPhotoIndex >= this.park.photos.length - 1) return;
+    this.selectedPhotoIndex++;
   }
 
 }

@@ -47,7 +47,7 @@ export class TripsMapComponent implements OnInit {
   }
 
   drawLines(path) {
-    if (!this.map) return;
+    if (!this.map || !path) return;
 
     this.polyLines = new google.maps.Polyline({
       path,

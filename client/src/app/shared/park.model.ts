@@ -9,5 +9,7 @@ export class Park {
         address: string,
         coordinates: number[], t
         ype: string
-    }
+    };
+    avgRating?: number;
+    photos: string[];
 }

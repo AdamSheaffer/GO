@@ -1,6 +1,6 @@
 .header-team {
     text-align: center;
-    margin: 0 0 30px;
+    margin: 12px 0 30px;
     font-size: 65px;
 }
 
@@ -17,18 +17,50 @@
 
 .details-label {
     font-weight: 600;
-    font-size: 32px;
-}
-
-.park-details-item:not(:last-of-type) {
-    margin-bottom: 20px;
+    font-size: 24px;
 }
 
 .park-details-item {
     margin-top: 8px;
-    font-size: 18px
+    font-size: 18px;
+    margin-bottom: 20px;
 }
 
 .park-container {
     margin-top: 24px;
+}
+
+.card-photo {
+    margin: 0 8px;
+}
+
+.user-img {
+    height: 100px;
+}
+
+.modal-body {
+    position: relative;
+}
+
+.modal-photo {
+    width: 100%;
+}
+
+.caret-left, .caret-right {
+    position: absolute;
+    width: 100px;
+    height: 30%;
+    top: 40%;
+    opacity: 0.5;
+    filter: alpha(opacity=50);
+    cursor: pointer;
+}
+
+.caret-left:hover, .caret-right:hover {
+    opacity: 0.85;
+    filter: alpha(opacity=85);
+}
+
+.caret-right {
+    right: 0;
 }

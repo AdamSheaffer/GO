@@ -37,4 +37,17 @@ const parkSchema = new mongoose.Schema({
     }
 });
 
+parkSchema.virtual('trips', {
+    ref: 'Trip',
+    localField: '_id',
+    foreignField: 'park'
+});
+
+function autopopulate(next) {
+    this.populate('trips');
+    next();
+}
+
+parkSchema.pre('findOne', autopopulate);
+
 module.exports = mongoose.model('Park', parkSchema);

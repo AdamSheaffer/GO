@@ -25,16 +25,19 @@
           <p *ngIf="park?.avgRating" class="park-details-item">{{park?.avgRating | number:'1.1' }} out of 5</p>
           <em *ngIf="!park?.avgRating" class="park-details-item">No one has rated {{park?.name}} yet!</em>
         </div>
-      </div>
-    </div>
-    <!-- Photos -->
-    <div class="row">
-      <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
-        <div (click)="selectPhoto(i)" class="card clickable">
-          <div class="card-block">
-            <img src="{{photoDir + photo}}" class="user-img" alt="">
+        <!-- Log trip button -->
+        <a *ngIf="park" routerLink="/trip/new" [queryParams]="{park: park.name}" class="btn btn-default">Log Trip</a>
+        <!-- Photos -->
+        <div class="row">
+          <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
+            <div (click)="selectPhoto(i)" class="card clickable">
+              <div class="card-block">
+                <img src="{{photoDir + photo}}" class="user-img" alt="">
+              </div>
+            </div>
           </div>
         </div>
+
       </div>
     </div>
   </div>

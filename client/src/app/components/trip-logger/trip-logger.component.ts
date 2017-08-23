@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
+import 'rxjs/add/operator/map';
 import { sortBy } from 'lodash';
 
 @Component({
@@ -11,9 +12,9 @@ import { sortBy } from 'lodash';
   styleUrls: ['./trip-logger.component.css']
 })
 export class TripLoggerComponent implements OnInit {
-
+  parkParam: string;
   parks = [];
-  trip = { rating: 1 };
+  trip;
   photos = [];
   photoPreviews = [];
   hasBadge = false;
@@ -23,12 +24,23 @@ export class TripLoggerComponent implements OnInit {
   constructor(
     private parkService: ParkService,
     private msgService: AlertService,
-    private router: Router) { }
+    private router: Router,
+    private route: ActivatedRoute) {
+    this.trip = { rating: 1 };
+    this.route.queryParamMap.subscribe(param => {
+      this.parkParam = param.get('park') || null;
+    });
+  }
 
   ngOnInit() {
     this.parkService.getParks().then(data => {
       if (data.success) {
         this.parks = sortBy(data.parks, 'name');
+        if (this.parkParam) {
+          const defaultPark = this.parks.find(p => p.name === this.parkParam);
+          this.trip.park = !!defaultPark ? defaultPark._id : null;
+        }
+
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: 'Error getting list of parks. Please try again' });
       }

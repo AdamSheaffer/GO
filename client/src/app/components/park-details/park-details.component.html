@@ -1,16 +1,17 @@
 <!-- Heading -->
 <img [src]="teamImage" class="header-team-logo" alt="">
-<h1 class="header-team" [style.color]="teamColor">{{teamName}}</h1>
-<div class="row">
+<h1 class="header-team">{{teamName}}</h1>
+<div class="row flex-items-xs-around">
   <!-- Tickets -->
-  <div class="col-lg-6 col-sm-12">
+  <div class="col-xl-6 col-lg-6 col-sm-12">
     <app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams" [expandAll]="true" (onQueryChange)="getTickets()"></app-ticket-list>
   </div>
-  <div class="col-lg-6 col-sm-12">
+  <div class="col-xl-5 col-lg-6 col-sm-12">
     <!-- Details -->
-    <div class="row park-container">
-      <div class="img-container">
-        <img *ngIf="parkImage" [src]="parkImage" alt="{{teamName + 'park'}}">
+    <div class="park-container">
+      <div>
+        <img *ngIf="park && park.division === 'American League'" class="division-img" src="/assets/images/americanleague.png" alt="american league">
+        <img *ngIf="park && park.division === 'National League'" class="division-img" src="/assets/images/nationalleague.gif" alt="national league">
       </div>
       <div class="park-details">
         <label class="details-label">Park Name:</label>
@@ -30,7 +31,7 @@
         <!-- Photos -->
         <div class="row">
           <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
-            <div (click)="selectPhoto(i)" class="card clickable">
+            <div *ngIf="i < 20" (click)="selectPhoto(i)" class="card clickable">
               <div class="card-block">
                 <img src="{{photoDir + photo}}" class="user-img" alt="">
               </div>

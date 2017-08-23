@@ -15,7 +15,6 @@ import { get, sample } from 'lodash';
 })
 export class ParkDetailsComponent implements OnInit {
   teamName: string;
-  teamColor: string;
   teamImage: string;
   parkImage: string;
   park: Park;
@@ -64,7 +63,6 @@ export class ParkDetailsComponent implements OnInit {
       this.upcomingEvents = data.meta.total;
       this.events = data.events;
       const sampleEvent = sample(data.events);
-      this.teamColor = get<string>(sampleEvent, 'performers.homeTeam.colors.iconic', '#000');
 
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Something unexpected happened. Please try again' });

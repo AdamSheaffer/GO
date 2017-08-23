@@ -2,12 +2,20 @@
     text-align: center;
     margin: 12px 0 30px;
     font-size: 65px;
+    font-weight: 600;
+    color: #007E7A;
 }
 
 .header-team-logo {
     display: block;
     margin: auto;
     height: 150px;
+}
+
+.division-img {
+    height: 250px;
+    display: block;
+    margin-bottom: 30px;
 }
 
 .park-details {
@@ -17,7 +25,7 @@
 
 .details-label {
     font-weight: 600;
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .park-details-item {

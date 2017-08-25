@@ -1,46 +1,72 @@
 <!-- Heading -->
-<img [src]="teamImage" class="header-team-logo" alt="">
-<h1 class="header-team">{{teamName}}</h1>
-<div class="row flex-items-xs-around">
-  <!-- Tickets -->
-  <div class="col-xl-6 col-lg-6 col-sm-12">
-    <app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams" [expandAll]="true" (onQueryChange)="getTickets()"></app-ticket-list>
-  </div>
-  <div class="col-xl-5 col-lg-6 col-sm-12">
-    <!-- Details -->
-    <div class="park-container">
-      <div>
-        <img *ngIf="park && park.division === 'American League'" class="division-img" src="/assets/images/americanleague.png" alt="american league">
-        <img *ngIf="park && park.division === 'National League'" class="division-img" src="/assets/images/nationalleague.gif" alt="national league">
-      </div>
-      <div class="park-details">
-        <label class="details-label">Park Name:</label>
-        <p class="park-details-item">{{park?.name}}</p>
-        <label class="details-label">Address:</label>
-        <p class="park-details-item">{{park?.location.address}}</p>
-        <label class="details-label">Upcoming Home Games:</label>
-        <p class="park-details-item">{{upcomingEvents}}</p>
-        <label class="details-label">Avg. Trip Rating:</label>
-        <div>
-          <app-stars *ngIf="park?.avgRating" [rating]="park?.avgRating"></app-stars>
-          <p *ngIf="park?.avgRating" class="park-details-item">{{park?.avgRating | number:'1.1' }} out of 5</p>
-          <em *ngIf="!park?.avgRating" class="park-details-item">No one has rated {{park?.name}} yet!</em>
+<div class="main-container">
+  <div class="content-container">
+    <div class="content-area">
+      <img [src]="teamImage" class="header-team-logo" alt="">
+      <h1 class="header-team">{{teamName}}</h1>
+      <div class="row flex-items-xs-around">
+        <!-- Tickets -->
+        <div class="col-xl-6 col-lg-6 col-sm-12">
+          <app-ticket-list *ngIf="events" [events]="events" [meta]="meta" [queryParams]="queryParams" [expandAll]="true" (onQueryChange)="getTickets()"></app-ticket-list>
         </div>
-        <!-- Log trip button -->
-        <a *ngIf="park" routerLink="/trip/new" [queryParams]="{park: park.name}" class="btn btn-default">Log Trip</a>
-        <!-- Photos -->
-        <div class="row">
-          <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
-            <div *ngIf="i < 20" (click)="selectPhoto(i)" class="card clickable">
-              <div class="card-block">
-                <img src="{{photoDir + photo}}" class="user-img" alt="">
+        <div class="col-xl-5 col-lg-6 col-sm-12">
+          <!-- Details -->
+          <div class="park-container">
+            <div>
+              <img *ngIf="park && park.division === 'American League'" class="division-img" src="/assets/images/americanleague.png" alt="american league">
+              <img *ngIf="park && park.division === 'National League'" class="division-img" src="/assets/images/nationalleague.gif" alt="national league">
+            </div>
+            <div class="park-details">
+              <label class="details-label">Park Name:</label>
+              <p class="park-details-item">{{park?.name}}</p>
+              <label class="details-label">Address:</label>
+              <p class="park-details-item">{{park?.location.address}}</p>
+              <label class="details-label">Upcoming Home Games:</label>
+              <p class="park-details-item">{{upcomingEvents}}</p>
+              <label class="details-label">Avg. Trip Rating:</label>
+              <div>
+                <app-stars *ngIf="park?.avgRating" [rating]="park?.avgRating"></app-stars>
+                <p *ngIf="park?.avgRating" class="park-details-item">{{park?.avgRating | number:'1.1' }} out of 5</p>
+                <em *ngIf="!park?.avgRating" class="park-details-item">No one has rated {{park?.name}} yet!</em>
               </div>
+              <!-- Log trip button -->
+              <a *ngIf="park" routerLink="/trip/new" [queryParams]="{park: park.name}" class="btn btn-default">Log Trip</a>
+              <!-- Photos -->
+              <div class="row">
+                <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">
+                  <div *ngIf="i < 20" (click)="selectPhoto(i)" class="card clickable">
+                    <div class="card-block">
+                      <img src="{{photoDir + photo}}" class="user-img" alt="">
+                    </div>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>
-
       </div>
     </div>
+    <clr-vertical-nav [clrVerticalNavCollapsible]="true">
+      <clr-vertical-nav-group>
+        <a clrVerticalNavLink>
+          <clr-icon shape="id-badge" class="is-error" clrVerticalNavIcon></clr-icon>
+          National League
+        </a>
+        <clr-vertical-nav-group-children *clrIfExpanded="true">
+          <a [routerLink]="['/park', team]" [ngClass]="{'active': team === park?.team}" clrVerticalNavLink *ngFor="let team of nlTeamList">{{team}}</a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+      <clr-vertical-nav-group>
+        <a clrVerticalNavLink>
+          <clr-icon shape="id-badge" class="is-info" clrVerticalNavIcon></clr-icon>
+          American League
+        </a>
+        <clr-vertical-nav-group-children *clrIfExpanded="true">
+          <a [routerLink]="['/park', team]" [ngClass]="{'active': team === park?.team}" clrVerticalNavLink *ngFor="let team of alTeamList">{{team}}</a>
+        </clr-vertical-nav-group-children>
+      </clr-vertical-nav-group>
+    </clr-vertical-nav>
   </div>
 </div>
 

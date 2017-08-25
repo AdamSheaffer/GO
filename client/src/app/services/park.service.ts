@@ -2,15 +2,19 @@ import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { AuthService } from './auth.service';
+import { Park } from "../shared/park.model";
+import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ParkService {
   domain = "http://localhost:8080";
+  parksResponse;
 
   constructor(private http: Http, private authService: AuthService) { }
 
-  getParks() {
-    return this.http.get(`${this.domain}/api/parks`).toPromise().then(res => res.json());
+  getParks(): Promise<any> {
+    if (this.parksResponse) return new Promise((res, rej) => res(this.parksResponse));
+    return this.http.get(`${this.domain}/api/parks`).toPromise().then(res => this.parksResponse = res.json());
   }
 
   getParkByTeam(teamName: string) {

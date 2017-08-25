@@ -1,3 +1,4 @@
+import { ActivatedRouteSnapshot, RouteReuseStrategy, DetachedRouteHandle } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -39,6 +40,17 @@ import { ParkDetailsComponent } from './components/park-details/park-details.com
 import { TripLoggerEditComponent } from './components/trip-logger-edit/trip-logger-edit.component';
 import { BadgesComponent } from './components/badges/badges.component';
 
+class CustomRouteReuseStrategy extends RouteReuseStrategy {
+    shouldDetach(route: ActivatedRouteSnapshot): boolean { return false; }
+    store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void { }
+    shouldAttach(route: ActivatedRouteSnapshot): boolean { return false; }
+    retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle { return null!; }
+    shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
+        const name = future.component && (<any>future.component).name;
+        return name !== 'ParkDetailsComponent';
+    }
+}
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -79,7 +91,11 @@ import { BadgesComponent } from './components/badges/badges.component';
         EventService,
         LocationService,
         ParkService,
-        AuthGuard
+        AuthGuard,
+        {
+            provide: RouteReuseStrategy,
+            useClass: CustomRouteReuseStrategy
+        }
     ],
     bootstrap: [AppComponent]
 })

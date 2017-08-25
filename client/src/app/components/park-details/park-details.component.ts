@@ -6,7 +6,7 @@ import { Park } from '../../shared/park.model';
 import { EventService } from '../../services/event.service';
 import { Event } from '../../shared/event.model';
 import { TicketQuery } from '../../shared/ticket-query.model';
-import { get, sample } from 'lodash';
+import { get, sample, partition } from 'lodash';
 
 @Component({
   selector: 'app-park-details',
@@ -18,6 +18,8 @@ export class ParkDetailsComponent implements OnInit {
   teamImage: string;
   parkImage: string;
   park: Park;
+  alTeamList: string[] = [];
+  nlTeamList: string[] = [];
   events: Event[];
   upcomingEvents: number;
   queryParams = new TicketQuery();
@@ -38,8 +40,22 @@ export class ParkDetailsComponent implements OnInit {
 
   ngOnInit() {
     this.teamName = this.route.snapshot.paramMap.get('team');
+    this.getAllParks();
     this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
     this.getPark(this.teamName).then(() => this.getTickets());
+  }
+
+  getAllParks() {
+    this.parkService.getParks().then(data => {
+      if (!data.success) {
+        return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
+      }
+      const [al, nl] = partition<Park>(data.parks, p => p.division.includes('American'));
+      this.alTeamList = al.map(t => t.team).sort();
+      this.nlTeamList = nl.map(t => t.team).sort();
+    }).catch(err => {
+      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong finding your list of teams' });
+    })
   }
 
   getPark(teamName: string) {

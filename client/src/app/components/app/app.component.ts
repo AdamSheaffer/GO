@@ -13,4 +13,8 @@ export class AppComponent {
   get isHomeRoute() {
     return this.router.url === '/';
   }
+
+  get isTicketRoute() {
+    return this.router.url.startsWith('/park/');
+  }
 }

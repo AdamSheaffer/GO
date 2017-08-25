@@ -46,7 +46,7 @@ export class UserTripsTeamsComponent implements OnInit {
   mapTeamsByDivision() {
     this.parks.forEach(p => {
       const division = p.division.includes('National') ? this.nlTeamVisitedStatus : this.alTeamVisitedStatus;
-      division[p.team] = {
+      division[p.team.replace(' ', '')] = {
         visited: false,
         image: `${this.imageDir}${p.team.replace(' ', '').toLocaleLowerCase()}.png`,
         park: p.name
@@ -57,8 +57,12 @@ export class UserTripsTeamsComponent implements OnInit {
   }
 
   updateTeamsVisited(trips: Trip[]) {
-    this.getDivisionalVisitedTeams(trips, 'American').forEach(t => this.alTeamVisitedStatus[t].visited = true);
-    this.getDivisionalVisitedTeams(trips, 'National').forEach(t => this.nlTeamVisitedStatus[t].visited = true);
+    this.getDivisionalVisitedTeams(trips, 'American').forEach(t => {
+      this.alTeamVisitedStatus[t.replace(' ', '')].visited = true;
+    });
+    this.getDivisionalVisitedTeams(trips, 'National').forEach(t => {
+      this.nlTeamVisitedStatus[t.replace(' ', '')].visited = true;
+    });
   }
 
   onTeamSelect(team: string) {

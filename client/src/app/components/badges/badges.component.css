@@ -1,0 +1,27 @@
+.go-badge {
+    margin-top: 40px;
+    transition: all .05s linear;
+}
+
+.go-badge-image {
+    height: 125px;
+    display: block;
+    margin: auto;
+    cursor: pointer;
+    padding: 5px;
+}
+
+.go-badge-name {
+    display: block;
+    margin: 0;
+    text-align: center;
+    color: #007E7A
+}
+
+.go-badge:hover {
+    transform: scale(1.1);
+}
+
+.badge-header {
+    margin-top: 40px;
+}

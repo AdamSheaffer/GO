@@ -17,7 +17,8 @@ export class TripLoggerComponent implements OnInit {
   trip;
   photos = [];
   photoPreviews = [];
-  hasBadge = false;
+  badges = [];
+  activeBadgeIndex = 0;
   badgeTitle: string;
   badgeContent: string;
 
@@ -83,10 +84,10 @@ export class TripLoggerComponent implements OnInit {
     this.parkService.postTrip(formData).then(data => {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
-        if (data.badge) {
-          this.showBadge(data.badge);
+        if (data.badges && data.badges.length) {
+          this.badges = data.badges;
         } else {
-          this.router.navigate(['/trips']);
+          this.navigateToTrips();
         }
       } else {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
@@ -96,13 +97,14 @@ export class TripLoggerComponent implements OnInit {
     });
   }
 
-  showBadge(badge) {
-    this.hasBadge = true;
-    this.badgeTitle = badge.title;
-    this.badgeContent = badge.description;
-  }
-
-  cancel() {
+  navigateToTrips() {
     this.router.navigate(['/trips']);
   }
+
+  logNewTrip() {
+    this.badges = [];
+    this.activeBadgeIndex = 0;
+    this.trip = { rating: 1 };
+  }
+
 }

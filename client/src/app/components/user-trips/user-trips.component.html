@@ -29,6 +29,8 @@
     <app-trips-map [trips]="trips"></app-trips-map>
     <!-- Trip progress -->
     <app-progress *ngIf="parks && parks.length" [trips]="trips" [parks]="parks"></app-progress>
+    <!-- Badges -->
+    <app-badges [badges]="badges"></app-badges>
     <!-- Teams visited -->
     <app-user-trips-teams *ngIf="parks && parks.length" [trips]="trips" [parks]="parks"></app-user-trips-teams>
   </div>

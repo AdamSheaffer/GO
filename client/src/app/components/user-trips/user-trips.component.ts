@@ -4,6 +4,8 @@ import { AlertService } from '../../services/alert.service';
 import { Trip } from '../../shared/trip.model';
 import { sortBy } from 'lodash';
 import { Park } from '../../shared/park.model';
+import { AuthService } from '../../services/auth.service';
+import { Badge } from '../../shared/badge.model';
 
 @Component({
   selector: 'app-user-trips',
@@ -15,13 +17,15 @@ export class UserTripsComponent implements OnInit {
   trips: Trip[] = [];
   tripStagedForDelete: Trip;
   deleteConfirmationModalContent: string;
-  parks: Park[];
+  parks: Park[] = [];
+  badges: Badge[] = [];
 
-  constructor(private parkService: ParkService, private msgService: AlertService) { }
+  constructor(private parkService: ParkService, private authService: AuthService, private msgService: AlertService) { }
 
   ngOnInit() {
     this.getTrips();
     this.getParks();
+    this.getBadges();
   }
 
   getTrips() {
@@ -68,6 +72,19 @@ export class UserTripsComponent implements OnInit {
       }
     }).catch(err => {
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was a problem finding your park list' });
+    });
+  }
+
+  getBadges() {
+    const userId: string = this.authService.user && this.authService.user._id;
+    if (!userId) return;
+    this.parkService.getBadges(userId).then(data => {
+      if (!data.success) {
+        return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
+      }
+      this.badges = data.badges;
+    }).catch(err => {
+      return this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! There was a problem finding your badges' });
     });
   }
 }

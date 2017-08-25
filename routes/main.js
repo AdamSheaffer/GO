@@ -2,6 +2,7 @@ const { catchErrors } = require('../handlers/errorHandlers');
 const ticketsController = require('../controllers/ticketController');
 const tripsController = require('../controllers/tripsController');
 const parkController = require('../controllers/parkController');
+const badgeController = require('../controllers/badgeController');
 const passport = require('passport');
 const express = require('express');
 const router = express.Router();
@@ -15,7 +16,8 @@ router.post('/trips',
     requireAuth,
     tripsController.upload,
     catchErrors(tripsController.resize),
-    catchErrors(tripsController.postNewTrip));
+    catchErrors(tripsController.postNewTrip),
+    catchErrors(tripsController.checkBadges));
 router.get('/trips',
     requireAuth,
     catchErrors(tripsController.getUserTrips));
@@ -33,6 +35,8 @@ router.put('/trips',
     tripsController.validateTrip,
     catchErrors(tripsController.updateTrip),
     catchErrors(tripsController.deletePhotos));
+
+router.get('/badges/:userId', catchErrors(badgeController.getBadges));
 
 router.get('/parks', catchErrors(parkController.getParks));
 router.get('/parks/:team', catchErrors(parkController.getParkByTeam));

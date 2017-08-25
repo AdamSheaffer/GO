@@ -4,7 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
 /* 
-  I don't know if this should be refactored. I started making the trip-logger.component
+  I don't know if this should be refactored. This may be the rare case for inheritance.
+  I started making the trip-logger.component
   also work for editing, but it became messy with photos. I'm making EDIT a separate 
   component for now, but using the original template and css from the logger.
 */
@@ -20,7 +21,8 @@ export class TripLoggerEditComponent implements OnInit {
   trip;
   newPhotos = []; // New photos will be actual files. Old ones will be urls
   photoPreviews = [];
-  hasBadge = false;
+  badges = [];
+  activateBadgesIndex = 0;
   badgeTitle: string;
   badgeContent: string;
   photoDir = 'http://localhost:8080/';
@@ -103,7 +105,12 @@ export class TripLoggerEditComponent implements OnInit {
     });
   }
 
-  cancel() {
+  navigateToTrips() {
     this.router.navigate(['/trips']);
+  }
+
+  logNewTrip() {
+    this.badges = [];
+    this.trip = { rating: 1 };
   }
 }

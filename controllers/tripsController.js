@@ -6,6 +6,8 @@ const jimp = require('jimp');
 const uuid = require('uuid');
 const fs = require('fs');
 const difference = require('lodash/difference');
+const uniq = require('lodash/uniq');
+const moment = require('moment');
 const photoDir = './uploads/';
 
 const multerOptions = {
@@ -45,14 +47,14 @@ exports.resize = async (req, res, next) => {
     next();
 };
 
-exports.postNewTrip = async (req, res) => {
+exports.postNewTrip = async (req, res, next) => {
     let { trip } = req.body;
     if (!trip) {
         return res.json({ success: false, message: 'You must include a trip object' });
     }
 
     trip = JSON.parse(trip);
-    trip.tripDate = new Date(trip.tripDate);
+    trip.tripDate = new Date(trip.tripDate.replace(/-/g, '/'));
 
     if (!trip.rating || !trip.tripDate || !trip.park) {
         return res.json({ success: false, message: 'Trip is missing required fields' });
@@ -61,14 +63,18 @@ exports.postNewTrip = async (req, res) => {
     trip.user = req.user._id;
     trip.photos = req.body.photos;
     await (new Trip(trip)).save();
-    const tripsPromise = Trip.find({ user: req.user._id });
-    const userPromise = User.findById(req.user._id);
-    const [trips, user] = await Promise.all([tripsPromise, userPromise]);
-    const badge = await checkBadges(trips);
-    if (badge) user.badges.push(badge);
-    await user.save();
-    return res.json({ success: true, message: 'Trip Saved!', badge });
+    next();
 };
+
+exports.checkBadges = async (req, res) => {
+    const tripsPromise = Trip.find({ user: req.user._id }).populate('park');
+    const userPromise = User.findById(req.user._id).populate('badges');
+    const [trips, user] = await Promise.all([tripsPromise, userPromise]);
+    const badges = await Promise.all(findBadges(trips, user));
+    if (badges && badges.length) user.badges.push(...badges);
+    await user.save();
+    return res.json({ success: true, message: 'Trip Saved!', badges });
+}
 
 exports.getUserTrips = async (req, res) => {
     const trips = await Trip.find({ user: req.user._id }).populate('park');
@@ -80,11 +86,66 @@ exports.getUserTrips = async (req, res) => {
     return res.json({ success: true, trips });
 };
 
-const checkBadges = (trips) => {
+const findBadges = (trips, user) => {
+    const badgePromises = [];
+
+    const dates = trips.map(t => t.tripDate).sort((a, b) => a.tripDate - b.tripDate);
+    let hasBackToBack = false;
+    for (const [i, date] of dates.entries()) {
+        if (i + 1 >= dates.length) break;
+        const curTripDate = moment(date);
+        const nextDay = curTripDate.add(1, 'days');
+        const nextTripDate = moment(dates[i + 1]);
+        if (nextTripDate.isSameOrBefore(nextDay)) hasBackToBack = true;
+    }
+
+    if (hasBackToBack) {
+        const name = 'Back 2 Back';
+        const alreadyAquired = user.badges.findIndex(b => b.name === name) > -1;
+        if (!alreadyAquired) badgePromises.push(Badge.findOne({ name }));
+    }
+
     // first trip badge
     if (trips.length === 1) {
-        return Badge.findOne({ name: 'First Park' });
+        const name = 'First Park';
+        const alreadyAquired = user.badges.findIndex(b => b.name === name) > -1;
+        if (!alreadyAquired) {
+            badgePromises.push(Badge.findOne({ name }));
+        };
+
     }
+
+    // national league
+    const nlCount = uniq(trips.filter(t => t.park.division.includes('National')).map(t => t.park.name)).length;
+    if (nlCount === 15) {
+        const name = 'National League Champion';
+        const alreadyAquired = user.badges.findIndex(b => b.name === name) > -1;
+        if (!alreadyAquired) {
+            badgePromises.push(Badge.findOne({ name }));
+        };
+    }
+
+    // american league
+    const alCount = uniq(trips.filter(t => t.park.division.includes('American')).map(t => t.park.name)).length;
+    if (alCount === 15) {
+        const name = 'American League Champion';
+        const alreadyAquired = user.badges.findIndex(b => b.name === name) > -1;
+        if (!alreadyAquired) {
+            badgePromises.push(Badge.findOne({ name }));
+        };
+    }
+
+    // 100%
+    const totalParkCount = uniq(trips.map(t => t.park.name)).length;
+    if (totalParkCount === 30) {
+        const name = 'World Champion';
+        const alreadyAquired = user.badges.findIndex(b => b.name === name) > -1;
+        if (!alreadyAquired) {
+            badgePromises.push(Badge.findOne({ name }));
+        };
+    }
+
+    return badgePromises;
 }
 
 exports.getUserTrip = async (req, res) => {

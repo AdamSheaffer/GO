@@ -37,6 +37,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { UserTripsTeamsComponent } from './components/user-trips-teams/user-trips-teams.component';
 import { ParkDetailsComponent } from './components/park-details/park-details.component';
 import { TripLoggerEditComponent } from './components/trip-logger-edit/trip-logger-edit.component';
+import { BadgesComponent } from './components/badges/badges.component';
 
 @NgModule({
     imports: [
@@ -68,7 +69,8 @@ import { TripLoggerEditComponent } from './components/trip-logger-edit/trip-logg
         ProgressComponent,
         UserTripsTeamsComponent,
         ParkDetailsComponent,
-        TripLoggerEditComponent
+        TripLoggerEditComponent,
+        BadgesComponent
     ],
     providers: [
         AuthService,

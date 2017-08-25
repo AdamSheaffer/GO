@@ -32,7 +32,7 @@ export class ParkService {
     return this.http.get(`${this.domain}/api/trips/${tripId}`, headers).toPromise().then(res => res.json());
   }
 
-  deleteTrip(tripId) {
+  deleteTrip(tripId: string) {
     const headers = this.authService.createAuthenticationHeaders();
     return this.http.delete(`${this.domain}/api/trips/${tripId}`, headers).toPromise().then(res => res.json());
   }
@@ -42,4 +42,8 @@ export class ParkService {
     return this.http.put(`${this.domain}/api/trips`, trip, headers).toPromise().then(res => res.json());
   }
 
+  getBadges(userId: string) {
+    const headers = this.authService.createMultipartAuthenticationHeaders();
+    return this.http.get(`${this.domain}/api/badges/${userId}`, headers).toPromise().then(res => res.json());
+  }
 }

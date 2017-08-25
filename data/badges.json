@@ -6,9 +6,27 @@
         "image": "028-hand.png"
     },
     {
-        "name": "100% Park",
+        "name": "World Champion",
         "title": "CONGRATULATIONS!",
-        "description": "Congratulations! You made it to EVERY park!",
+        "description": "Congratulations! You made it to EVERY SINGLE park!",
+        "image": "015-stadium.png"
+    },
+    {
+        "name": "National League Champion",
+        "title": "CONGRATULATIONS!",
+        "description": "Congratulations! You made it to all National League parks! Keep it up!",
         "image": "022-trophy-1.png"
+    },
+    {
+        "name": "American League Champion",
+        "title": "CONGRATULATIONS!",
+        "description": "Congratulations! You made it to all American League parks! Keep it up!",
+        "image": "023-trophy.png"
+    },
+    {
+        "name": "Back 2 Back",
+        "title": "CONGRATULATIONS!",
+        "description": "2 different parks in 2 days? Nice Job! You're well on your way!",
+        "image": "016-shoes.png"
     }
 ]

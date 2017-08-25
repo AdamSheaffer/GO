@@ -59,7 +59,7 @@
       </div>
       <!-- Submit -->
       <div class="card-footer">
-        <button (click)="cancel()" class="btn btn-default">Cancel</button>
+        <button (click)="navigateToTrips()" class="btn btn-default">Cancel</button>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
@@ -67,18 +67,23 @@
 </div>
 
 <!-- Modal -->
-<clr-modal [(clrModalOpen)]="hasBadge" [clrModalClosable]="false">
-  <h1 class="modal-title badge-header">{{badgeTitle}}</h1>
-  <div class="modal-body">
-    <img class="badge-img" src="assets/images/028-hand.png" alt="badge">
-    <h5 class="badge-content">{{badgeContent}}</h5>
+<clr-modal [(clrModalOpen)]="badges && badges.length" [clrModalClosable]="false">
+  <h1 class="modal-title badge-header">{{badges[activeBadgeIndex]?.title}}</h1>
+  <div class="modal-body" *ngIf="badges && badges.length">
+    <img class="badge-img" src="{{'assets/images/' + badges[activeBadgeIndex]?.image}}" alt="badge">
+    <h5 class="badge-content">{{badges[activeBadgeIndex]?.description}}</h5>
   </div>
-  <div class="modal-footer">
-    <button type="button" class="btn" (click)="hasBadge = false">
+  <div *ngIf="activeBadgeIndex >= badges.length - 1" class="modal-footer">
+    <button type="button" class="btn" (click)="logNewTrip()">
       Log Another Trip
     </button>
     <button type="button" class="btn btn-primary" (click)="navigateToTrips()">
       View My Scrapbook
+    </button>
+  </div>
+  <div *ngIf="activeBadgeIndex < badges.length - 1" class="modal-footer">
+    <button type="button" class="btn" (click)="activeBadgeIndex = activeBadgeIndex + 1">
+      Ok
     </button>
   </div>
 </clr-modal>

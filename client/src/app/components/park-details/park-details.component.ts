@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ParkService } from '../../services/park.service';
 import { AlertService } from '../../services/alert.service';
@@ -7,13 +7,15 @@ import { EventService } from '../../services/event.service';
 import { Event } from '../../shared/event.model';
 import { TicketQuery } from '../../shared/ticket-query.model';
 import { get, sample, partition } from 'lodash';
+import { Subscription } from "rxjs/Subscription";
 
 @Component({
   selector: 'app-park-details',
   templateUrl: './park-details.component.html',
   styleUrls: ['./park-details.component.css']
 })
-export class ParkDetailsComponent implements OnInit {
+export class ParkDetailsComponent implements OnInit, OnDestroy {
+  teamObservable: Subscription;
   teamName: string;
   teamImage: string;
   parkImage: string;
@@ -39,10 +41,12 @@ export class ParkDetailsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.teamName = this.route.snapshot.paramMap.get('team');
-    this.getAllParks();
-    this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
-    this.getPark(this.teamName).then(() => this.getTickets());
+    this.teamObservable = this.route.params.subscribe(params => {
+      this.teamName = params['team'];
+      this.getAllParks();
+      this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
+      this.getPark(this.teamName).then(() => this.getTickets());
+    });
   }
 
   getAllParks() {
@@ -98,6 +102,10 @@ export class ParkDetailsComponent implements OnInit {
   showNextPhoto() {
     if (!this.park || !this.park.photos || this.selectedPhotoIndex >= this.park.photos.length - 1) return;
     this.selectedPhotoIndex++;
+  }
+
+  ngOnDestroy() {
+    if (this.teamObservable) this.teamObservable.unsubscribe();
   }
 
 }

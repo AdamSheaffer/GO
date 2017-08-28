@@ -40,17 +40,6 @@ import { ParkDetailsComponent } from './components/park-details/park-details.com
 import { TripLoggerEditComponent } from './components/trip-logger-edit/trip-logger-edit.component';
 import { BadgesComponent } from './components/badges/badges.component';
 
-class CustomRouteReuseStrategy extends RouteReuseStrategy {
-    shouldDetach(route: ActivatedRouteSnapshot): boolean { return false; }
-    store(route: ActivatedRouteSnapshot, detachedTree: DetachedRouteHandle): void { }
-    shouldAttach(route: ActivatedRouteSnapshot): boolean { return false; }
-    retrieve(route: ActivatedRouteSnapshot): DetachedRouteHandle { return null!; }
-    shouldReuseRoute(future: ActivatedRouteSnapshot, curr: ActivatedRouteSnapshot): boolean {
-        const name = future.component && (<any>future.component).name;
-        return name !== 'ParkDetailsComponent';
-    }
-}
-
 @NgModule({
     imports: [
         BrowserModule,
@@ -91,11 +80,7 @@ class CustomRouteReuseStrategy extends RouteReuseStrategy {
         EventService,
         LocationService,
         ParkService,
-        AuthGuard,
-        {
-            provide: RouteReuseStrategy,
-            useClass: CustomRouteReuseStrategy
-        }
+        AuthGuard
     ],
     bootstrap: [AppComponent]
 })

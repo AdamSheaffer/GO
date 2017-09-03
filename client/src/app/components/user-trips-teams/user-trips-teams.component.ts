@@ -28,8 +28,8 @@ export class UserTripsTeamsComponent implements OnInit {
 
   alTeamVisitedStatus = {};
   nlTeamVisitedStatus = {};
-  alTeamNames: string[];
-  nlTeamNames: string[];
+  alTeamNames: { short: string, long: string }[];
+  nlTeamNames: { short: string, long: string }[];
   imageDir = '/assets/images/teams/';
 
   constructor(private router: Router) { }
@@ -49,11 +49,17 @@ export class UserTripsTeamsComponent implements OnInit {
       division[p.team.replace(' ', '')] = {
         visited: false,
         image: `${this.imageDir}${p.team.replace(' ', '').toLocaleLowerCase()}.png`,
-        park: p.name
+        park: p.name,
+        team: p.team
       }
     });
-    this.alTeamNames = Object.keys(this.alTeamVisitedStatus);
-    this.nlTeamNames = Object.keys(this.nlTeamVisitedStatus);
+
+    this.alTeamNames = Object.keys(this.alTeamVisitedStatus).map(t => {
+      return { long: this.alTeamVisitedStatus[t].team, short: t }
+    });
+    this.nlTeamNames = Object.keys(this.nlTeamVisitedStatus).map(t => {
+      return { long: this.nlTeamVisitedStatus[t].team, short: t }
+    });
   }
 
   updateTeamsVisited(trips: Trip[]) {

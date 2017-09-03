@@ -1,36 +1,38 @@
-<div class="card" *ngFor="let trip of trips">
-  <!-- Park Name And Date -->
-  <div class="card-header">
-    <span>{{trip.park.name}}</span>
-    <span class="header-date">{{trip.tripDate | date}}</span>
-    <div class="card-actions">
-      <!-- Edit -->
-      <a [routerLink]="['/trip/edit', trip._id]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-left">
-        <clr-icon shape="note-edit" size="18" class="is-info"></clr-icon>
-        <span class="tooltip-content">Edit</span>
-      </a>
-      <!-- Delete -->
-      <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-right">
-        <clr-icon (click)="deleteTrip(trip)" shape="trash" size="18" class="is-danger"></clr-icon>
-        <span class="tooltip-content">Delete</span>
-      </a>
+<div *ngFor="let trip of trips; let i = index">
+  <div *ngIf="i < perPage" class="card">
+    <!-- Park Name And Date -->
+    <div class="card-header">
+      <span>{{trip.park.name}}</span>
+      <span class="header-date">{{trip.tripDate | date}}</span>
+      <div class="card-actions">
+        <!-- Edit -->
+        <a [routerLink]="['/trip/edit', trip._id]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-left">
+          <clr-icon shape="note-edit" size="18" class="is-info"></clr-icon>
+          <span class="tooltip-content">Edit</span>
+        </a>
+        <!-- Delete -->
+        <a role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-right">
+          <clr-icon (click)="deleteTrip(trip)" shape="trash" size="18" class="is-danger"></clr-icon>
+          <span class="tooltip-content">Delete</span>
+        </a>
+      </div>
     </div>
-  </div>
-  <div class="card-block">
-    <!-- Comments -->
-    <p *ngIf="!trip.comments">
-      <em>No comments</em>
-    </p>
-    <p>{{trip.comments}}</p>
-    <!-- Stars -->
-    <app-stars [rating]="trip.rating"></app-stars>
-    <!-- Photots -->
-    <div class="card-footer">
-      <div class="row">
-        <div *ngFor="let photo of trip.photos" class="preview-img-wrapper">
-          <div (click)="selectPhoto(photo)" class="card clickable">
-            <div class="card-block">
-              <img src="{{photoDir + photo}}" class="preview-img" />
+    <div class="card-block">
+      <!-- Comments -->
+      <p *ngIf="!trip.comments">
+        <em>No comments</em>
+      </p>
+      <p>{{trip.comments}}</p>
+      <!-- Stars -->
+      <app-stars [rating]="trip.rating"></app-stars>
+      <!-- Photots -->
+      <div class="card-footer">
+        <div class="row">
+          <div *ngFor="let photo of trip.photos" class="preview-img-wrapper">
+            <div (click)="selectPhoto(photo)" class="card clickable">
+              <div class="card-block">
+                <img src="{{photoDir + photo}}" class="preview-img" />
+              </div>
             </div>
           </div>
         </div>
@@ -38,6 +40,7 @@
     </div>
   </div>
 </div>
+<button *ngIf="perPage < tripCount" (click)="perPage = perPage + 5" class="btn btn-link">View More</button>
 <!-- Photo Modal -->
 <clr-modal [(clrModalOpen)]="showPhotoModal" [clrModalSize]="'lg'" [clrModalClosable]="false">
   <div class="modal-body">

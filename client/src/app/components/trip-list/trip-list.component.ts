@@ -10,9 +10,12 @@ export class TripListComponent implements OnInit {
   @Input() trips: Trip[];
   @Output() onDeleteTrip = new EventEmitter<Trip>();
 
+  get tripCount(): number { return !!this.trips ? this.trips.length : 0 }
+
   photoDir = 'http://localhost:8080/';
   showPhotoModal = false;
   selectedPhoto: string;
+  perPage = 5;
 
   constructor() { }
 

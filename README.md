@@ -15,13 +15,7 @@ SEATGEEK_URI=https://api.seatgeek.com/2/events
 
 ```
 $ npm install
-$ node start.js
-```
-Concurrently:
-```
-$ cd client/
-$ npm install
-$ ng serve
+$ npn run dev
 ```
 
 To load park and badge data:

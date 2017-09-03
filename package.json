@@ -5,7 +5,7 @@
   "main": "start.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --inspect start.js",
+    "dev": "concurrently \"nodemon --inspect start.js\" \"cd client/ && ng serve\"",
     "loadparks": "node ./data/parkData.js",
     "blowitallaway": "node ./data/parkData.js --delete"
   },
@@ -40,5 +40,8 @@
     "uuid": "^3.1.0",
     "validator": "^8.0.0"
   },
-  "homepage": "https://github.com/AdamSheaffer/GO#readme"
+  "homepage": "https://github.com/AdamSheaffer/GO#readme",
+  "devDependencies": {
+    "concurrently": "^3.5.0"
+  }
 }

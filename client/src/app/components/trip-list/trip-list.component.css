@@ -20,6 +20,10 @@
     float: right;
 }
 
+.view-more {
+    margin-top: 15px;
+}
+
 clr-icon {
     margin-left: 15px;
 }

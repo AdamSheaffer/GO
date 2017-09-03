@@ -40,7 +40,7 @@
     </div>
   </div>
 </div>
-<button *ngIf="perPage < tripCount" (click)="perPage = perPage + 5" class="btn btn-link">View More</button>
+<button *ngIf="perPage < tripCount" (click)="perPage = perPage + 5" class="btn btn-link view-more">View More</button>
 <!-- Photo Modal -->
 <clr-modal [(clrModalOpen)]="showPhotoModal" [clrModalSize]="'lg'" [clrModalClosable]="false">
   <div class="modal-body">

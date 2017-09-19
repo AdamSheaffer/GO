@@ -5,8 +5,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
-
-    domain = "http://localhost:8080";
     redirectUrl: string;
     authToken: string;
     user: any;
@@ -40,11 +38,11 @@ export class AuthService {
     }
 
     registerUser(user) {
-        return this.http.post(`${this.domain}/auth/register`, user).toPromise();
+        return this.http.post('auth/register', user).toPromise();
     }
 
     login(user) {
-        return this.http.post(`${this.domain}/auth/login`, user).toPromise();
+        return this.http.post('auth/login', user).toPromise();
     }
 
     logout() {

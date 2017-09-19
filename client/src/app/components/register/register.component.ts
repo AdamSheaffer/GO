@@ -10,9 +10,10 @@ import { AlertService } from '../../services/alert.service';
     styleUrls: ['./register.component.css']
 })
 export class RegisterComponent implements OnInit {
-
     form: FormGroup;
     isProcessing: boolean;
+    emailBlurred: boolean;
+    confirmBlurred: boolean;
 
     constructor(
         private authService: AuthService,

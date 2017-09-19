@@ -53,6 +53,12 @@
     font-family: 'Josefin Sans', sans-serif;
 }
 
+.tagline {
+    text-align: center;
+    color: #1E9FE0;
+    font-weight: 500;
+}
+
 .nav-button-group {
     padding-top: 20px;
 }

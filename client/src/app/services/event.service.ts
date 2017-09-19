@@ -7,7 +7,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class EventService {
-  domain = "http://localhost:8080";
 
   constructor(private http: Http) { }
 
@@ -17,14 +16,14 @@ export class EventService {
     const { range, beginDate, endDate, minPrice, maxPrice, sortBy, page } = query;
     const params = pickBy({ lat, lon, range, beginDate, endDate, minPrice, maxPrice, sortBy, page }, x => !!x);
     const args: RequestOptionsArgs = { params };
-    return this.http.get(`${this.domain}/api/range`, args).toPromise().then(res => res.json());
+    return this.http.get('api/range', args).toPromise().then(res => res.json());
   }
 
   getEventsForPark(parkName: string, page?: number, sortBy?: string) {
     const args: RequestOptionsArgs = {
       params: { page, sortBy }
     };
-    return this.http.get(`${this.domain}/api/tickets/${parkName}`, args).toPromise().then(res => res.json());
+    return this.http.get(`api/tickets/${parkName}`, args).toPromise().then(res => res.json());
   }
 
 }

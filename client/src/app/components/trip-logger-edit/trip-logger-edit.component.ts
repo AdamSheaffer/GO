@@ -22,7 +22,7 @@ export class TripLoggerEditComponent implements OnInit {
   newPhotos = []; // New photos will be actual files. Old ones will be urls
   photoPreviews = [];
   badges = [];
-  activateBadgesIndex = 0;
+  activeBadgeIndex = 0;
   badgeTitle: string;
   badgeContent: string;
   photoDir = 'http://localhost:8080/';

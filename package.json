@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "start.js",
+  "engines": {
+    "node": ">= 7.6.0"
+  },
   "scripts": {
     "start": "node ./start.js",
     "build": "cd client && ng build --prod",

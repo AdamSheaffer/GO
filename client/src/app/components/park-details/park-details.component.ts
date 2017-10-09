@@ -36,17 +36,22 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
     private parkService: ParkService,
     private msgService: AlertService,
     private eventService: EventService) {
-    this.queryParams.page = 1;
-    this.queryParams.sortBy = 'datetime_utc.asc';
+    this.resetQueryParams();
   }
 
   ngOnInit() {
     this.teamObservable = this.route.params.subscribe(params => {
       this.teamName = params['team'];
+      this.resetQueryParams();
       this.getAllParks();
       this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
       this.getPark(this.teamName).then(() => this.getTickets());
     });
+  }
+
+  resetQueryParams() {
+    this.queryParams.page = 1;
+    this.queryParams.sortBy = 'datetime_utc.asc';
   }
 
   getAllParks() {

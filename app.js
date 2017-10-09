@@ -2,7 +2,6 @@ const errorHandlers = require('./handlers/errorHandlers');
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-const cors = require('cors');
 const authRoutes = require('./routes/auth');
 const mainRoutes = require('./routes/main');
 const passport = require('passport');
@@ -19,9 +18,6 @@ app.use(expressValidator());
 app.use(express.static(`${__dirname}/uploads/`));
 
 if (app.get('env') === 'development') {
-    app.use(cors({
-        origin: 'http://localhost:4200'
-    }));
     app.use(express.static(`${__dirname}/client/dist/`));
     app.use('/auth', authRoutes);
     app.use('/api', mainRoutes);
@@ -30,11 +26,11 @@ if (app.get('env') === 'development') {
     });
     app.use(errorHandlers.developmentErrors);
 } else {
-    app.use(express.static(`${__dirname}/public/`));
+    app.use(express.static(`${__dirname}/client/dist/`));
     app.use('/auth', authRoutes);
     app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
-        res.sendFile(path.join(__dirname, 'public/index.html'));
+        res.sendFile(path.join(__dirname, 'client/dist/index.html'));
     });
     app.use(errorHandlers.productionErrors);
 }

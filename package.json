@@ -4,6 +4,8 @@
   "description": "",
   "main": "start.js",
   "scripts": {
+    "start": "node ./start.js",
+    "build": "cd client && ng build --prod",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"nodemon --inspect start.js\" \"cd client/ && ng serve --proxy-config proxy.config.json\"",
     "loadparks": "node ./data/parkData.js",

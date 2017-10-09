@@ -12,7 +12,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "concurrently \"nodemon --inspect start.js\" \"cd client/ && ng serve --proxy-config proxy.config.json\"",
     "loadparks": "node ./data/parkData.js",
-    "blowitallaway": "node ./data/parkData.js --delete"
+    "blowitallaway": "node ./data/parkData.js --delete",
+    "postinstall": "npm run build"
   },
   "repository": {
     "type": "git",

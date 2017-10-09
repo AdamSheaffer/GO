@@ -1,7 +1,7 @@
 # Ground Out
 This is a re-boot of the first AngularJS project I ever made using Angular 4 and the Angular CLI. It is a tool to help baseball fans who are interested in seeing every major league ballpark in America document their trips and monitor their progress.
 
-<https://groundout.herokuapp.com/trips>
+<https://groundout.herokuapp.com/>
 
 ![ScreenShot](screenshot1.png "Screenshot 1")
 

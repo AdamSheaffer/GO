@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.use(expressValidator());
-app.use(express.static(`${__dirname}/uploads/`));
+app.use('/uploads', express.static(`${__dirname}/uploads/`));
 
 if (app.get('env') === 'development') {
     app.use(express.static(`${__dirname}/client/dist/`));

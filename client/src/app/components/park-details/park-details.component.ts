@@ -25,7 +25,7 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   events: Event[];
   upcomingEvents: number;
   queryParams = new TicketQuery();
-  photoDir = 'http://localhost:8080/';
+  photoDir = '/uploads/';
   selectedPhotoIndex = 0;
   showPhotoModal = false;
   meta;

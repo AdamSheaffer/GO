@@ -22,7 +22,7 @@ export class TripListComponent implements OnInit {
 
   get tripCount(): number { return !!this.trips ? this.trips.length : 0 }
 
-  photoDir = 'http://localhost:8080/';
+  photoDir = '/uploads/';
   showPhotoModal = false;
   selectedPhoto: string;
   perPage = 5;

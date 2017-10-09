@@ -25,7 +25,7 @@ export class TripLoggerEditComponent implements OnInit {
   activeBadgeIndex = 0;
   badgeTitle: string;
   badgeContent: string;
-  photoDir = 'http://localhost:8080/';
+  photoDir = '/uploads/';
 
   constructor(
     private parkService: ParkService,

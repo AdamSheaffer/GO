@@ -7,7 +7,6 @@ import { Observable } from "rxjs/Observable";
 
 @Injectable()
 export class ParkService {
-  domain = "http://localhost:8080";
   parksResponse;
 
   constructor(private http: Http, private authService: AuthService) { }

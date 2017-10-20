@@ -42,4 +42,5 @@ testem.log
 Thumbs.db
 
 *.env
-uploads/
+
+s3config.json

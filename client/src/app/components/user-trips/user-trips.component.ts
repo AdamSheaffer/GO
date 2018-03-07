@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ParkService } from '../../services/park.service';
-import { AlertService } from '../../services/alert.service';
 import { Trip } from '../../shared/trip.model';
 import { sortBy } from 'lodash';
 import { Park } from '../../shared/park.model';
-import { AuthService } from '../../services/auth.service';
+import { AuthService, AlertService, ParkService } from '../../modules/core/services';
 import { Badge } from '../../shared/badge.model';
 
 @Component({

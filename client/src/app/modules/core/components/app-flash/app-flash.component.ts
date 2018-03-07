@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Alert } from '../../shared/alert.model';
-import { AlertService } from '../../services/alert.service';
+import { Alert } from '../../../../shared/alert.model';
+import { AlertService } from '../../services';
+
 
 @Component({
   selector: 'app-flash',

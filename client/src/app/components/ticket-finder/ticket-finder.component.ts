@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { EventService } from '../../services/event.service';
+
 import { LocationService } from '../../services/location.service';
 import { Location } from '../../shared/location.model';
 import { Event } from '../../shared/event.model';
-import { AlertService } from '../../services/alert.service';
+import { AlertService, EventService } from '../../modules/core/services';
 import { TicketQuery } from '../../shared/ticket-query.model';
 import { uniqBy } from 'lodash';
 

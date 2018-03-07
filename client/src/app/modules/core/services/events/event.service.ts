@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs } from '@angular/http';
-import { Location } from '../shared/location.model';
+import { TicketQuery } from '../../../../shared/ticket-query.model';
+import { Location } from '../../../../shared/location.model';
 import { pickBy, get } from 'lodash';
-import { TicketQuery } from '../shared/ticket-query.model';
+
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()

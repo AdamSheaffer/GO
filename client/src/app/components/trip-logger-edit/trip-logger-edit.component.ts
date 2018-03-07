@@ -1,5 +1,4 @@
-import { AlertService } from '../../services/alert.service';
-import { ParkService } from '../../services/park.service';
+import { AlertService, ParkService } from '../../modules/core/services';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';

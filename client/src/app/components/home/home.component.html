@@ -10,8 +10,8 @@
 </div>
 <!-- Auth buttons -->
 <div *ngIf="!isLoggedIn" class="row flex-items-xs-center nav-button-group">
-    <a routerLink="/login" class="btn btn-outline">Log in</a>
-    <a routerLink="/register" class="btn btn-primary">Get Started</a>
+    <a routerLink="/auth/login" class="btn btn-outline">Log in</a>
+    <a routerLink="/auth/register" class="btn btn-primary">Get Started</a>
 </div>
 <!-- Trip nav buttons -->
 <div *ngIf="isLoggedIn" class="row flex-items-xs-center nav-button-group">

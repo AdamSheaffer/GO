@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Alert } from '../shared/alert.model';
+import { Alert } from '../../../../shared/alert.model';
+
 
 @Injectable()
 export class AlertService {

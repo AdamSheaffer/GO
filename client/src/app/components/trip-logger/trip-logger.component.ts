@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ParkService } from '../../services/park.service';
-import { AlertService } from '../../services/alert.service';
+import { AlertService, ParkService } from '../../modules/core/services';
 import 'rxjs/add/operator/map';
 import { sortBy } from 'lodash';
 

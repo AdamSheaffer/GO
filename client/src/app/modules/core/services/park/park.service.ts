@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { AuthService } from './auth.service';
-import { Park } from "../shared/park.model";
 import { Observable } from "rxjs/Observable";
+import { AuthService } from '../auth/auth.service';
+
 
 @Injectable()
 export class ParkService {

@@ -27,8 +27,8 @@
 
     <!-- IF LOGGED OUT -->
     <div *ngIf="!isLoggedIn">
-      <a routerLink="/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Login</a>
-      <a routerLink="/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Register</a>
+      <a routerLink="/auth/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Login</a>
+      <a routerLink="/auth/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Register</a>
     </div>
   </div>
 </header>

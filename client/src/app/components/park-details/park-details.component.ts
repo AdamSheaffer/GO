@@ -1,9 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { ParkService } from '../../services/park.service';
-import { AlertService } from '../../services/alert.service';
+import { AlertService, EventService, ParkService } from '../../modules/core/services';
 import { Park } from '../../shared/park.model';
-import { EventService } from '../../services/event.service';
 import { Event } from '../../shared/event.model';
 import { TicketQuery } from '../../shared/ticket-query.model';
 import { get, sample, partition } from 'lodash';

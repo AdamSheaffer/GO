@@ -1,11 +1,11 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, EventService, ParkService } from '../../modules/core/services';
-import { Park } from '../../shared/park.model';
-import { Event } from '../../shared/event.model';
-import { TicketQuery } from '../../shared/ticket-query.model';
 import { get, sample, partition } from 'lodash';
 import { Subscription } from "rxjs/Subscription";
+import { Park } from '../../../../shared/park.model';
+import { TicketQuery } from '../../../../shared/ticket-query.model';
+import { ParkService, AlertService, EventService } from '../../../core/services';
+import { Event } from '../../../../shared/event.model';
 
 @Component({
   selector: 'app-park-details',

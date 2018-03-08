@@ -6,7 +6,7 @@
       <span class="header-date">{{trip.tripDate | date}}</span>
       <div class="card-actions">
         <!-- Edit -->
-        <a [routerLink]="['/trip/edit', trip._id]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-left">
+        <a [routerLink]="['/trips/edit', trip._id]" role="tooltip" aria-haspopup="true" class="tooltip tooltip-xs tooltip-left">
           <clr-icon shape="note-edit" size="18" class="is-info"></clr-icon>
           <span class="tooltip-content">Edit</span>
         </a>

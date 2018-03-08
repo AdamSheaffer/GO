@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Event } from '../../shared/event.model';
-import { Location } from '../../shared/location.model';
 import { } from '@types/google-maps';
 import { groupBy } from 'lodash';
-import { EventsByLocation } from '../../shared/events-by-location.model';
+import { EventsByLocation } from '../../../../shared/events-by-location.model';
+import { Location } from '../../../../shared/location.model';
+import { Event } from '../../../../shared/event.model';
 
 @Component({
   selector: 'app-map',

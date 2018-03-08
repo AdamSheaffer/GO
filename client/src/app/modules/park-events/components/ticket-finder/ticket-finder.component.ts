@@ -1,12 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
-import { LocationService } from '../../services/location.service';
-import { Location } from '../../shared/location.model';
-import { Event } from '../../shared/event.model';
-import { AlertService, EventService } from '../../modules/core/services';
-import { TicketQuery } from '../../shared/ticket-query.model';
 import { uniqBy } from 'lodash';
+import { TicketQuery } from '../../../../shared/ticket-query.model';
+import { EventService, AlertService } from '../../../core/services';
+import { Event } from '../../../../shared/event.model';
+import { Location } from '../../../../shared/location.model';
+import { LocationService } from '../../services';
 
 @Component({
   selector: 'app-ticket-finder',

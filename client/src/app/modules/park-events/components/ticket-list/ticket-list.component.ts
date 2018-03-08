@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Event } from '../../shared/event.model';
-import { TicketQuery } from '../../shared/ticket-query.model';
+import { TicketQuery } from '../../../../shared/ticket-query.model';
+import { Event } from '../../../../shared/event.model';
 
 @Component({
   selector: 'app-ticket-list',

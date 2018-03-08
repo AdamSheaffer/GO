@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Location } from '../shared/location.model';
+import { Location } from '../../../../shared/location.model';
+
 
 @Injectable()
 export class LocationService {

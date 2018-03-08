@@ -15,7 +15,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   declarations: [
-    COMPONENTS
+    ...COMPONENTS
   ]
 })
 export class TripsModule { }

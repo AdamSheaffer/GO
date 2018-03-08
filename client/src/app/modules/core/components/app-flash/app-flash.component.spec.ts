@@ -1,8 +1,9 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { ClrIconModule } from 'clarity-angular/icon/icon.module';
-import { AlertService } from '../../services/alert.service';
+
 
 import { AppFlashComponent } from './app-flash.component';
+import { AlertService } from '../../services';
 
 describe('AppFlashComponent', () => {
   let component: AppFlashComponent;

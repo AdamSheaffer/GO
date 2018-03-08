@@ -1,7 +1,8 @@
-import { AlertService, ParkService } from '../../modules/core/services';
+
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
+import { ParkService, AlertService } from '../../../core/services';
 /* 
   I don't know if this should be refactored. This may be the rare case for inheritance.
   I started making the trip-logger.component

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Trip } from '../shared/trip.model';
-import { Park } from '../shared/park.model';
 import { partition, uniq } from 'lodash';
+import { Trip } from '../../../../shared/trip.model';
+import { Park } from '../../../../shared/park.model';
 
 @Component({
   selector: 'app-progress',

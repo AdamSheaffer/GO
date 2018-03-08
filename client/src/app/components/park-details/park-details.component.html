@@ -30,7 +30,7 @@
                 <em *ngIf="!park?.avgRating" class="park-details-item">No one has rated {{park?.name}} yet!</em>
               </div>
               <!-- Log trip button -->
-              <a *ngIf="park" routerLink="/trip/new" [queryParams]="{park: park.name}" class="btn btn-default">Log Trip</a>
+              <a *ngIf="park" routerLink="/trips/new" [queryParams]="{park: park.name}" class="btn btn-default">Log Trip</a>
               <!-- Photos -->
               <div class="row">
                 <div *ngFor="let photo of park?.photos; let i = index" class="card-photo">

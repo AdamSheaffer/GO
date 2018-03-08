@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, ActivatedRoute } from '@angular/router';
-import { AlertService, ParkService } from '../../modules/core/services';
 import 'rxjs/add/operator/map';
 import { sortBy } from 'lodash';
+import { ParkService, AlertService } from '../../../core/services';
 
 @Component({
   selector: 'app-trip-logger',

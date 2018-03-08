@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Trip } from '../../shared/trip.model';
 import { orderBy } from 'lodash';
+import { Trip } from '../../../../shared/trip.model';
 
 @Component({
   selector: 'app-trip-list',

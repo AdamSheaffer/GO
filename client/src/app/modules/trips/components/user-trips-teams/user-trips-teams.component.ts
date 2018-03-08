@@ -1,8 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
-import { Trip } from '../../shared/trip.model';
-import { Park } from '../../shared/park.model';
 import { partition } from 'lodash';
+import { Trip } from '../../../../shared/trip.model';
+import { Park } from '../../../../shared/park.model';
 
 @Component({
   selector: 'app-user-trips-teams',

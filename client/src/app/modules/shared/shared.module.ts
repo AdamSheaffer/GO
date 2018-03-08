@@ -1,18 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { COMPONENTS } from './components';
-import { ClrIconModule } from 'clarity-angular';
+import { ClarityModule } from 'clarity-angular';
+import 'clarity-icons';
+import 'clarity-icons/shapes/essential-shapes';
 
 @NgModule({
   imports: [
     CommonModule,
-    ClrIconModule
+    ClarityModule
   ],
   declarations: [
     ...COMPONENTS
   ],
   exports: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ClarityModule
   ]
 })
 export class SharedModule { }

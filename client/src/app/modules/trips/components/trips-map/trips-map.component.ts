@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Trip } from '../../shared/trip.model';
 import { sortBy } from 'lodash';
 import { } from '@types/google-maps';
+import { Trip } from '../../../../shared/trip.model';
 
 @Component({
   selector: 'app-trips-map',

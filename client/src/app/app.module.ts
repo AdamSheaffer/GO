@@ -7,8 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { ClarityModule } from 'clarity-angular';
 import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
-import 'clarity-icons'; // loads only core-shapes alone and Clarity Icons API
-import 'clarity-icons/shapes/all-shapes'; // loads all shapes from all sets
 
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
@@ -23,17 +21,11 @@ import { TicketFinderComponent } from './components/ticket-finder/ticket-finder.
 import { LocationService } from './services/location.service';
 import { TicketListComponent } from './components/ticket-list/ticket-list.component';
 import { ParksComponent } from './components/parks/parks.component';
-import { TripLoggerComponent } from './components/trip-logger/trip-logger.component';
-import { AuthGuard } from './guards/auth.guard';
-import { UserTripsComponent } from './components/user-trips/user-trips.component';
-import { TripsMapComponent } from './components/trips-map/trips-map.component';
-import { TripListComponent } from './components/trip-list/trip-list.component';
 
-import { ProgressComponent } from './progress/progress.component';
-import { UserTripsTeamsComponent } from './components/user-trips-teams/user-trips-teams.component';
+import { AuthGuard } from './guards/auth.guard';
+
+
 import { ParkDetailsComponent } from './components/park-details/park-details.component';
-import { TripLoggerEditComponent } from './components/trip-logger-edit/trip-logger-edit.component';
-import { BadgesComponent } from './components/badges/badges.component';
 
 
 @NgModule({
@@ -55,16 +47,7 @@ import { BadgesComponent } from './components/badges/badges.component';
         TicketFinderComponent,
         TicketListComponent,
         ParksComponent,
-        TripLoggerComponent,
-        UserTripsComponent,
-        TripsMapComponent,
-        TripListComponent,
-
-        ProgressComponent,
-        UserTripsTeamsComponent,
-        ParkDetailsComponent,
-        TripLoggerEditComponent,
-        BadgesComponent
+        ParkDetailsComponent
     ],
     providers: [
         AlertIconAndTypesService,

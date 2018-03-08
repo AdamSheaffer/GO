@@ -7,7 +7,7 @@
   </div>
   <div class="header-nav">
     <a *ngIf="isLoggedIn" routerLink="/trips" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Scrapbook</a>
-    <a *ngIf="isLoggedIn" routerLink="/trip/new" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Log Trip</a>
+    <a *ngIf="isLoggedIn" routerLink="/trips/new" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Log Trip</a>
     <a routerLink="/tickets" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Find Tickets</a>
   </div>
   <div class="header-actions">

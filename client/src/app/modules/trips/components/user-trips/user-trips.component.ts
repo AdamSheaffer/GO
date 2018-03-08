@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Trip } from '../../shared/trip.model';
 import { sortBy } from 'lodash';
-import { Park } from '../../shared/park.model';
-import { AuthService, AlertService, ParkService } from '../../modules/core/services';
-import { Badge } from '../../shared/badge.model';
+import { Trip } from '../../../../shared/trip.model';
+import { Park } from '../../../../shared/park.model';
+import { Badge } from '../../../../shared/badge.model';
+import { ParkService, AuthService, AlertService } from '../../../core/services';
+
 
 @Component({
   selector: 'app-user-trips',

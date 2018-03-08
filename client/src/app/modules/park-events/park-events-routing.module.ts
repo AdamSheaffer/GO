@@ -5,7 +5,7 @@ import { TicketFinderComponent, ParkDetailsComponent } from './components';
 const routes: Routes = [
   { path: '', redirectTo: 'finder' },
   { path: 'finder', component: TicketFinderComponent },
-  { path: '/:team', component: ParkDetailsComponent }
+  { path: ':team', component: ParkDetailsComponent }
 ];
 
 @NgModule({

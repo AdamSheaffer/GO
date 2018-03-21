@@ -14,7 +14,8 @@
     "dev": "concurrently \"nodemon --inspect start.js\" \"cd client/ && ng serve --proxy-config proxy.config.json\"",
     "loadparks": "node ./data/parkData.js",
     "blowitallaway": "node ./data/parkData.js --delete",
-    "postinstall": "cd client && npm install && ./client/node_modules/.bin/ng build --prod"
+    "preinstall": "cd client && npm install",
+    "postinstall": "./client/node_modules/.bin/ng build --prod"
   },
   "repository": {
     "type": "git",

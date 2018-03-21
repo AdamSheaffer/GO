@@ -4,7 +4,7 @@
   "description": "",
   "main": "start.js",
   "engines": {
-    "node": "7.10.x"
+    "node": "9.9.x"
   },
   "scripts": {
     "start": "node ./start.js",
@@ -13,7 +13,7 @@
     "dev": "concurrently \"nodemon --inspect start.js\" \"cd client/ && ng serve --proxy-config proxy.config.json\"",
     "loadparks": "node ./data/parkData.js",
     "blowitallaway": "node ./data/parkData.js --delete",
-    "postinstall": "cd client && npm install && ./node_modules/@angular/cli/.bin/ng build --prod"
+    "postinstall": "cd client && npm install && ./node_modules/.bin/ng build --prod"
   },
   "repository": {
     "type": "git",

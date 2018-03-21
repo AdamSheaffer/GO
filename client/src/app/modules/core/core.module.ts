@@ -2,14 +2,14 @@ import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PROVIDERS } from './services';
 import { COMPONENTS } from './components';
-import { ClrIconModule } from 'clarity-angular';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations/';
 import { BrowserModule } from '@angular/platform-browser';
+import { ClarityModule } from '@clr/angular';
 
 @NgModule({
   imports: [
     CommonModule,
-    ClrIconModule
+    ClarityModule
   ],
   providers: [
     ...PROVIDERS

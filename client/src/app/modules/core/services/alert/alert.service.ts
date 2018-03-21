@@ -13,7 +13,7 @@ export class AlertService {
     this.alerts.push(alert);
     setTimeout(() => {
       this.remove(alert);
-    }, 2500);
+    }, 3000);
   }
 
   remove(alert: Alert) {

@@ -5,8 +5,6 @@ import { HttpModule } from '@angular/http';
 import { FormsModule } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 
-import { AlertIconAndTypesService } from 'clarity-angular/emphasis/alert/providers/icon-and-types-service';
-
 import { CoreModule } from './modules/core/core.module';
 import { SharedModule } from './modules/shared/shared.module';
 
@@ -16,7 +14,6 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { HomeComponent } from './components/home/home.component';
 
 import { AuthGuard } from './guards/auth.guard';
-
 
 @NgModule({
     imports: [
@@ -33,7 +30,6 @@ import { AuthGuard } from './guards/auth.guard';
         HomeComponent
     ],
     providers: [
-        AlertIconAndTypesService,
         AuthGuard
     ],
     bootstrap: [AppComponent]

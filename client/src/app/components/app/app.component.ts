@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { ClrAlertModule } from 'clarity-angular'
 import { Router } from "@angular/router";
 
 @Component({

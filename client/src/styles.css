@@ -2,3 +2,7 @@
 a {
     cursor: pointer;
 }
+
+.main {
+    padding: 20px 40px;
+}

@@ -1,13 +1,17 @@
 <div id="flash-messages">
   <div>
     <!-- Alerts -->
-    <div *ngFor="let alert of alerts" class="alert {{alert.cssClass}}">
-      <button (click)="close(alert)" type="button" class="close" aria-label="Close">
-        <clr-icon aria-hidden="true" shape="close"></clr-icon>
-      </button>
-      <div class="alert-item">
-        <span class="alert-text">{{alert.message}}</span>
-      </div>
+    <div *ngFor="let alert of alerts">
+
+      <clr-alert [clrAlertType]="alert.cssClass" class="go-alert">
+        <!-- <button (click)="close(alert)" type="button" class="close" aria-label="Close"> -->
+        <!-- <clr-icon aria-hidden="true" shape="close"></clr-icon> -->
+        <!-- </button> -->
+        <div class="alert-item">
+          <span class="alert-text">{{alert.message}}</span>
+        </div>
+      </clr-alert>
+
     </div>
   </div>
 </div>

@@ -24,7 +24,7 @@
           <div class="form-group">
             <label for="rank">Park Rating</label>
             <clr-icon (click)="trip.rating = rank" (mouseenter)="hover = rank" (mouseleave)="hover = null" shape="star" *ngFor="let rank of [1,2,3,4,5]; let i = index"
-              [ngClass]="{'is-solid': hover >= rank|| trip.rating >= rank}" class="is-warning">
+              [ngClass]="{'is-solid': hover >= rank || trip.rating >= rank}" class="is-warning">
             </clr-icon>
           </div>
           <!-- Comments -->

@@ -14,6 +14,6 @@ export class AppComponent {
   }
 
   get isTicketRoute() {
-    return this.router.url.startsWith('/events/');
+    return this.router.url.startsWith('/events');
   }
 }

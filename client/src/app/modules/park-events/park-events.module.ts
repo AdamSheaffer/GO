@@ -6,6 +6,8 @@ import { COMPONENTS } from './components';
 import { PROVIDERS } from './services';
 import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ParkDetailsHomeComponent } from './components/park-details-home/park-details-home.component';
+import { ParkDetailsSidebarComponent } from './components/park-details-sidebar/park-details-sidebar.component';
 
 @NgModule({
   imports: [
@@ -16,7 +18,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     ReactiveFormsModule
   ],
   declarations: [
-    ...COMPONENTS
+    ...COMPONENTS,
+    ParkDetailsHomeComponent,
+    ParkDetailsSidebarComponent
   ],
   providers: [
     ...PROVIDERS

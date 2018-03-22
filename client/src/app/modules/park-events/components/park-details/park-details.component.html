@@ -1,6 +1,8 @@
-<!-- Heading -->
 <div class="main-container">
   <div class="content-container">
+    <div class="content-area" id="park-side-nav">
+      <app-park-details-sidebar></app-park-details-sidebar>
+    </div>
     <div class="content-area">
       <img [src]="teamImage" class="header-team-logo" alt="">
       <h1 class="header-team">{{teamName}}</h1>
@@ -47,26 +49,6 @@
         </div>
       </div>
     </div>
-    <clr-vertical-nav [clrVerticalNavCollapsible]="true">
-      <clr-vertical-nav-group>
-        <a clrVerticalNavLink>
-          <clr-icon shape="id-badge" class="is-error" clrVerticalNavIcon></clr-icon>
-          National League
-        </a>
-        <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a [routerLink]="['/events', team]" [ngClass]="{'active': team === park?.team}" clrVerticalNavLink *ngFor="let team of nlTeamList">{{team}}</a>
-        </clr-vertical-nav-group-children>
-      </clr-vertical-nav-group>
-      <clr-vertical-nav-group>
-        <a clrVerticalNavLink>
-          <clr-icon shape="id-badge" class="is-info" clrVerticalNavIcon></clr-icon>
-          American League
-        </a>
-        <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a [routerLink]="['/events', team]" [ngClass]="{'active': team === park?.team}" clrVerticalNavLink *ngFor="let team of alTeamList">{{team}}</a>
-        </clr-vertical-nav-group-children>
-      </clr-vertical-nav-group>
-    </clr-vertical-nav>
   </div>
 </div>
 

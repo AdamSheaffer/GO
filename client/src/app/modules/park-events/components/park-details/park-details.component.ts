@@ -39,30 +39,16 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.teamObservable = this.route.params.subscribe(params => {
-      this.teamName = params['team'];
+      const teamName = params['team'];
       this.resetQueryParams();
-      this.getAllParks();
-      this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
-      this.getPark(this.teamName).then(() => this.getTickets());
+      this.teamImage = `/assets/images/teams/${teamName.toLowerCase().replace(' ', '')}.png`;
+      this.getPark(teamName).then(() => this.getTickets());
     });
   }
 
   resetQueryParams() {
     this.queryParams.page = 1;
     this.queryParams.sortBy = 'datetime_utc.asc';
-  }
-
-  getAllParks() {
-    this.parkService.getParks().then(data => {
-      if (!data.success) {
-        return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
-      }
-      const [al, nl] = partition<Park>(data.parks, p => p.division.includes('American'));
-      this.alTeamList = al.map(t => t.team).sort();
-      this.nlTeamList = nl.map(t => t.team).sort();
-    }).catch(err => {
-      this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong finding your list of teams' });
-    })
   }
 
   getPark(teamName: string) {

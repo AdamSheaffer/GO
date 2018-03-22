@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { get, sample, partition } from 'lodash';
 import { Subscription } from "rxjs/Subscription";
 import { Park } from '../../../../shared/park.model';
@@ -13,13 +13,11 @@ import { Event } from '../../../../shared/event.model';
   styleUrls: ['./park-details.component.css']
 })
 export class ParkDetailsComponent implements OnInit, OnDestroy {
-  teamObservable: Subscription;
+  team$: Subscription;
   teamName: string;
   teamImage: string;
   parkImage: string;
   park: Park;
-  alTeamList: string[] = [];
-  nlTeamList: string[] = [];
   events: Event[];
   upcomingEvents: number;
   queryParams = new TicketQuery();
@@ -29,7 +27,6 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   meta;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private parkService: ParkService,
     private msgService: AlertService,
@@ -38,11 +35,11 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.teamObservable = this.route.params.subscribe(params => {
-      const teamName = params['team'];
+    this.team$ = this.route.params.subscribe(params => {
+      this.teamName = params['team'];
       this.resetQueryParams();
-      this.teamImage = `/assets/images/teams/${teamName.toLowerCase().replace(' ', '')}.png`;
-      this.getPark(teamName).then(() => this.getTickets());
+      this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
+      this.getPark(this.teamName).then(() => this.getTickets());
     });
   }
 
@@ -94,7 +91,7 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.teamObservable) this.teamObservable.unsubscribe();
+    if (this.team$) this.team$.unsubscribe();
   }
 
 }

@@ -1,0 +1,31 @@
+.card-header {
+  background-color: #007E7A;
+}
+
+.content-img-circle {
+  padding: 20px;
+  border-radius: 95px;
+  width: 190px;
+  margin: auto;
+  background-color: #002638;
+}
+
+.teams-img {
+  display: block;
+  height: 150px;
+  margin: auto;
+}
+
+.content-heading {
+  color: #FAFAFA;
+  text-align: center;
+  font-weight: 500;
+  font-family: 'Josefin Sans', sans-serif;
+}
+
+.content-description {
+  font-size: 16px;
+  line-height: 30px;
+  color: #747474;
+  margin-top: 20px;
+}

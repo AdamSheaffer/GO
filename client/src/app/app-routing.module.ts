@@ -8,8 +8,8 @@ const appRoutes: Routes = [
     { path: 'auth', loadChildren: './modules/auth/auth.module#AuthModule' },
     { path: 'events', loadChildren: './modules/park-events/park-events.module#ParkEventsModule' },
     { path: 'trips', loadChildren: './modules/trips/trips.module#TripsModule', canActivate: [AuthGuard] },
-    { path: '**', component: HomeComponent }
-]
+    { path: '**', loadChildren: './modules/not-found/not-found.module#NotFoundModule' }
+];
 
 @NgModule({
     declarations: [],

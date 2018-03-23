@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TicketFinderComponent, ParkDetailsComponent, ParkDetailsWelcomeComponent, ParkDetailsHomeComponent } from './components';
+import { ParkResolverService } from './services';
 
 const routes: Routes = [
   { path: '', redirectTo: 'finder' },
@@ -15,7 +16,8 @@ const routes: Routes = [
       },
       {
         path: ':team',
-        component: ParkDetailsComponent
+        component: ParkDetailsComponent,
+        resolve: { park: ParkResolverService }
       }
     ]
   }

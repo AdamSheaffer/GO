@@ -13,10 +13,9 @@ import { Event } from '../../../../shared/event.model';
   styleUrls: ['./park-details.component.css']
 })
 export class ParkDetailsComponent implements OnInit, OnDestroy {
-  team$: Subscription;
+  park$: Subscription;
   teamName: string;
   teamImage: string;
-  parkImage: string;
   park: Park;
   events: Event[];
   upcomingEvents: number;
@@ -28,18 +27,18 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private parkService: ParkService,
     private msgService: AlertService,
     private eventService: EventService) {
     this.resetQueryParams();
   }
 
   ngOnInit() {
-    this.team$ = this.route.params.subscribe(params => {
-      this.teamName = params['team'];
-      this.resetQueryParams();
+    this.park$ = this.route.data.subscribe((data: { park: Park }) => {
+      this.park = data.park;
+      this.teamName = data.park.team;
       this.teamImage = `/assets/images/teams/${this.teamName.toLowerCase().replace(' ', '')}.png`;
-      this.getPark(this.teamName).then(() => this.getTickets());
+      this.resetQueryParams();
+      this.getTickets();
     });
   }
 
@@ -49,15 +48,10 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   }
 
   getPark(teamName: string) {
-    return this.parkService.getParkByTeam(teamName).then(data => {
-      if (!data.success) {
-        return this.msgService.show({ cssClass: 'alert-danger', message: data.message });
-      }
+    this.route.data.subscribe(data => {
       this.park = data.park;
-      this.teamName = `${this.park.teamCity} ${this.park.team}`;
-    }).catch(err => {
-      this.msgService.show({ cssClass: 'alert-danger', message: 'Something unexpected happened. Please try again' });
-    });
+      this.getTickets()
+    })
   }
 
   getTickets() {
@@ -91,7 +85,7 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if (this.team$) this.team$.unsubscribe();
+    if (this.park$) this.park$.unsubscribe();
   }
 
 }

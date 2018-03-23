@@ -1,35 +1,43 @@
-<header class="header-6">
+<clr-header class="header-6">
   <div class="branding">
     <a class="logo-and-title" routerLink="/">
       <img src="assets/images/009-location.png" alt="logo" id="logo">
       <span class="title">Ground Out</span>
     </a>
   </div>
-  <div class="header-nav">
+  <div class="header-nav" [clr-nav-level]="1">
     <a *ngIf="isLoggedIn" routerLink="/trips" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Scrapbook</a>
     <a *ngIf="isLoggedIn" routerLink="/trips/new" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Log Trip</a>
     <a routerLink="/events/finder" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Find Tickets</a>
     <a routerLink="/events/teams" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}" class="nav-link nav-text">Teams</a>
+    <!-- Collapsed Links -->
+    <a *ngIf="isLoggedIn" class="nav-link nav-text collapsed-nav">Preferences</a>
+    <a *ngIf="isLoggedIn" (click)="logout()" class="nav-link nav-text collapsed-nav">Log Out</a>
+    <a *ngIf="!isLoggedIn" routerLink="/auth/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+      class="nav-link nav-text collapsed-nav">Login</a>
+    <a *ngIf="!isLoggedIn" routerLink="/auth/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
+      class="nav-link nav-text collapsed-nav">Register</a>
   </div>
   <div class="header-actions">
 
     <!-- IF LOGGED IN -->
-    <img *ngIf="isLoggedIn" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar" alt="user_image">
-    <clr-dropdown *ngIf="isLoggedIn" clrMenuPosition="bottom-right">
-      <button class="nav-text" clrDropdownToggle>
-                {{authService.user.name}}
-                <clr-icon shape="caret down"></clr-icon>
-            </button>
-      <clr-dropdown-menu>
+    <img *ngIf="isLoggedIn" src="{{authService.user?.gravatar + 'd=retro'}}" class="avatar expanded-nav" alt="user_image">
+    <clr-dropdown *ngIf="isLoggedIn" class="expanded-nav">
+      <button class="nav-text" clrDropdownTrigger>
+        {{authService.user.name}}
+      <clr-icon shape="caret down"></clr-icon>
+      </button>
+      <clr-dropdown-menu clrPosition="bottom-left">
         <a clrDropdownItem>Preferences</a>
-        <a (click)="logout()" clrDropdownItem>Log out</a>
+        <a (click)="logout()" clrDropdownItem>Log Out</a>
       </clr-dropdown-menu>
     </clr-dropdown>
 
     <!-- IF LOGGED OUT -->
-    <div *ngIf="!isLoggedIn">
+    <div *ngIf="!isLoggedIn" class="expanded-nav">
       <a routerLink="/auth/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Login</a>
       <a routerLink="/auth/register" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Register</a>
     </div>
   </div>
-</header>
+
+</clr-header>

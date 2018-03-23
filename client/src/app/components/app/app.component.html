@@ -1,6 +1,8 @@
 <!--The content below is only a placeholder and can be replaced.-->
-<app-navbar></app-navbar>
-<div [ngClass]="{'main': !isHomeRoute && !isTicketRoute}">
-    <app-flash></app-flash>
-    <router-outlet></router-outlet>
-</div>
+<clr-main-container>
+    <app-navbar></app-navbar>
+    <div [ngClass]="{'main': !isHomeRoute && !isTicketRoute}">
+        <app-flash></app-flash>
+        <router-outlet></router-outlet>
+    </div>
+</clr-main-container>

@@ -13,3 +13,23 @@
 .header-actions {
     padding-right: 24px;
 }
+
+@media only screen and (max-width: 768px) {
+    .header-nav .collapsed-nav {
+        display: inherit;
+    }
+
+    .expanded-nav {
+        display: none;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .header-nav .collapsed-nav {
+        display: none;
+    }
+    
+    .expanded-nav {
+        display: inherit;
+    }
+}

@@ -18,6 +18,12 @@
     margin-bottom: 30px;
 }
 
+@media only screen and (max-width: 992px) {
+    .division-img {
+        margin: 0 auto 30px;
+    }
+}
+
 .park-details {
     display: inline-block;
     padding-left: 20px;

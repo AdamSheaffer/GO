@@ -3,10 +3,17 @@ a {
     cursor: pointer;
 }
 
+
+.background-blue {
+    background-color: #002538;
+}
+
 .main {
     padding: 20px 40px;
 }
 
-.background-blue {
-    background-color: #002538;
+@media only screen and (max-width: 544px) {
+    .main {
+        padding: 0 10px
+    }
 }

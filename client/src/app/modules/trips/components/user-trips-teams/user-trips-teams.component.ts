@@ -72,6 +72,6 @@ export class UserTripsTeamsComponent implements OnInit {
   }
 
   onTeamSelect(team: string) {
-    this.router.navigate(['/events', team]);
+    this.router.navigate(['/events/teams', team]);
   }
 }

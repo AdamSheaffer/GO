@@ -18,8 +18,7 @@ const routes: Routes = [
         component: ParkDetailsComponent
       }
     ]
-  },
-  { path: ':team', component: ParkDetailsComponent }
+  }
 ];
 
 @NgModule({

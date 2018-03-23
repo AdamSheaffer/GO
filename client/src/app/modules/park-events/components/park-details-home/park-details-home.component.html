@@ -11,7 +11,8 @@
           National League
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a [routerLink]="['/events', team]" [ngClass]="{'active': team === selectedTeam}" clrVerticalNavLink *ngFor="let team of nlTeamList">{{team}}</a>
+          <a [routerLink]="['/events/teams', team]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" clrVerticalNavLink
+            *ngFor="let team of nlTeamList">{{team}}</a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
       <clr-vertical-nav-group>
@@ -20,7 +21,8 @@
           American League
         </a>
         <clr-vertical-nav-group-children *clrIfExpanded="true">
-          <a [routerLink]="['/events', team]" [ngClass]="{'active': team === selectedTeam}" clrVerticalNavLink *ngFor="let team of alTeamList">{{team}}</a>
+          <a [routerLink]="['/events/teams', team]" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" clrVerticalNavLink
+            *ngFor="let team of alTeamList">{{team}}</a>
         </clr-vertical-nav-group-children>
       </clr-vertical-nav-group>
     </clr-vertical-nav>

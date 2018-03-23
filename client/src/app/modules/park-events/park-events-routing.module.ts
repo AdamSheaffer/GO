@@ -3,8 +3,10 @@ import { Routes, RouterModule } from '@angular/router';
 import { TicketFinderComponent, ParkDetailsComponent, ParkDetailsWelcomeComponent, ParkDetailsHomeComponent } from './components';
 
 const routes: Routes = [
+  { path: '', redirectTo: 'finder' },
+  { path: 'finder', component: TicketFinderComponent },
   {
-    path: '',
+    path: 'teams',
     component: ParkDetailsHomeComponent,
     children: [
       {
@@ -17,7 +19,6 @@ const routes: Routes = [
       }
     ]
   },
-  { path: 'finder', component: TicketFinderComponent },
   { path: ':team', component: ParkDetailsComponent }
 ];
 

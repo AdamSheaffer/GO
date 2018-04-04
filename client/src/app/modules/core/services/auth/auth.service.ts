@@ -5,7 +5,6 @@ import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class AuthService {
-    redirectUrl: string;
     authToken: string;
     user: any;
 

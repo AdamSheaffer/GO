@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { AlertService, AuthService } from '../../../core/services';
 
 @Component({
@@ -11,15 +11,18 @@ import { AlertService, AuthService } from '../../../core/services';
 export class LoginComponent implements OnInit {
   form: FormGroup;
   isProcessing: boolean;
+  redirectUrl: string;
 
   constructor(private authService: AuthService,
     private formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router,
     private msgService: AlertService) {
     this.createForm();
   }
 
   ngOnInit() {
+    this.redirectUrl = this.route.snapshot.queryParams['redirectUrl'] || '/trips';
   }
 
   createForm() {
@@ -40,7 +43,8 @@ export class LoginComponent implements OnInit {
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         this.authService.storeUserData(data.token, data.user);
-        this.router.navigate([`${this.authService.redirectUrl || '/trips'}`]);
+        debugger;
+        this.router.navigateByUrl(this.redirectUrl);
       } else {
         this.msgService.show({ message: data.message, cssClass: 'alert-danger' });
         this.isProcessing = false;

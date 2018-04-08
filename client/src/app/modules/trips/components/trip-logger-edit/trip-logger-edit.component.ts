@@ -26,6 +26,7 @@ export class TripLoggerEditComponent implements OnInit {
   badgeTitle: string;
   badgeContent: string;
   photoDir = 'https://groundout.blob.core.windows.net/groundout/';
+  isSaving: boolean;
 
   constructor(
     private parkService: ParkService,
@@ -87,6 +88,7 @@ export class TripLoggerEditComponent implements OnInit {
   }
 
   submitTrip() {
+    this.isSaving = true;
     const formData = new FormData();
 
     formData.append('trip', JSON.stringify(this.trip));
@@ -94,6 +96,7 @@ export class TripLoggerEditComponent implements OnInit {
     this.newPhotos.forEach(p => formData.append('photos', p));
 
     this.parkService.updateTrip(formData).then(data => {
+      this.isSaving = false;
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         this.router.navigate(['/trips']);
@@ -101,6 +104,7 @@ export class TripLoggerEditComponent implements OnInit {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
     }).catch(err => {
+      this.isSaving = false;
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
     });
   }

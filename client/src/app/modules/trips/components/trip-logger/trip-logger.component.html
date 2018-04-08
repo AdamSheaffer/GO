@@ -60,7 +60,7 @@
       <!-- Submit -->
       <div class="card-footer">
         <button (click)="navigateToTrips()" class="btn btn-default">Cancel</button>
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button [clrLoading]="isSaving" [disabled]="isSaving" type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
   </div>

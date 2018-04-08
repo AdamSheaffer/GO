@@ -20,6 +20,7 @@ export class TripLoggerComponent implements OnInit {
   activeBadgeIndex = 0;
   badgeTitle: string;
   badgeContent: string;
+  isSaving: boolean;
 
   constructor(
     private parkService: ParkService,
@@ -74,6 +75,8 @@ export class TripLoggerComponent implements OnInit {
   }
 
   submitTrip() {
+    this.isSaving = true;
+
     const formData = new FormData();
 
     formData.append('trip', JSON.stringify(this.trip));
@@ -81,6 +84,7 @@ export class TripLoggerComponent implements OnInit {
     this.photos.forEach(p => formData.append('photos', p));
 
     this.parkService.postTrip(formData).then(data => {
+      this.isSaving = false;
       if (data.success) {
         this.msgService.show({ cssClass: 'alert-success', message: data.message });
         if (data.badges && data.badges.length) {
@@ -92,6 +96,7 @@ export class TripLoggerComponent implements OnInit {
         this.msgService.show({ cssClass: 'alert-danger', message: data.message });
       }
     }).catch(err => {
+      this.isSaving = false;
       this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong' });
     });
   }

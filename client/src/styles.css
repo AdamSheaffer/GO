@@ -12,6 +12,10 @@ a {
     padding: 20px 40px;
 }
 
+.main-container {
+    height: inherit;
+}
+
 @media only screen and (max-width: 544px) {
     .main {
         padding: 0 10px

@@ -25,7 +25,7 @@ export class TripLoggerEditComponent implements OnInit {
   activeBadgeIndex = 0;
   badgeTitle: string;
   badgeContent: string;
-  photoDir = '/uploads/';
+  photoDir = 'https://groundout.blob.core.windows.net/groundout/';
 
   constructor(
     private parkService: ParkService,

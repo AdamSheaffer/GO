@@ -42,9 +42,9 @@
 </div>
 <button *ngIf="perPage < tripCount" (click)="perPage = perPage + 5" class="btn btn-link view-more">View More</button>
 <!-- Photo Modal -->
-<clr-modal [(clrModalOpen)]="showPhotoModal" [clrModalSize]="'lg'" [clrModalClosable]="false">
+<clr-modal [(clrModalOpen)]="showPhotoModal" [clrModalSize]="'lg'" [clrModalClosable]="false" *ngIf="selectedPhoto">
   <div class="modal-body">
-    <img src="{{selectedPhoto}}" alt="photo preview">
+    <img src="{{photoDir + selectedPhoto}}" alt="photo preview">
   </div>
   <div class="modal-footer">
     <button (click)="showPhotoModal = false" class="btn btn-default">Close</button>

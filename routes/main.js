@@ -33,8 +33,7 @@ router.put('/trips',
     catchErrors(tripsController.resize),
     tripsController.parseTrip,
     tripsController.validateTrip,
-    catchErrors(tripsController.updateTrip),
-    catchErrors(tripsController.deletePhotos));
+    catchErrors(tripsController.updateTrip));
 
 router.get('/badges/:userId', catchErrors(badgeController.getBadges));
 

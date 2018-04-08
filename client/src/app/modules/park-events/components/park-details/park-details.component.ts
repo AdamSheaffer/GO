@@ -20,10 +20,10 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   events: Event[];
   upcomingEvents: number;
   queryParams = new TicketQuery();
-  photoDir = '/uploads/';
   selectedPhotoIndex = 0;
   showPhotoModal = false;
   meta;
+  photoDir = 'https://groundout.blob.core.windows.net/groundout/';
 
   constructor(
     private route: ActivatedRoute,

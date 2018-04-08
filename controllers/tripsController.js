@@ -4,11 +4,12 @@ const Badge = require('../models/Badge');
 const multer = require('multer');
 const jimp = require('jimp');
 const uuid = require('uuid');
-const fs = require('fs');
 const difference = require('lodash/difference');
 const uniq = require('lodash/uniq');
 const moment = require('moment');
 const photoDir = './uploads/';
+const azure = require('azure-storage');
+const fileService = require('../handlers/fileService');
 
 const multerOptions = {
     storage: multer.memoryStorage(),
@@ -37,9 +38,16 @@ exports.resize = async (req, res, next) => {
         const fileName = `${uuid.v4()}.${extension}`;
         req.body.photos.push(fileName);
 
-        const promise = jimp.read(f.buffer)
-            .then(photo => photo.resize(800, jimp.AUTO))
-            .then(photo => photo.write(photoDir + fileName));
+        const promise = new Promise((resolve, reject) => {
+            jimp.read(f.buffer).then(photo => {
+                photo.resize(800, jimp.AUTO)
+                    .write(photoDir + fileName, () => {
+                        fileService.uploadLocalFile(fileName, photoDir + fileName)
+                            .then(() => resolve())
+                            .catch((error) => reject(error))
+                    });
+            });
+        });
 
         promises.push(promise);
     });
@@ -77,7 +85,7 @@ exports.checkBadges = async (req, res) => {
 }
 
 exports.getUserTrips = async (req, res) => {
-    const trips = await Trip.find({ user: req.user._id }).populate('park');
+    let trips = await Trip.find({ user: req.user._id }).populate('park');
 
     if (!trips) {
         return res.json({ success: false, message: 'No trips found!' });
@@ -172,7 +180,7 @@ exports.deleteTrip = async (req, res) => {
 
     // Check if trip has photos
     if (trip.photos && trip.photos.length) {
-        trip.photos.forEach(p => fs.unlink(photoDir + p));
+        trip.photos.forEach(p => fileService.deleteFile(p));
     }
 
     await Trip.findByIdAndRemove(tripId);
@@ -198,19 +206,19 @@ exports.validateTrip = (req, res, next) => {
     next();
 }
 
-exports.deletePhotos = async (req, res, next) => {
-    const updatedTrip = req.body.trip;
-    const oldTrip = await Trip.findById(updatedTrip._id);
-    const photosToDelete = difference(oldTrip.photos, updatedTrip.photos);
-    photosToDelete.forEach(p => fs.unlink(photoDir + p));
-    return res.json({ success: true, message: 'Trip Updated!' });
-}
-
 exports.updateTrip = async (req, res, next) => {
     const { trip } = req.body;
+    const oldTrip = await Trip.findById(trip._id);
+
+    // Delete old photos
+    const photosToDelete = difference(oldTrip.photos, trip.photos);
+    photosToDelete.forEach(p => fileService.deleteFile(p));
+
+    // Add new photos
     if (req.body.photos && req.body.photos.length) {
         trip.photos.push(...req.body.photos);
     }
-    await Trip.findByIdAndUpdate(trip._id, trip);
-    next();
+
+    await oldTrip.update(trip);
+    return res.json({ success: true, message: 'Trip Updated' });
 }

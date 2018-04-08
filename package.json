@@ -27,6 +27,7 @@
   },
   "dependencies": {
     "axios": "^0.16.2",
+    "azure-storage": "^2.8.1",
     "bcrypt-nodejs": "0.0.3",
     "body-parser": "^1.18.2",
     "crypto": "0.0.3",

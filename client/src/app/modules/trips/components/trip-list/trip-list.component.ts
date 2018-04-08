@@ -22,10 +22,10 @@ export class TripListComponent implements OnInit {
 
   get tripCount(): number { return !!this.trips ? this.trips.length : 0 }
 
-  photoDir = '/uploads/';
   showPhotoModal = false;
   selectedPhoto: string;
   perPage = 5;
+  photoDir = 'https://groundout.blob.core.windows.net/groundout/';
 
   constructor() { }
 
@@ -33,7 +33,7 @@ export class TripListComponent implements OnInit {
   }
 
   selectPhoto(photo: string) {
-    this.selectedPhoto = this.photoDir + photo;
+    this.selectedPhoto = photo;
     this.showPhotoModal = true;
   }
 

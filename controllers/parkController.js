@@ -1,4 +1,5 @@
 const Park = require('../models/Park');
+const fileService = require('../handlers/fileService');
 
 exports.getParks = async (req, res) => {
     const parks = await Park.find();

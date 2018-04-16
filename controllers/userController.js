@@ -2,6 +2,7 @@ const promisify = require('es6-promisify');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const User = require('../models/User');
+const mail = require('../handlers/mail');
 
 function setUserInfo(user) {
     return {
@@ -12,7 +13,6 @@ function setUserInfo(user) {
         gravatar: user.gravatar
     }
 };
-
 
 function generateToken(user) {
     return jwt.sign(user, process.env.SECRET, {
@@ -108,24 +108,42 @@ exports.isLoggedIn = (req, res, next) => {
     }
 };
 
-// exports.forgot = async (req, res) => {
-//     const user = await User.findOne({ email: req.body.email });
-//     if (!user) {
-//         req.flash('error', 'There is no user with that Email address');
-//         return res.redirect('/login');
-//     }
+exports.forgot = async (req, res) => {
+    const user = await User.findOne({ email: req.body.email });
+    if (!user) {
+        return res.json({ success: false, message: 'No user exists with that Email address' })
+    }
 
-//     user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
-//     user.resetPasswordExpires = Date.now() + 3600000; // 1 Hour from now
+    user.resetPasswordToken = crypto.randomBytes(20).toString('hex');
+    user.resetPasswordExpires = Date.now() + 3600000; // 1 Hour from now
 
-//     await user.save();
-//     const resetURL = `http://${req.headers.host}/account/reset/${user.resetPasswordToken}`;
+    await user.save();
+    const resetURL = `http://${req.headers.host}/auth/reset/${user.resetPasswordToken}`;
 
-//     await mail.send({ user, subject: 'Password Reset', resetURL, filename: 'password-reset' });
+    await mail.send({ user, subject: 'Password Reset', resetURL, filename: 'password-reset' });
 
-//     req.flash('success', 'You have been emailed a password reset link');
-//     return res.redirect('/login');
-// };
+    res.json({ success: true, message: `An reset link has been sent to ${user.email}` });
+};
+
+exports.verifyResetToken = async (req, res) => {
+    const { token } = req.params;
+    const user = await User.findOne({
+        resetPasswordToken: token,
+        resetPasswordExpires: { $gt: Date.now() }
+    });
+
+    if (!user) {
+        return res.json({
+            success: false,
+            message: 'Password reset token is either invalid or has expired'
+        });
+    }
+
+    return res.json({
+        success: true,
+        message: 'Token is valid'
+    });
+}
 
 // exports.reset = async (req, res) => {
 //     const user = await User.findOne({
@@ -153,23 +171,22 @@ exports.confirmedPasswords = (req, res, next) => {
     });
 };
 
-// exports.update = async (req, res) => {
-//     const user = await User.findOne({
-//         resetPasswordToken: req.params.token,
-//         resetPasswordExpires: { $gt: Date.now() },
-//     });
+exports.update = async (req, res) => {
+    const user = await User.findOne({
+        resetPasswordToken: req.params.token,
+        resetPasswordExpires: { $gt: Date.now() },
+    });
 
-//     if (!user) {
-//         req.flash('error', 'Password reset token is invalid or has expired');
-//         return res.redirect('/login');
-//     }
+    if (!user) {
+        return res.json({
+            success: false,
+            message: 'Password reset token is invalid or has expired'
+        });
+    }
 
-//     const setPassword = promisify(user.setPassword, user);
-//     await setPassword(req.body.password);
-//     user.resetPasswordToken = undefined;
-//     user.resetPasswordExpires = undefined;
-//     const updatedUser = await user.save();
-//     await req.login(updatedUser);
-//     req.flash('success', 'Your password has been reset!');
-//     return res.redirect('/');
-// };
+    user.password = req.body.password;
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpires = undefined;
+    const updatedUser = await user.save();
+    return res.json({ success: true, message: 'Your password has been updated!' });
+};

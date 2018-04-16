@@ -19,7 +19,7 @@ app.use('/uploads', express.static(`${__dirname}/uploads/`));
 
 if (app.get('env') === 'development') {
     app.use(express.static(`${__dirname}/client/dist/`));
-    app.use('/auth', authRoutes);
+    app.use('/account', authRoutes);
     app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/dist/index.html'));
@@ -27,7 +27,7 @@ if (app.get('env') === 'development') {
     app.use(errorHandlers.developmentErrors);
 } else {
     app.use(express.static(`${__dirname}/client/dist/`));
-    app.use('/auth', authRoutes);
+    app.use('/account', authRoutes);
     app.use('/api', mainRoutes);
     app.get('*', (req, res) => {
         res.sendFile(path.join(__dirname, 'client/dist/index.html'));

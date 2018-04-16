@@ -37,11 +37,26 @@ export class AuthService {
     }
 
     registerUser(user) {
-        return this.http.post('auth/register', user).toPromise();
+        return this.http.post('account/register', user).toPromise();
     }
 
     login(user) {
-        return this.http.post('auth/login', user).toPromise();
+        return this.http.post('account/login', user).toPromise();
+    }
+
+    requestResetEmail(email: string) {
+        return this.http.post('account/forgot', { email }).toPromise();
+    }
+
+    verifyResetToken(token: string) {
+        return this.http.get(`account/verifytoken/${token}`).toPromise();
+    }
+
+    updatePassword(token: string, pw: string, pwConfirm) {
+        return this.http.post(`account/reset/${token}`, {
+            password: pw,
+            'password-confirm': pwConfirm
+        }).toPromise();
     }
 
     logout() {

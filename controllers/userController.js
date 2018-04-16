@@ -85,8 +85,7 @@ exports.updateAccount = async (req, res) => {
         { new: true, runValidators: true, context: 'query' }
     );
 
-    req.flash('success', 'Your profile has been updated!');
-    res.redirect('back');
+    return res.json({ success: true, message: 'Your profile has been updated!' });
 };
 
 exports.logout = (req, res) => {
@@ -144,22 +143,6 @@ exports.verifyResetToken = async (req, res) => {
         message: 'Token is valid'
     });
 }
-
-// exports.reset = async (req, res) => {
-//     const user = await User.findOne({
-//         resetPasswordToken: req.params.token,
-//         resetPasswordExpires: { $gt: Date.now() },
-//     });
-
-//     if (!user) {
-//         req.flash('error', 'Password reset token is invalid or has expired');
-//         return res.redirect('/login');
-//     }
-
-//     return res.render('reset', {
-//         title: 'Reset Your Password',
-//     });
-// };
 
 exports.confirmedPasswords = (req, res, next) => {
     if (req.body.password === req.body['password-confirm']) {

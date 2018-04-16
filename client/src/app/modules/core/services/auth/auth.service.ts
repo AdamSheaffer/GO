@@ -59,6 +59,19 @@ export class AuthService {
         }).toPromise();
     }
 
+    updateAccount(user: { email: string, name: string }) {
+        const authHeader = this.createAuthenticationHeaders();
+        return this.http.post('account/update', user, authHeader).toPromise()
+            .then(res => {
+                const data = res.json();
+                if (data.success) {
+                    this.user.name = data.user.name;
+                    this.user.email = data.user.email;
+                }
+                return res;
+            });
+    }
+
     logout() {
         this.authToken = null;
         this.user = null;

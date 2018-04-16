@@ -85,7 +85,7 @@ exports.updateAccount = async (req, res) => {
         { new: true, runValidators: true, context: 'query' }
     );
 
-    return res.json({ success: true, message: 'Your profile has been updated!' });
+    return res.json({ success: true, user, message: 'Your profile has been updated!' });
 };
 
 exports.logout = (req, res) => {

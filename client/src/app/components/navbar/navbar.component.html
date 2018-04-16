@@ -11,7 +11,7 @@
     <a routerLink="/events/finder" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}" class="nav-link nav-text">Find Tickets</a>
     <a routerLink="/events/teams" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:false}" class="nav-link nav-text">Teams</a>
     <!-- Collapsed Links -->
-    <a *ngIf="isLoggedIn" class="nav-link nav-text collapsed-nav">Preferences</a>
+    <a *ngIf="isLoggedIn" routerLink="/auth/account" class="nav-link nav-text collapsed-nav">Account</a>
     <a *ngIf="isLoggedIn" (click)="logout()" class="nav-link nav-text collapsed-nav">Log Out</a>
     <a *ngIf="!isLoggedIn" routerLink="/auth/login" [routerLinkActive]="['active']" [routerLinkActiveOptions]="{exact:true}"
       class="nav-link nav-text collapsed-nav">Login</a>
@@ -28,7 +28,7 @@
       <clr-icon shape="caret down"></clr-icon>
       </button>
       <clr-dropdown-menu clrPosition="bottom-left">
-        <a clrDropdownItem>Preferences</a>
+        <a routerLink="/auth/account" clrDropdownItem>Account</a>
         <a (click)="logout()" clrDropdownItem>Log Out</a>
       </clr-dropdown-menu>
     </clr-dropdown>

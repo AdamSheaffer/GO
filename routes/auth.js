@@ -13,8 +13,13 @@ router.post('/register',
     userController.validateRegister,
     catchErrors(userController.register),
     userController.login);
+
 router.post('/login', requireLogin, userController.login);
 router.post('/forgot', catchErrors(userController.forgot));
+router.post('/update',
+    requireAuth,
+    catchErrors(userController.updateAccount));
+
 router.post('/reset/:token',
     userController.confirmedPasswords,
     catchErrors(userController.update));

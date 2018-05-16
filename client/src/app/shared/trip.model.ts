@@ -2,7 +2,7 @@ import { Location } from './location.model';
 import { SeatGeekPark } from './seatgeek-park.model';
 
 export class Trip {
-    _id: string
+    _id: string;
     comments: string;
     createdDate: Date;
     park: any;

@@ -19,11 +19,11 @@ export class ProgressComponent implements OnInit {
     this.calculateProgress();
   }
 
-  get trips() { return this._trips }
+  get trips() { return this._trips; }
 
-  totalPercentage: number = 0;
-  nlPercentage: number = 0;
-  alPercentage: number = 0;
+  totalPercentage = 0;
+  nlPercentage = 0;
+  alPercentage = 0;
 
   constructor() { }
 
@@ -31,10 +31,10 @@ export class ProgressComponent implements OnInit {
   }
 
   calculateProgress() {
-    if (!this.trips || !this.trips.length) return;
+    if (!this.trips || !this.trips.length) { return; }
     const [alParks, nlParks] = partition(this.parks, p => p.division.includes('American'));
     const visitedParks = uniq(this.trips.map(t => t.park.name));
-    const visitedALParks = alParks.filter(p => visitedParks.includes(p.name))
+    const visitedALParks = alParks.filter(p => visitedParks.includes(p.name));
     const visitedNLParks = nlParks.filter(p => visitedParks.includes(p.name));
     const totalParkCount = alParks.length + nlParks.length;
     this.totalPercentage = Math.floor((visitedParks.length / totalParkCount) * 100);

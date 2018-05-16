@@ -34,7 +34,10 @@ export class TicketFinderComponent implements OnInit {
       this.userLocation = loc;
       this.queryParams.coords = loc;
     }, (err) => {
-      this.msgService.show({ cssClass: 'alert-danger', message: 'Enable location services on your browser before using the Ticket Finder tool' });
+      this.msgService.show({
+        cssClass: 'alert-danger',
+        message: 'Enable location services on your browser before using the Ticket Finder tool'
+      });
     });
   }
 
@@ -103,7 +106,7 @@ export class TicketFinderComponent implements OnInit {
 
     // If it's off check if there are others active before turning off hometeam
     const stillActive = this.events.find(e => e.venue.id === event.venue.id && e.isActive);
-    if (stillActive) return;
+    if (stillActive) { return; }
 
     const team = this.homeTeams.find(t => t.venue.id === event.venue.id);
     team.isActive = false;

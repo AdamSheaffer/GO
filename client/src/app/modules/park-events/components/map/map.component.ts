@@ -22,7 +22,7 @@ export class MapComponent implements OnInit {
     this.updateMap(events);
   }
 
-  get events() { return this._events }
+  get events() { return this._events; }
 
   @Input()
   set userLocation(location: Location) {
@@ -30,7 +30,7 @@ export class MapComponent implements OnInit {
     this.setCenter(this._userLocation);
   }
 
-  get userLocation() { return this._userLocation }
+  get userLocation() { return this._userLocation; }
 
   map;
   markers = [];
@@ -46,6 +46,7 @@ export class MapComponent implements OnInit {
         lng: (this.userLocation && this.userLocation.lon) || this.defaultCenter.lon
       },
       zoom: 4,
+      // tslint:disable-next-line
       styles: [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "visibility": "on" }, { "lightness": 33 }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#DFF0D0" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#c5dac6" }] }, { "featureType": "poi.park", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": 20 }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "color": "#c5c6c6" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#e4d7c6" }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#fbfaf7" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }] }]
     });
 
@@ -53,7 +54,7 @@ export class MapComponent implements OnInit {
   }
 
   setMarkers(eventsByLocation: EventsByLocation[]) {
-    if (!this.map) return; // This may get called before the map gets loaded
+    if (!this.map) { return; } // This may get called before the map gets loaded
 
     this.clearMarkers();
     this.markers = eventsByLocation.map(e => {
@@ -81,7 +82,7 @@ export class MapComponent implements OnInit {
   }
 
   setBounds(eventsByLocation: EventsByLocation[]) {
-    if (!this.map || !eventsByLocation || !eventsByLocation.length) return; // This may get called before the map gets loaded
+    if (!this.map || !eventsByLocation || !eventsByLocation.length) { return; } // This may get called before the map gets loaded
 
     const bounds = new google.maps.LatLngBounds();
 
@@ -99,7 +100,7 @@ export class MapComponent implements OnInit {
   }
 
   setCenter(location: Location) {
-    if (!this.map) return; // This may get called before the map gets loaded
+    if (!this.map) { return; } // This may get called before the map gets loaded
     this.map.setCenter(new google.maps.LatLng(location.lat, location.lon));
   }
 
@@ -136,17 +137,19 @@ export class MapComponent implements OnInit {
   }
 
   groupEvents(events: Event[]): EventsByLocation[] {
-    if (!events) return;
+    if (!events) { return; }
 
     const eventsByLocation: EventsByLocation[] = [];
     const groupedObj = groupBy(events, (e) => `${e.venue.location.lat},${e.venue.location.lon}`);
 
-    for (let coords in groupedObj) {
-      const [lat, lon] = coords.split(',').map(c => +c);
-      eventsByLocation.push({
-        location: { lat, lon },
-        events: groupedObj[coords]
-      });
+    for (const coords in groupedObj) {
+      if (groupedObj.hasOwnProperty(coords)) {
+        const [lat, lon] = coords.split(',').map(c => +c);
+        eventsByLocation.push({
+          location: { lat, lon },
+          events: groupedObj[coords]
+        });
+      }
     }
 
     return eventsByLocation;

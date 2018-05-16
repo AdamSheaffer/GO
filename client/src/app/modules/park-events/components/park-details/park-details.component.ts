@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { get, sample, partition } from 'lodash';
-import { Subscription } from "rxjs/Subscription";
+import { Subscription } from 'rxjs/Subscription';
 import { Park } from '../../../../shared/park.model';
 import { TicketQuery } from '../../../../shared/ticket-query.model';
 import { ParkService, AlertService, EventService } from '../../../core/services';
@@ -50,8 +50,8 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   getPark(teamName: string) {
     this.route.data.subscribe(data => {
       this.park = data.park;
-      this.getTickets()
-    })
+      this.getTickets();
+    });
   }
 
   getTickets() {
@@ -75,17 +75,17 @@ export class ParkDetailsComponent implements OnInit, OnDestroy {
   }
 
   showPrevPhoto() {
-    if (this.selectedPhotoIndex < 1) return;
+    if (this.selectedPhotoIndex < 1) { return; }
     this.selectedPhotoIndex--;
   }
 
   showNextPhoto() {
-    if (!this.park || !this.park.photos || this.selectedPhotoIndex >= this.park.photos.length - 1) return;
+    if (!this.park || !this.park.photos || this.selectedPhotoIndex >= this.park.photos.length - 1) { return; }
     this.selectedPhotoIndex++;
   }
 
   ngOnDestroy() {
-    if (this.park$) this.park$.unsubscribe();
+    if (this.park$) { this.park$.unsubscribe(); }
   }
 
 }

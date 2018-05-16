@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, RequestOptionsArgs, RequestOptions, Headers } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable';
 import { AuthService } from '../auth/auth.service';
 
 
@@ -12,7 +12,10 @@ export class ParkService {
   constructor(private http: Http, private authService: AuthService) { }
 
   getParks(): Promise<any> {
-    if (this.parksResponse) return new Promise((res, rej) => res(this.parksResponse));
+    if (this.parksResponse) {
+      return new Promise((res, rej) => res(this.parksResponse));
+    }
+
     return this.http.get(`api/parks`).toPromise().then(res => this.parksResponse = res.json());
   }
 

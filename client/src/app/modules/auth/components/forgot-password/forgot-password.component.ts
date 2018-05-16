@@ -30,7 +30,10 @@ export class ForgotPasswordComponent implements OnInit {
       })
       .catch(err => {
         this.isLoading = false;
-        this.msgService.show({ cssClass: 'alert-danger', message: 'Whoops! Something went wrong while trying to email your reset link. Please try again' });
+        this.msgService.show({
+          cssClass: 'alert-danger',
+          message: 'Whoops! Something went wrong while trying to email your reset link. Please try again'
+        });
       });
   }
 

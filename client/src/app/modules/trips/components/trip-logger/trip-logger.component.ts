@@ -51,7 +51,7 @@ export class TripLoggerComponent implements OnInit {
   onPhotoSelect(event) {
     const photos = event.target.files || event.srcElement.files;
     this.photos.push(...photos);
-    this.readUrl(event.target)
+    this.readUrl(event.target);
   }
 
   readUrl(input) {
@@ -59,10 +59,10 @@ export class TripLoggerComponent implements OnInit {
       const files = Array.from(input.files);
 
       files.forEach((f: Blob) => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e: any) => {
           this.photoPreviews.push(e.target.result);
-        }
+        };
         reader.readAsDataURL(f);
       });
 

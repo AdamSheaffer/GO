@@ -47,13 +47,13 @@ export class TicketListComponent implements OnInit {
   }
 
   nextPage() {
-    if (this.isLastPage()) return;
+    if (this.isLastPage()) { return; }
     this.queryParams.page++;
     this.onQueryChange.emit();
   }
 
   previousPage() {
-    if (this.queryParams.page <= 1) return;
+    if (this.queryParams.page <= 1) { return; }
 
     this.queryParams.page--;
     this.onQueryChange.emit();

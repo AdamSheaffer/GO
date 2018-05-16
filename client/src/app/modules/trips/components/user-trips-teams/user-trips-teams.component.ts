@@ -51,14 +51,14 @@ export class UserTripsTeamsComponent implements OnInit {
         image: `${this.imageDir}${p.team.replace(' ', '').toLocaleLowerCase()}.png`,
         park: p.name,
         team: p.team
-      }
+      };
     });
 
     this.alTeamNames = Object.keys(this.alTeamVisitedStatus).map(t => {
-      return { long: this.alTeamVisitedStatus[t].team, short: t }
+      return { long: this.alTeamVisitedStatus[t].team, short: t };
     });
     this.nlTeamNames = Object.keys(this.nlTeamVisitedStatus).map(t => {
-      return { long: this.nlTeamVisitedStatus[t].team, short: t }
+      return { long: this.nlTeamVisitedStatus[t].team, short: t };
     });
   }
 

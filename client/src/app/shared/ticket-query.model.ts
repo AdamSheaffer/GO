@@ -7,6 +7,6 @@ export class TicketQuery {
     endDate?: string;
     minPrice?: number;
     maxPrice?: number;
-    page: number = 1;
+    page = 1;
     sortBy?: string;
 }

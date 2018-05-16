@@ -76,7 +76,7 @@ export class UserTripsComponent implements OnInit {
 
   getBadges() {
     const userId: string = this.authService.user && this.authService.user._id;
-    if (!userId) return;
+    if (!userId) { return; }
     this.parkService.getBadges(userId).then(data => {
       if (!data.success) {
         return this.msgService.show({ cssClass: 'alert-danger', message: data.message });

@@ -17,7 +17,7 @@ export class TripsMapComponent implements OnInit {
 
     const path = trips.map(t => {
       const [lng, lat] = t.park.location.coordinates;
-      return { lat, lng }
+      return { lat, lng };
     });
 
     this.clearLines();
@@ -42,12 +42,13 @@ export class TripsMapComponent implements OnInit {
         lng: this.defaultCenter.lon
       },
       zoom: 4,
+      // tslint:disable-next-line
       styles: [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "visibility": "on" }, { "lightness": 33 }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#DFF0D0" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#c5dac6" }] }, { "featureType": "poi.park", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": 20 }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "color": "#c5c6c6" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#e4d7c6" }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#fbfaf7" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }] }]
     });
   }
 
   drawLines(path) {
-    if (!this.map || !path) return;
+    if (!this.map || !path) { return; }
 
     this.polyLines = new google.maps.Polyline({
       path,
@@ -61,12 +62,12 @@ export class TripsMapComponent implements OnInit {
   }
 
   clearLines() {
-    if (!this.polyLines) return;
+    if (!this.polyLines) { return; }
     this.polyLines.setMap(null);
   }
 
   setBounds(paths) {
-    if (!this.map || !paths || !paths.length) return; // This may get called before the map gets loaded
+    if (!this.map || !paths || !paths.length) { return; } // This may get called before the map gets loaded
 
     const bounds = new google.maps.LatLngBounds();
     paths.forEach(p => bounds.extend(p));

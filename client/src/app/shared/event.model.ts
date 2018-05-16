@@ -9,5 +9,5 @@ export class Event {
     title: string;
     url: string;
     venue: SeatGeekPark;
-    isActive: boolean = false;
+    isActive = false;
 }

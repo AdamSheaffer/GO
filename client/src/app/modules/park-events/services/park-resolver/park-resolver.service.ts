@@ -14,7 +14,7 @@ export class ParkResolverService implements Resolve<Park> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<Park> {
     const team = route.paramMap.get('team');
     return this.parkService.getParkByTeam(team).then(data => {
-      if (data.success) return data.park;
+      if (data.success) { return data.park; }
 
       this.router.navigate(['/404']);
       return null;

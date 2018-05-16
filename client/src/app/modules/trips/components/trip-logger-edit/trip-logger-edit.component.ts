@@ -3,10 +3,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { sortBy } from 'lodash';
 import { ParkService, AlertService } from '../../../core/services';
-/* 
+/*
   I don't know if this should be refactored. This may be the rare case for inheritance.
   I started making the trip-logger.component
-  also work for editing, but it became messy with photos. I'm making EDIT a separate 
+  also work for editing, but it became messy with photos. I'm making EDIT a separate
   component for now, but using the original template and css from the logger.
 */
 
@@ -52,7 +52,7 @@ export class TripLoggerEditComponent implements OnInit {
   onPhotoSelect(event) {
     const photos = event.target.files || event.srcElement.files;
     this.newPhotos.push(...photos);
-    this.readUrl(event.target)
+    this.readUrl(event.target);
   }
 
   readUrl(input) {
@@ -60,10 +60,10 @@ export class TripLoggerEditComponent implements OnInit {
       const files = Array.from(input.files);
 
       files.forEach((f: Blob) => {
-        var reader = new FileReader();
+        const reader = new FileReader();
         reader.onload = (e: any) => {
           this.photoPreviews.push(e.target.result);
-        }
+        };
         reader.readAsDataURL(f);
       });
 
@@ -78,7 +78,7 @@ export class TripLoggerEditComponent implements OnInit {
       }
       this.trip = data.trip;
       this.trip.tripDate = data.trip.tripDate.substring(0, 10); // format date
-      this.photoPreviews = this.trip.photos.map(p => this.photoDir + p)
+      this.photoPreviews = this.trip.photos.map(p => this.photoDir + p);
     });
   }
 

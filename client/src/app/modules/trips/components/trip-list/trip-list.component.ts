@@ -13,14 +13,14 @@ export class TripListComponent implements OnInit {
   @Input()
   set trips(trips: Trip[]) {
     this._trips = orderBy(trips, 'tripDate', 'desc');
-  };
+  }
   get trips() {
     return this._trips;
   }
 
   @Output() onDeleteTrip = new EventEmitter<Trip>();
 
-  get tripCount(): number { return !!this.trips ? this.trips.length : 0 }
+  get tripCount(): number { return !!this.trips ? this.trips.length : 0; }
 
   showPhotoModal = false;
   selectedPhoto: string;

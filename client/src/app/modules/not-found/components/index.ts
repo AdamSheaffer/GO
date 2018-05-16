@@ -1,7 +1,7 @@
-import { NotFoundComponent } from "./not-found/not-found.component";
+import { NotFoundComponent } from './not-found/not-found.component';
 
 export const COMPONENTS = [
   NotFoundComponent
 ];
 
-export * from "./not-found/not-found.component";
+export * from './not-found/not-found.component';

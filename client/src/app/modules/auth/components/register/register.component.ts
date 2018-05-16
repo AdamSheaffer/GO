@@ -47,6 +47,7 @@ export class RegisterComponent implements OnInit {
     }
 
     validateEmail(controls) {
+        // tslint:disable-next-line
         const regExp = new RegExp(/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/);
         if (regExp.test(controls.value)) {
             return null;
@@ -60,14 +61,14 @@ export class RegisterComponent implements OnInit {
                 return null;
             }
             return { matchingPasswords: true };
-        }
+        };
     }
 
     onRegisterSubmit() {
         this.isProcessing = true;
-        const user = ['name', 'email', 'password', 'confirm'].reduce((user, field) => {
-            user[field] = this.form.get(field).value;
-            return user;
+        const user = ['name', 'email', 'password', 'confirm'].reduce((u, field) => {
+            u[field] = this.form.get(field).value;
+            return u;
         }, {});
 
         this.authService.registerUser(user).then(res => {
@@ -80,7 +81,7 @@ export class RegisterComponent implements OnInit {
                 this.msgService.show({ message: data.message, cssClass: 'alert-danger' });
                 this.isProcessing = false;
             }
-        })
+        });
     }
 
 }

@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ClrIconModule } from 'clarity-angular/icon/icon.module';
 
 
 import { AppFlashComponent } from './app-flash.component';
@@ -9,16 +8,16 @@ describe('AppFlashComponent', () => {
   let component: AppFlashComponent;
   let fixture: ComponentFixture<AppFlashComponent>;
   let alertService: AlertService;
-  let alertServiceStub = {
+  const alertServiceStub = {
     remove(alert) { },
     show(alert) { },
     alerts: []
-  }
+  };
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppFlashComponent],
-      imports: [ClrIconModule],
+      imports: [],
       providers: [{ provide: AlertService, useValue: alertServiceStub }]
     })
       .compileComponents();

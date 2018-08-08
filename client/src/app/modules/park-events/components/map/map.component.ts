@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { } from '@types/google-maps';
 import { groupBy } from 'lodash';
 import { EventsByLocation } from '../../../../shared/events-by-location.model';
 import { Location } from '../../../../shared/location.model';
 import { Event } from '../../../../shared/event.model';
+import * as L from 'leaflet';
 
 @Component({
   selector: 'app-map',
@@ -13,8 +13,12 @@ import { Event } from '../../../../shared/event.model';
 export class MapComponent implements OnInit {
   private _events: Event[];
   private _userLocation: Location;
-
-  infoWindow = new google.maps.InfoWindow();
+  private token = 'pk.eyJ1IjoiYWRhbXNoZWFmZmVyIiwiYSI6ImNqa2s1OWRieDA4emYzdnBiZnF1ZmU1b3AifQ.W6pXH3av-6y3UzRO8dAIMg';
+  map: L.Map;
+  markers: L.Marker[] = [];
+  defaultCenter = { lat: 39.5, lon: -98.35 };
+  get events() { return this._events; }
+  get userLocation() { return this._userLocation; }
 
   @Input()
   set events(events: Event[]) {
@@ -22,35 +26,30 @@ export class MapComponent implements OnInit {
     this.updateMap(events);
   }
 
-  get events() { return this._events; }
-
   @Input()
   set userLocation(location: Location) {
     this._userLocation = location;
     this.setCenter(this._userLocation);
   }
 
-  get userLocation() { return this._userLocation; }
-
-  map;
-  markers = [];
-  defaultCenter = { lat: 39.5, lon: -98.35 };
-
   constructor() {
   }
 
   ngOnInit() {
-    this.map = new google.maps.Map(document.getElementById('map'), {
-      center: {
-        lat: (this.userLocation && this.userLocation.lat) || this.defaultCenter.lat,
-        lng: (this.userLocation && this.userLocation.lon) || this.defaultCenter.lon
-      },
-      zoom: 4,
-      // tslint:disable-next-line
-      styles: [{ "featureType": "administrative", "elementType": "all", "stylers": [{ "visibility": "on" }, { "lightness": 33 }] }, { "featureType": "landscape", "elementType": "all", "stylers": [{ "color": "#DFF0D0" }] }, { "featureType": "poi.park", "elementType": "geometry", "stylers": [{ "color": "#c5dac6" }] }, { "featureType": "poi.park", "elementType": "labels", "stylers": [{ "visibility": "on" }, { "lightness": 20 }] }, { "featureType": "road", "elementType": "all", "stylers": [{ "lightness": 20 }] }, { "featureType": "road.highway", "elementType": "geometry", "stylers": [{ "color": "#c5c6c6" }] }, { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{ "color": "#e4d7c6" }] }, { "featureType": "road.local", "elementType": "geometry", "stylers": [{ "color": "#fbfaf7" }] }, { "featureType": "water", "elementType": "all", "stylers": [{ "visibility": "on" }, { "color": "#acbcc9" }] }]
-    });
+    const lat = (this.userLocation && this.userLocation.lat) || this.defaultCenter.lat;
+    const lng = (this.userLocation && this.userLocation.lon) || this.defaultCenter.lon;
+    const zoom = 4;
+    this.map = L.map('map').setView([lat, lng], zoom);
+    this.map.scrollWheelZoom.disable();
 
-    this.infoWindow = new google.maps.InfoWindow({ content: 'Ground Out' });
+    L.tileLayer(`https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=${this.token}`, {
+      attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a>' +
+        'contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>,' +
+        'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+      maxZoom: 18,
+      id: 'mapbox.streets',
+      accessToken: this.token,
+    }).addTo(this.map);
   }
 
   setMarkers(eventsByLocation: EventsByLocation[]) {
@@ -59,18 +58,13 @@ export class MapComponent implements OnInit {
     this.clearMarkers();
     this.markers = eventsByLocation.map(e => {
       const { lat, lon } = e.location;
-      const icon = 'assets/images/009-location-sm.png';
-      const marker = new google.maps.Marker({
-        position: { lat, lng: lon },
-        map: this.map,
+      const iconUrl = 'assets/images/009-location-sm.png';
+      const marker = L.marker([lat, lon], {
         title: e.events[0].performers.homeTeam.name,
-        icon
-      });
-
-      marker.addListener('click', () => {
-        this.infoWindow.setContent(this.setInfoWindowContent(e));
-        this.infoWindow.open(this.map, marker);
-      });
+        icon: L.icon({ iconUrl })
+      })
+        .addTo(this.map)
+        .bindPopup(this.setInfoWindowContent(e));
 
       return marker;
 
@@ -78,30 +72,19 @@ export class MapComponent implements OnInit {
   }
 
   clearMarkers() {
-    this.markers.forEach(m => m.setMap(null));
+    this.markers.forEach(m => this.map.removeLayer(m));
   }
 
   setBounds(eventsByLocation: EventsByLocation[]) {
     if (!this.map || !eventsByLocation || !eventsByLocation.length) { return; } // This may get called before the map gets loaded
 
-    const bounds = new google.maps.LatLngBounds();
-
-    // extend to include starting location
-    bounds.extend({
-      lat: (this.userLocation && this.userLocation.lat) || this.defaultCenter.lat,
-      lng: (this.userLocation && this.userLocation.lon) || this.defaultCenter.lon
-    });
-
-    eventsByLocation.forEach(e => {
-      const { lat, lon } = e.location;
-      bounds.extend({ lat: lat, lng: lon });
-    });
-    this.map.fitBounds(bounds);
+    const featureGroup = L.featureGroup(this.markers);
+    this.map.fitBounds(featureGroup.getBounds().pad(0.25));
   }
 
   setCenter(location: Location) {
     if (!this.map) { return; } // This may get called before the map gets loaded
-    this.map.setCenter(new google.maps.LatLng(location.lat, location.lon));
+    this.map.panTo(L.latLng(location.lat, location.lon));
   }
 
   setInfoWindowContent(eventsByLocation: EventsByLocation) {

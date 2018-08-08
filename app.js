@@ -4,10 +4,8 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const authRoutes = require('./routes/auth');
 const mainRoutes = require('./routes/main');
-const passport = require('passport');
 const expressValidator = require('express-validator');
 const app = express();
-const router = express.Router();
 require('./handlers/passport');
 
 app.use(bodyParser.urlencoded({ extended: false }));

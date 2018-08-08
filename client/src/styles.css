@@ -3,6 +3,9 @@ a {
     cursor: pointer;
 }
 
+body {
+    background: #fafafa;
+}
 
 .background-blue {
     background-color: #002538;

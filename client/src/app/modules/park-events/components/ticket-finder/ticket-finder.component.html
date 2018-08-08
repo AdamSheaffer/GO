@@ -39,7 +39,7 @@
                             <input formControlName="maxPrice" type="number" name="price2" placeholder="Max Price">
                         </div>
                     </section>
-                    <button [disabled]="!form.valid" type="submit" class="btn btn-primary">Get Events</button>
+                    <button [clrLoading]="isSearchingTickets" [disabled]="!form.valid || isSearchingTickets" type="submit" class="btn btn-primary">Get Events</button>
                 </form>
             </div>
         </div>

@@ -20,6 +20,7 @@ export class TicketFinderComponent implements OnInit {
   homeTeams = []; // This is what gets passed to the Parks component
   form: FormGroup;
   queryParams = new TicketQuery();
+  isSearchingTickets = false;
 
   constructor(
     private eventService: EventService,
@@ -58,6 +59,7 @@ export class TicketFinderComponent implements OnInit {
   }
 
   getEventsInRange() {
+    this.isSearchingTickets = true;
     const { radius, beginDate, endDate, minPrice, maxPrice } = this.form.getRawValue();
     this.queryParams.range = radius;
     this.queryParams.beginDate = beginDate;
@@ -70,6 +72,7 @@ export class TicketFinderComponent implements OnInit {
       this.meta = data.meta;
       this.homeTeams = this.getHomeTeamsOfEvents(this.events);
       this.msgService.show({ cssClass: 'alert-info', message: `Showing ${this.events.length} of ${data.meta.total} games found` });
+      this.isSearchingTickets = false;
     });
   }
 
